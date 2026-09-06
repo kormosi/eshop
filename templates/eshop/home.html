@@ -59,53 +59,59 @@
     <div class="articles">
 
         <article id="sk-content" class="lang active">
-            <h1>Krištáľové Puto</h1>
-            <div class="images">
-                <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book cover">
-            </div>
+            <h1>{{ product.name }}</h1>
 
-            <p>
-                Sestry Ashley a Elizabeth verili, že ich po škole čaká pokojný život na predmestí Los Angeles.
-            </p>
-            <p>
-                Bohužiaľ, ich spolubývajúci James je časová anomália.
-                Vždy keď nad sebou stratí kontrolu, prenesie svojich blízkych aj cez pol planéty.
-            </p>
-            <p>
-                Keď sa Ashley ocitne uprostred zasnežených lesov a nevie, ako sa tam dostala, tuší, že v ich svete je toho inak oveľa viac, než sa zdá.
-                Aby toho nebolo málo, nový sused sa podozrivo zaujíma o Elizabeth, ktorá priťahuje čudákov ako magnet.
-            </p>
-            <p>
-                Keď sa ich dom stane terčom zlodeja, pravda sa už nedá ignorovať. James nie je jediný, kto má zvláštne schopnosti.
-            </p>
-            <p>
-                Podarí sa sestrám zistiť pravdu o sebe skôr, než toto tajomstvo niekto použije proti nim?
-            </p>
-            <p>
+            <p>{{ product.description }}</p>
+
+            <p>{{ product.price }} {{ product.currency }}</p>
+            
+<!--            <h1>Krištáľové Puto</h1>-->
+<!--            <div class="images">-->
+<!--                <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book cover">-->
+<!--            </div>-->
+
+<!--            <p>-->
+<!--                Sestry Ashley a Elizabeth verili, že ich po škole čaká pokojný život na predmestí Los Angeles.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                Bohužiaľ, ich spolubývajúci James je časová anomália.-->
+<!--                Vždy keď nad sebou stratí kontrolu, prenesie svojich blízkych aj cez pol planéty.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                Keď sa Ashley ocitne uprostred zasnežených lesov a nevie, ako sa tam dostala, tuší, že v ich svete je toho inak oveľa viac, než sa zdá.-->
+<!--                Aby toho nebolo málo, nový sused sa podozrivo zaujíma o Elizabeth, ktorá priťahuje čudákov ako magnet.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                Keď sa ich dom stane terčom zlodeja, pravda sa už nedá ignorovať. James nie je jediný, kto má zvláštne schopnosti.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                Podarí sa sestrám zistiť pravdu o sebe skôr, než toto tajomstvo niekto použije proti nim?-->
+<!--            </p>-->
+<!--            <p>-->
 
         </article>
 
-        <article id="en-content" class="lang">
-            <h1>The Crystal Bond</h1>
-            <div class="images">
-                <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book cover">
-            </div>
-            <p>
-                When Elizabeth and Ashley Kings finished high-school, they thought only boring adult life awaited them.
-                Looking for jobs, starting a career, paying rent.
-            </p>
-            <p>
-                But that is impossible when James is their roommate because he is a traveler through space and time who has no control over his ability.
-                On his journeys, he unintentionally takes along anyone close to him who happens to be nearby.
-            </p>
-            <p>
-                As if that wasn't enough, a new neighbor on their street takes a suspicious interest in them, and the sisters begin to suspect that James isn't the only one with a special ability.
-                That creates problems, unexpected situations, and unwanted attention that could change their lives far more than they ever imagined.
-            </p>
-            <p>
-                For now, their peaceful life is on hold.
-            </p>
-        </article>
+<!--        <article id="en-content" class="lang">-->
+<!--            <h1>The Crystal Bond</h1>-->
+<!--            <div class="images">-->
+<!--                <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book cover">-->
+<!--            </div>-->
+<!--            <p>-->
+<!--                When Elizabeth and Ashley Kings finished high-school, they thought only boring adult life awaited them.-->
+<!--                Looking for jobs, starting a career, paying rent.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                But that is impossible when James is their roommate because he is a traveler through space and time who has no control over his ability.-->
+<!--                On his journeys, he unintentionally takes along anyone close to him who happens to be nearby.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                As if that wasn't enough, a new neighbor on their street takes a suspicious interest in them, and the sisters begin to suspect that James isn't the only one with a special ability.-->
+<!--                That creates problems, unexpected situations, and unwanted attention that could change their lives far more than they ever imagined.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                For now, their peaceful life is on hold.-->
+<!--            </p>-->
+<!--        </article>-->
 
         <br>
 
