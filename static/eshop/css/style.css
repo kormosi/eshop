@@ -89,6 +89,11 @@ header {
     text-decoration: none;
 }
 
+.cart {
+    height: 2em;
+    margin-right: 1em;
+}
+
 .lang-switch {
     font-size: 1.3em;
     margin-right: 1.1em;
