@@ -24,9 +24,9 @@ def stripe_webhook(request):
 
     if event.type == "checkout.session.completed":
         session = event.data.object
-        order = Order.objects.get(
-            stripe_checkout_session_id=session["id"]
-        )
+        order_id = session["metadata"]["order_id"]
+        order = Order.objects.get(id=order_id)
+        
         order.status = Order.Status.PAID
         order.paid_at = timezone.now()
         order.save()

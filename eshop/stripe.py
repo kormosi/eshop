@@ -7,6 +7,9 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def create_checkout_session(order):
     return stripe.checkout.Session.create(
         mode="payment",
+        metadata={
+            "order_id": str(order.id),
+        },
         line_items=[
             {
                 "price_data": {
