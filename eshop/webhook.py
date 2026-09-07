@@ -22,13 +22,11 @@ def stripe_webhook(request):
     except (ValueError, stripe.error.SignatureVerificationError):
         return HttpResponse(status=400)
 
-    if event["type"] == "checkout.session.completed":
-        session = event["data"]["object"]
-
+    if event.type == "checkout.session.completed":
+        session = event.data.object
         order = Order.objects.get(
             stripe_checkout_session_id=session["id"]
         )
-
         order.status = Order.Status.PAID
         order.paid_at = timezone.now()
         order.save()
