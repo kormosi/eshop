@@ -16,23 +16,21 @@ def checkout(request):
         Product,
         active=True,
     )
-
     order = Order.objects.create(
         email="test@example.com",
         total=product.price,
         currency=product.currency,
     )
-
     OrderItem.objects.create(
         order=order,
         product=product,
         quantity=1,
         unit_price=product.price,
     )
-
     session = create_checkout_session(order)
-
     order.stripe_checkout_session_id = session.id
     order.save()
-
     return redirect(session.url)
+
+def checkout_success(request):
+    return render(request, "eshop/checkout_success.html")
