@@ -115,10 +115,16 @@
 
         <br>
 
+
         <div class="btncontainer">
             <!-- TODO pridať do tohto tlačidla obrázok košíka, ako majú na martinuse-->
-            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="sk-content" class="call-to-action lang active">Vložiť do košíka</a>
-            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="en-content" class="call-to-action lang">Add to shopping cart</a>
+<!--            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="sk-content" class="call-to-action lang active">Vložiť do košíka</a>-->
+<!--            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="en-content" class="call-to-action lang">Add to shopping cart</a>-->
+            <form action="{% url 'checkout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Buy now</button>
+            </form>
+            
         </div>
 
 
