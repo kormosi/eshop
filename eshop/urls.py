@@ -8,5 +8,6 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("checkout/", views.checkout, name="checkout"),
     path("checkout/success/", views.checkout_success, name="checkout-success"),
+    path("checkout/cancel/", views.checkout_cancel, name="checkout-cancel"),
     path("stripe/webhook/", stripe_webhook, name="stripe-webhook"),
 ]

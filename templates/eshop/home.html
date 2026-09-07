@@ -57,12 +57,9 @@
 <!--    </div>-->
 
     <div class="articles">
-
         <article id="sk-content" class="lang active">
             <h1>{{ product.name }}</h1>
-
             <p>{{ product.description }}</p>
-
             <p>{{ product.price }} {{ product.currency }}</p>
             
 <!--            <h1>Krištáľové Puto</h1>-->
@@ -90,6 +87,19 @@
 <!--            <p>-->
 
         </article>
+
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+
+            <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+            >
+
+            <button type="submit">Buy now</button>
+        </form>
 
 <!--        <article id="en-content" class="lang">-->
 <!--            <h1>The Crystal Bond</h1>-->
@@ -120,10 +130,6 @@
             <!-- TODO pridať do tohto tlačidla obrázok košíka, ako majú na martinuse-->
 <!--            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="sk-content" class="call-to-action lang active">Vložiť do košíka</a>-->
 <!--            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="en-content" class="call-to-action lang">Add to shopping cart</a>-->
-            <form action="{% url 'checkout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Buy now</button>
-            </form>
             
         </div>
 
