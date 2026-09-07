@@ -25,10 +25,15 @@ def stripe_webhook(request):
     if event.type == "checkout.session.completed":
         session = event.data.object
         order_id = session["metadata"]["order_id"]
-        order = Order.objects.get(id=order_id)
         
-        order.status = Order.Status.PAID
-        order.paid_at = timezone.now()
-        order.save()
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            return HttpResponse(status=400)
+        
+        if order.status != Order.Status.PAID:  # idempotency measure, Stripe can deliver one event more than once
+            order.status = Order.Status.PAID
+            order.paid_at = timezone.now()
+            order.save()
 
     return HttpResponse(status=200)
