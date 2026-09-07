@@ -20,20 +20,22 @@ class Order(models.Model):
         FAILED = "failed", "Failed"
 
     email = models.EmailField()
-
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
         default=Status.PENDING,
     )
-
     total = models.DecimalField(
         max_digits=10,
         decimal_places=2,
     )
-
     currency = models.CharField(max_length=3, default="EUR")
-
+    stripe_checkout_session_id = models.CharField(
+        max_length=255,
+        unique=True,
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(null=True, blank=True)
 

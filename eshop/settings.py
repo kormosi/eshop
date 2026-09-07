@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]
+STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
