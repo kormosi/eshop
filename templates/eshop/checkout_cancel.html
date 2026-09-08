@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Payment cancelled</title>
-</head>
-<body>
+{% extends 'eshop/base.html' %}
+{% block content %}
 
-<h1>Niečo sa nepodarilo.</h1>
-<p>Platba nebola úspešne dokončená.</p>
+<div class="articles">
+    <h1>Niečo sa nepodarilo.</h1>
+    <p>Platba nebola úspešne dokončená.</p>
+    <br>
+    <a href="{% url 'home' %}">Naspäť do obchodu</a>
+</div>
 
-<a href="{% url 'home' %}">Naspäť do obchodu</a>
 
-</body>
-</html>
+{% endblock %}

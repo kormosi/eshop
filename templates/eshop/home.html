@@ -1,36 +1,6 @@
+{% extends 'eshop/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Silvia Kormosi</title>
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    <!-- TODO tieto dole treba vyplniť? -->
-    <meta name="author" content="">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="{% static 'eshop/css/style.css' %}">
-
-</head>
-
-<body>
-
-<header>
-    <div class="header-container">
-        <a href="https://www.silviakormosi.com" class="logo">Silvia Kormosi</a>
-
-<!--        <div class="lang-switch">-->
-<!--            <a id="sk" onclick="setLang('sk')">SK</a> |-->
-<!--            <a id="en" onclick="setLang('en')">EN</a>-->
-<!--        </div>-->
-        <img src="{% static 'eshop/images/cart.svg' %}" alt="Cart" class="cart">
-    </div>
-</header>
-
-<div class="container">
+{% block content %}
 
 <!--    <nav id="sk-nav" class="lang active">-->
 <!--      <ul>-->
@@ -58,6 +28,7 @@
 
     <div class="articles">
         <article id="sk-content" class="lang active">
+            <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book">
             <h1>{{ product.name }}</h1>
             <p>{{ product.description }}</p>
             <p>{{ product.price }} {{ product.currency }}</p>
@@ -99,6 +70,7 @@
             >
 
             <button type="submit">Buy now</button>
+            <button class="packeta-selector-open" onclick="Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions)">Select pick-up point</button>
         </form>
 
 <!--        <article id="en-content" class="lang">-->
@@ -133,9 +105,6 @@
             
         </div>
 
-
-    </div>
-
 <!--    <div class="separator">-->
 <!--        <img src="separator2.svg" alt="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;">-->
 <!--    </div>-->
@@ -155,10 +124,6 @@
 <!--        <p id="en-content" class="copyright lang">© Silvia Kormosi. All rights reserved.</p>-->
 <!--    </footer>-->
 
-</div>
+    </div>
 
-<script src="script.js"></script>
-
-</body>
-
-</html>
+{% endblock %}

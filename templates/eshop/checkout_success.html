@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Payment successful</title>
-</head>
-<body>
+{% extends 'eshop/base.html' %}
+{% block content %}
 
-<h1>Ďakujem!</h1>
-<p>Vaša platba bola úspešne dokončená.</p>
+<div class="articles">
+  <h1>Ďakujem!</h1>
+  <p>
+    Vaša platba bola úspešne dokončená.
+  </p>
+  <br>
+  <a href="{% url 'home' %}">Naspäť do obchodu</a>
+</div>
 
-<a href="{% url 'home' %}">Naspäť do obchodu</a>
 
-</body>
-</html>
+{% endblock %}

@@ -50,12 +50,14 @@ table {
 .call-to-action.lang.active { display: flex; }
 
 html {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    width: 100%;
 }
 
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;

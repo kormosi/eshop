@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Silvia Kormosi</title>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <!-- TODO tieto dole treba vyplniť? -->
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{% static 'eshop/css/style.css' %}">
+
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+    <a href="https://www.silviakormosi.com" class="logo">Silvia Kormosi</a>
+
+    <!--        <div class="lang-switch">-->
+    <!--            <a id="sk" onclick="setLang('sk')">SK</a> |-->
+    <!--            <a id="en" onclick="setLang('en')">EN</a>-->
+    <!--        </div>-->
+    
+    <img src="{% static 'eshop/images/cart.svg' %}" alt="Cart" class="cart">
+  </div>
+</header>
+
+<div class="container">
+{% block content %}
+{% endblock content %}
+<div>
+
+<!--<div class="container">-->
+<!--</div>-->
+
+<script src="https://widget.packeta.com/www/js/library.js"></script>
+
+<script>
+  const packetaApiKey = '';
+
+  const packetaOptions = {
+    country: "cz,sk",
+    language: "sk",
+    view: "modal",
+    defaultCurrency: "EUR"
+  };
+
+  function showSelectedPickupPoint(point) {
+    const saveElement = document.querySelector(".packeta-selector-value");
+    // Add here an action on pickup point selection
+    saveElement.innerText = '';
+    if (point) {
+      console.log("Selected point", point);
+
+      function syntaxHighlight(json) {
+        json = json
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+
+        return json.replace(
+                /("(\u[a-zA-Z0-9]{4}|\[^u]|[^\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+                function (match) {
+                  var cls = 'number';
+                  if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                      cls = 'key';
+                    } else {
+                      cls = 'string';
+                    }
+                  } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                  } else if (/null/.test(match)) {
+                    cls = 'null';
+                  }
+                  return '<span class="' + cls + '">' + match + '</span>';
+                }
+        );
+      }
+
+
+      var jsonHtml = syntaxHighlight(JSON.stringify(point, null, 2));
+
+
+      var style = '<style>\
+    .json-viewer {white-space: break-spaces;font-family: monospace;background:transparent;color:#707070;padding:10px;border-radius:6px;}\
+    .json-viewer .string{color:#707070;}\
+    .json-viewer .number{color:#7cc38f;}\
+    .json-viewer .boolean{color:#33aebf;}\
+    .json-viewer .null{color:#e89313;}\
+    .json-viewer .key{color:#ba1b02;}\
+    </style>';
+
+
+      saveElement.innerHTML =
+              style +
+              '<div class="json-viewer">' +
+              jsonHtml +
+              "</div>";
+    }
+  }
+
+</script>
+
+<div class="packeta-selector-value"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
