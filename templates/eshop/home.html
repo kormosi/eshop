@@ -56,22 +56,28 @@
 <!--                Podarí sa sestrám zistiť pravdu o sebe skôr, než toto tajomstvo niekto použije proti nim?-->
 <!--            </p>-->
 <!--            <p>-->
+            <button
+                    type="button"
+                    id="add-to-cart"
+                    data-product-id="{{ product.id }}"
+            >
+                Add to cart
+            </button>
 
         </article>
 
-        <form action="{% url 'checkout' %}" method="post">
-            {% csrf_token %}
+<!--        <form action="{% url 'checkout' %}" method="post">-->
+<!--            {% csrf_token %}-->
 
-            <input
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                    required
-            >
+<!--            <input-->
+<!--                    type="email"-->
+<!--                    name="email"-->
+<!--                    placeholder="Your email"-->
+<!--                    required-->
+<!--            >-->
 
-            <button type="submit">Buy now</button>
-            <button class="packeta-selector-open" onclick="Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions)">Select pick-up point</button>
-        </form>
+<!--            <button type="submit">Buy now</button>-->
+<!--        </form>-->
 
 <!--        <article id="en-content" class="lang">-->
 <!--            <h1>The Crystal Bond</h1>-->
@@ -126,4 +132,20 @@
 
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document
+    .getElementById("add-to-cart")
+    .addEventListener("click", function () {
+    const productId = this.dataset.productId;
+    const cart = getCart();
+
+    cart[productId] = (cart[productId] || 0) + 1;
+
+    saveCart(cart);
+    updateCartAppearance();
+    });
+</script>
 {% endblock %}

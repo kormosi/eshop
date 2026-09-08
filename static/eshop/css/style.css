@@ -167,6 +167,7 @@ nav ul li img {
     padding: 0.5em;
     border: 1px solid;
     border-color: #efd7cf;
+    width: 100%;
 }
 
 article {

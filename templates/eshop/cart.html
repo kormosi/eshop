@@ -1,0 +1,65 @@
+{% extends 'eshop/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="articles">
+    <h1>Your cart</h1>
+    <div id="cart"></div>
+    <a href="{% url 'home' %}">Continue shopping</a>
+    <button class="packeta-selector-open" onclick="Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions)">Select pick-up point</button>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    const cart = JSON.parse(
+        localStorage.getItem("cart") || "{}"
+    );
+
+    const productIds = Object.keys(cart);
+
+    if (productIds.length === 0) {
+        document.getElementById("cart").innerHTML = `
+            <p>Your cart is empty.</p>
+        `;
+    } else {
+        fetch("/cart/data/?ids=" + productIds.join(","))
+            .then(response => response.json())
+            .then(products => {
+                const cartElement = document.getElementById("cart");
+
+                let total = 0;
+
+                products.forEach(product => {
+                    const quantity = cart[product.id];
+                    const itemTotal = product.price * quantity;
+
+                    total += itemTotal;
+
+                    cartElement.innerHTML += `
+                        <div>
+                            <h2>${product.name}</h2>
+                            <p>
+                                ${product.price} ${product.currency}
+                                × ${quantity}
+                            </p>
+                            <p>
+                                ${itemTotal.toFixed(2)}
+                                ${product.currency}
+                            </p>
+                        </div>
+                    `;
+                });
+
+                cartElement.innerHTML += `
+                    <hr>
+                    <h2>Total: ${total.toFixed(2)} EUR</h2>
+                    <a href="/checkout/">Checkout</a>
+                `;
+            });
+    }
+
+</script>
+{% endblock %}
+

@@ -11,23 +11,27 @@
   <meta name="author" content="">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="{% static 'eshop/css/style.css' %}">
-
 </head>
 
 <body>
 
 <header>
   <div class="header-container">
-    <a href="https://www.silviakormosi.com" class="logo">Silvia Kormosi</a>
+    <a href="{% url 'home' %}" class="logo">Silvia Kormosi</a>
 
     <!--        <div class="lang-switch">-->
     <!--            <a id="sk" onclick="setLang('sk')">SK</a> |-->
     <!--            <a id="en" onclick="setLang('en')">EN</a>-->
     <!--        </div>-->
     
-    <img src="{% static 'eshop/images/cart.svg' %}" alt="Cart" class="cart">
+    <div>
+      <img src="{% static 'eshop/images/cart.svg' %}" alt="Cart" class="cart">
+      <a href="{% url 'cart' %}" id="cart-link">
+        <span id="cart-count">0</span>
+      </a>
+    </div>
+    
   </div>
 </header>
 
@@ -36,12 +40,12 @@
 {% endblock content %}
 <div>
 
-<!--<div class="container">-->
-<!--</div>-->
 
 <script src="https://widget.packeta.com/www/js/library.js"></script>
-
+  
 <script>
+  
+  // Packeta stuff
   const packetaApiKey = '';
 
   const packetaOptions = {
@@ -50,7 +54,6 @@
     view: "modal",
     defaultCurrency: "EUR"
   };
-
   function showSelectedPickupPoint(point) {
     const saveElement = document.querySelector(".packeta-selector-value");
     // Add here an action on pickup point selection
@@ -106,7 +109,33 @@
     }
   }
 
+  // Cart stuff
+  const cartKey = "cart";
+
+  function getCart() {
+    return JSON.parse(localStorage.getItem(cartKey) || "{}");
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+  }
+
+  function updateCartAppearance() {
+    const cart = getCart();
+    const count = Object.values(cart).reduce(
+            (sum, quantity) => sum + quantity,
+            0
+    );
+    document.getElementById("cart-count").textContent = count;
+  }
+
+  updateCartAppearance();
+
 </script>
+
+{% block scripts %}
+{% endblock %}
+
 
 <div class="packeta-selector-value"></div>
 
