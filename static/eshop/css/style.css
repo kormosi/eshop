@@ -96,6 +96,13 @@ header {
     margin-right: 1em;
 }
 
+#cart-link {
+    margin-right: 2em;
+    font-size: 1.8em;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
 .lang-switch {
     font-size: 1.3em;
     margin-right: 1.1em;
