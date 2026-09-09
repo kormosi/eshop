@@ -46,6 +46,7 @@ def checkout(request):
         email=request.POST["email"],
         total=product.price,
         currency=product.currency,
+        pickup_point_id=request.POST["pickup_point_id"],
     )
     OrderItem.objects.create(
         order=order,
