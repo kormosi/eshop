@@ -11,3 +11,10 @@
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+<script>
+  localStorage.removeItem("cart");
+  updateCartAppearance();
+</script>
+{% endblock %}

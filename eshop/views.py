@@ -68,7 +68,21 @@ def checkout(request):
 
 
 def checkout_success(request):
-    return render(request, "eshop/checkout_success.html")
+    session_id = request.GET.get("session_id")
+
+    # So that when someone manually visits /checkout/success before the
+    # order has been paid, they will get 404
+    order = get_object_or_404(
+        Order,
+        stripe_checkout_session_id=session_id,
+        status=Order.Status.PAID,
+    )
+
+    return render(
+        request,
+        "eshop/checkout_success.html",
+        {"order": order},
+    )
 
 
 def checkout_cancel(request):
