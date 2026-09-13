@@ -50,10 +50,19 @@ def checkout(request):
     )
     order = Order.objects.create(
         email=request.POST["email"],
-        total=product.price,
-        currency=product.currency,
+        first_name=request.POST["first_name"],
+        last_name=request.POST["last_name"],
+        phone=request.POST["phone"],
+        address=request.POST["address"],
+        city=request.POST["city"],
+        postal_code=request.POST["postal_code"],
+        country=request.POST["country"],
         pickup_point_id=request.POST["pickup_point_id"],
+        pickup_point_address=request.POST["pickup_point_address"],
+        total=product.price, 
+        currency=product.currency,
     )
+    
     OrderItem.objects.create(
         order=order,
         product=product,

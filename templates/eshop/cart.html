@@ -13,22 +13,91 @@
     <form id="checkout-form" action="{% url 'checkout' %}" method="post">
         {% csrf_token %}
 
-        <input
-                type="email"
-                name="email"
-                placeholder="Your email"
-                required
-        >
-        <input type="hidden" name="cart" id="cart-data">
+        <h2>Billing information</h2>
+
+        <label>
+            First name
+            <input type="text" name="first_name" required autocomplete="given-name">
+        </label>
+
+        <label>
+            Last name
+            <input type="text" name="last_name" required autocomplete="family-name">
+        </label>
+
+        <label>
+            Email
+            <input type="email" name="email" required autocomplete="email">
+        </label>
+
+        <label>
+            Phone
+            <input type="tel" name="phone" autocomplete="tel">
+        </label>
+
+        <label>
+            Address
+            <input type="text" name="address" required autocomplete="street-address">
+        </label>
+
+        <label>
+            City
+            <input type="text" name="city" required autocomplete="address-level2">
+        </label>
+
+        <label>
+            Postal code
+            <input type="text" name="postal_code" required autocomplete="postal-code">
+        </label>
+
+        <label>
+            Country
+            <select name="country" required autocomplete="country">
+                <option value="SK">Slovakia</option>
+                <option value="CZ">Czech Republic</option>
+            </select>
+        </label>
+
         <input
                 type="hidden"
                 name="pickup_point_id"
                 id="pickup-point-id"
         >
 
+        <input
+                type="hidden"
+                name="pickup_point_address"
+                id="pickup-point-address"
+        >
+
+        <input
+                type="hidden"
+                name="cart"
+                id="cart-data"
+        >
+
         <button type="submit">Zaplatiť</button>
+        <!--    TODO doplniť sem, že "budete presmerovaní na...-->
     </form>
-    <!--    TODO doplniť sem, že "budete presmerovaní na...-->
+    
+<!--    <form id="checkout-form" action="{% url 'checkout' %}" method="post">-->
+<!--        {% csrf_token %}-->
+
+<!--        <input-->
+<!--                type="email"-->
+<!--                name="email"-->
+<!--                placeholder="Your email"-->
+<!--                required-->
+<!--        >-->
+<!--        <input type="hidden" name="cart" id="cart-data">-->
+<!--        <input-->
+<!--                type="hidden"-->
+<!--                name="pickup_point_id"-->
+<!--                id="pickup-point-id"-->
+<!--        >-->
+
+<!--        <button type="submit">Zaplatiť</button>-->
+<!--    </form>-->
 
     
     <a href="{% url 'home' %}">Späť k nákupu</a>
@@ -114,6 +183,8 @@ function showSelectedPickupPoint(point) {
         console.log("Selected point", point);
         document.getElementById("pickup-point-id").value =
             point.id;
+        document.getElementById("pickup-point-address").value =
+            point.routingName;
     }
 }
 </script>

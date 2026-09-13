@@ -19,7 +19,17 @@ class Order(models.Model):
         CANCELLED = "cancelled", "Cancelled"
         FAILED = "failed", "Failed"
 
+    # Billing / contact information
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=2)  # ISO 3166-1 alpha-2
     email = models.EmailField()
+    phone = models.CharField(max_length=30)
+    
+    # Order info
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
@@ -38,7 +48,8 @@ class Order(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(null=True, blank=True)
-    pickup_point_id= models.IntegerField(null=True)
+    pickup_point_id= models.IntegerField()
+    pickup_point_address = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
         return f"Order #{self.id}"
