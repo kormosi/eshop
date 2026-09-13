@@ -10,19 +10,18 @@ def create_checkout_session(order):
         metadata={
             "order_id": str(order.id),
         },
-        line_items=[
+        line_items = [
             {
                 "price_data": {
-                    "currency": order.currency.lower(),
+                    "currency": item.order.currency.lower(),
                     "product_data": {
-                        "name": order.items.first().product.name,
+                        "name": item.product.name,
                     },
-                    "unit_amount": int(
-                        order.items.first().unit_price * 100
-                    ),
+                    "unit_amount": int(item.unit_price * 100),
                 },
-                "quantity": order.items.first().quantity,
+                "quantity": item.quantity,
             }
+            for item in order.items.all()
         ],
         success_url="http://127.0.0.1:8000/checkout/success/",
         cancel_url="http://127.0.0.1:8000/checkout/cancel/",

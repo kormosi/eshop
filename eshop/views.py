@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
@@ -41,7 +42,12 @@ def cart_data(request):
     ], safe=False)
 
 def checkout(request):
-    product = get_object_or_404(Product, active=True)
+    PRODUCT_ID = "1"
+    cart = json.loads(request.POST["cart"])
+    product = Product.objects.get(
+        id=PRODUCT_ID,
+        active=True,
+    )
     order = Order.objects.create(
         email=request.POST["email"],
         total=product.price,
@@ -51,7 +57,7 @@ def checkout(request):
     OrderItem.objects.create(
         order=order,
         product=product,
-        quantity=1,
+        quantity=int(cart[PRODUCT_ID]),
         unit_price=product.price,
     )
     session = create_checkout_session(order)
