@@ -5,6 +5,12 @@
 <div class="articles">
     <h1>Your cart</h1>
     <div id="cart"></div>
+
+    {% if messages %}
+    {% for message in messages %}
+    <p class="error">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
     
     <button class="packeta-selector-open" onclick="Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions)">Select pick-up point</button>
 

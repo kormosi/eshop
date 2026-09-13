@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
 from django.http import JsonResponse
+from django.contrib import messages
+from django.shortcuts import redirect
 
 def home(request):
     product = Product.objects.filter(active=True).first()
@@ -43,11 +45,20 @@ def cart_data(request):
 
 def checkout(request):
     PRODUCT_ID = "1"
+    
     cart = json.loads(request.POST["cart"])
+    
+    # Reject invalid product counts 
+    quantity = int(cart[PRODUCT_ID])
+    if not 1 <= quantity <= 99:
+        messages.error(request, "Quantity must be between 1 and 99.")
+        return redirect("cart")
+    
     product = Product.objects.get(
         id=PRODUCT_ID,
         active=True,
     )
+    
     order = Order.objects.create(
         email=request.POST["email"],
         first_name=request.POST["first_name"],

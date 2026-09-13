@@ -58,6 +58,13 @@
 
   function updateCartAppearance() {
     const cart = getCart();
+
+    // In order clamp the product count inside the allowed range
+    Object.keys(cart).forEach(id => {
+      cart[id] = Math.max(1, Math.min(99, cart[id]));
+    });
+    saveCart(cart);
+    
     const count = Object.values(cart).reduce(
             (sum, quantity) => sum + quantity,
             0
