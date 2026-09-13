@@ -23,6 +23,8 @@ def create_checkout_session(order):
             }
             for item in order.items.all()
         ],
+        customer_email=order.email,
+        # payment_method_types=["card"],
         success_url=(
             "http://127.0.0.1:8000/checkout/success/"
             "?session_id={CHECKOUT_SESSION_ID}"
