@@ -47,9 +47,15 @@ def checkout(request):
     PRODUCT_ID = "1"
     
     cart = json.loads(request.POST["cart"])
-    
-    # Reject invalid product counts 
-    quantity = int(cart[PRODUCT_ID])
+
+    # Reject empty cart
+    quantity = cart.get(PRODUCT_ID)
+    if quantity is None:
+        messages.error(request, "Your cart is empty.")
+        return redirect("cart")
+
+    # Reject invalid product counts
+    quantity = int(quantity)
     if not 1 <= quantity <= 99:
         messages.error(request, "Quantity must be between 1 and 99.")
         return redirect("cart")

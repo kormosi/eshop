@@ -2,9 +2,11 @@ const cart = getCart();
 const productIds = Object.keys(cart);
 const cartElement = document.getElementById("cart");
 const clearCartButton = document.getElementById("clear-cart");
+const checkoutSubmitButton = document.getElementById("checkout-submit");
 
 if (productIds.length === 0) {
   cartElement.innerHTML = "<p>Your cart is empty.</p>";
+  checkoutSubmitButton.disabled = true;
 } else {
   clearCartButton.hidden = false;
 
@@ -36,6 +38,11 @@ if (productIds.length === 0) {
 }
 
 document.getElementById("checkout-form").addEventListener("submit", function (event) {
+  if (productIds.length === 0) {
+    event.preventDefault();
+    return;
+  }
+
   const pickupPointId = document.getElementById("pickup-point-id").value;
   const error = document.getElementById("pickup-point-error");
 
