@@ -20,7 +20,9 @@ function updateCartAppearance() {
   saveCart(cart);
 
   const count = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
-  document.getElementById("cart-count").textContent = count;
+  const cartCount = document.getElementById("cart-count");
+  cartCount.textContent = count;
+  cartCount.hidden = count === 0;
 }
 
 updateCartAppearance();

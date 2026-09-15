@@ -23,12 +23,10 @@
     <!--            <a id="en" onclick="setLang('en')">EN</a>-->
     <!--        </div>-->
     
-    <div>
-      <img src="{% static 'eshop/images/cart.svg' %}" alt="Cart" class="cart">
-      <a href="{% url 'cart' %}" id="cart-link">
-        <span id="cart-count">0</span>
-      </a>
-    </div>
+    <a href="{% url 'cart' %}" id="cart-link" aria-label="Cart">
+      <img src="{% static 'eshop/images/cart.svg' %}" alt="" class="cart-icon">
+      <span id="cart-count" class="cart-count" hidden>0</span>
+    </a>
 
   </div>
 </header>

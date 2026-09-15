@@ -1,10 +1,13 @@
 const cart = getCart();
 const productIds = Object.keys(cart);
 const cartElement = document.getElementById("cart");
+const clearCartButton = document.getElementById("clear-cart");
 
 if (productIds.length === 0) {
   cartElement.innerHTML = "<p>Your cart is empty.</p>";
 } else {
+  clearCartButton.hidden = false;
+
   fetch("/cart/data/?ids=" + productIds.join(","))
     .then((response) => response.json())
     .then((products) => {
@@ -44,4 +47,9 @@ document.getElementById("checkout-form").addEventListener("submit", function (ev
 
   error.hidden = true;
   document.getElementById("cart-data").value = JSON.stringify(cart);
+});
+
+clearCartButton.addEventListener("click", function () {
+  saveCart({});
+  updateCartAppearance();
 });

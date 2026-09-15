@@ -3,7 +3,8 @@
 {% block content %}
 
 <div class="articles">
-    <h1>Your cart</h1>
+        <h1>Your cart</h1>
+        <button type="button" id="clear-cart" class="clear-cart-button" aria-label="Empty cart" hidden>×</button>
     <div id="cart"></div>
 
     {% if messages %}
