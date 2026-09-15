@@ -18,6 +18,8 @@ class Order(models.Model):
         PAID = "paid", "Paid"
         CANCELLED = "cancelled", "Cancelled"
         FAILED = "failed", "Failed"
+        SHIPPED = "shipped", "Shipped"
+        DELIVERED = "delivered", "Delivered"
 
     # Billing / contact information
     # first_name = models.CharField(max_length=100)
