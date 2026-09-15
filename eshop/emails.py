@@ -14,9 +14,9 @@ def send_order_confirmation_email(order):
     resend.Emails.send({
         "from": settings.RESEND_FROM_EMAIL,
         "to": order.email,
-        "subject": f"Order #{order.id} confirmed",
+        "subject": f"Potvrdenie objednávky {order.id}",
         "html": (
-            "<p>Thank you for your order!</p>"
+            "<p>Ďakujeme za Vašu objednávku!</p>"
             f"<ul>{items_html}</ul>"
             f"<p>Total: {order.total} {order.currency}</p>"
         ),
