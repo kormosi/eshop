@@ -17,6 +17,8 @@ import os
 load_dotenv()
 STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]
 STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
+RESEND_API_KEY = os.environ["RESEND_API_KEY"]
+RESEND_FROM_EMAIL = "onboarding@resend.dev"
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

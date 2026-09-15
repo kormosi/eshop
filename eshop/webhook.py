@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from .emails import send_order_confirmation_email
 from .models import Order
 
 
@@ -35,5 +36,6 @@ def stripe_webhook(request):
             order.status = Order.Status.PAID
             order.paid_at = timezone.now()
             order.save()
+            send_order_confirmation_email(order)
 
     return HttpResponse(status=200)

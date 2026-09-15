@@ -135,6 +135,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "django" },
     { name = "python-dotenv" },
+    { name = "resend" },
     { name = "stripe" },
 ]
 
@@ -142,6 +143,7 @@ dependencies = [
 requires-dist = [
     { name = "django", specifier = ">=6.1.1" },
     { name = "python-dotenv", specifier = ">=1.2.3" },
+    { name = "resend", specifier = ">=2.45.0" },
     { name = "stripe", specifier = ">=15.6.1" },
 ]
 
@@ -176,6 +178,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz", hash = "sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed", size = 142856, upload-time = "2026-05-14T19:25:27.735Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl", hash = "sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0", size = 73075, upload-time = "2026-05-14T19:25:26.443Z" },
+]
+
+[[package]]
+name = "resend"
+version = "2.45.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b3/da/29802f061712b2f7141c952b4f05a482303a9158a3679e1756603c24ea25/resend-2.45.0.tar.gz", hash = "sha256:14df920d35b5e558c58a91c6b618fbcb01bcf8959c24a4d503b3b3166a10e257", size = 62468, upload-time = "2026-09-14T16:31:00.595Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/29/47/c776025bda78f08f2bb0dddb34b058160bcc21efb039733427ff8acd4b52/resend-2.45.0-py2.py3-none-any.whl", hash = "sha256:1e9516dec8d31b472f65382087163dc12fb39cdb0bc98d8fdf4edd704e0fe67f", size = 93055, upload-time = "2026-09-14T16:30:59.059Z" },
 ]
 
 [[package]]
