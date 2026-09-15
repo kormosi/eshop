@@ -19,5 +19,6 @@ def send_order_confirmation_email(order):
             "<p>Ďakujeme za Vašu objednávku!</p>"
             f"<ul>{items_html}</ul>"
             f"<p>Total: {order.total} {order.currency}</p>"
+            f"<p>Na tento email neodpovedajte.</p>"
         ),
     })
