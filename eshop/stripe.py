@@ -29,5 +29,8 @@ def create_checkout_session(order):
             "http://127.0.0.1:8000/checkout/success/"
             "?session_id={CHECKOUT_SESSION_ID}"
         ),
-        cancel_url="http://127.0.0.1:8000/checkout/cancel/",
+        cancel_url=(
+            "http://127.0.0.1:8000/checkout/cancel/"
+            "?session_id={CHECKOUT_SESSION_ID}"
+        ),
     )

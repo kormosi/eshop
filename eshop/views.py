@@ -118,5 +118,13 @@ def checkout_success(request):
 
 
 def checkout_cancel(request):
+    session_id = request.GET.get("session_id")
+
+    if session_id:
+        order = Order.objects.filter(stripe_checkout_session_id=session_id).first()
+        if order and order.status == Order.Status.PENDING:
+            order.status = Order.Status.CANCELLED
+            order.save(update_fields=["status"])
+
     return render(request, "eshop/checkout_cancel.html")
 
