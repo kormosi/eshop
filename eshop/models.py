@@ -48,7 +48,7 @@ class Order(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(null=True, blank=True)
-    pickup_point_id= models.IntegerField()
+    pickup_point_id= models.CharField(max_length=16, blank=False)
     pickup_point_address = models.CharField(max_length=255, blank=False)
 
     def __str__(self):

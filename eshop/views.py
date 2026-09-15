@@ -53,6 +53,12 @@ def checkout(request):
     if not 1 <= quantity <= 99:
         messages.error(request, "Quantity must be between 1 and 99.")
         return redirect("cart")
+
+    # Reject invalid pickup point
+    pickup_point_id = request.POST.get("pickup_point_id")
+    if not pickup_point_id:
+        messages.error(request, "Please select a pick-up point.")
+        return redirect("cart")
     
     product = Product.objects.get(
         id=PRODUCT_ID,
