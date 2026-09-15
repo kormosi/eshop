@@ -52,4 +52,5 @@ document.getElementById("checkout-form").addEventListener("submit", function (ev
 clearCartButton.addEventListener("click", function () {
   saveCart({});
   updateCartAppearance();
+  window.location.reload();
 });

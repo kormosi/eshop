@@ -109,17 +109,17 @@ header {
 
 .cart-count {
     position: absolute;
-    top: 0.4em;
+    top: 1em;
     right: 0.4em;
     box-sizing: border-box;
-    min-width: 1.4em;
-    height: 1.4em;
+    min-width: 1.8em;
+    height: 1.8em;
     padding: 0 0.35em;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #000;
+    background-color: #d14949;
     color: #fff;
     font-family: sans-serif;
     font-weight: bold;
