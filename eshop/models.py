@@ -20,14 +20,14 @@ class Order(models.Model):
         FAILED = "failed", "Failed"
 
     # Billing / contact information
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)
-    country = models.CharField(max_length=2)  # ISO 3166-1 alpha-2
+    # first_name = models.CharField(max_length=100)
+    # last_name = models.CharField(max_length=100)
+    # address = models.CharField(max_length=255)
+    # city = models.CharField(max_length=100)
+    # postal_code = models.CharField(max_length=20)
+    # country = models.CharField(max_length=2)  # ISO 3166-1 alpha-2
     email = models.EmailField()
-    phone = models.CharField(max_length=30)
+    # phone = models.CharField(max_length=30)
     
     # Order info
     status = models.CharField(

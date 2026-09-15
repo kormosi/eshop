@@ -6,8 +6,6 @@
 <head>
   <meta charset="utf-8">
   <title>Silvia Kormosi</title>
-  <link rel="icon" type="image/x-icon" href="favicon.png">
-  <!-- TODO tieto dole treba vyplniť? -->
   <meta name="author" content="">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +29,7 @@
         <span id="cart-count">0</span>
       </a>
     </div>
-    
+
   </div>
 </header>
 
@@ -40,49 +38,12 @@
 {% endblock content %}
 </div>
 
-</body>
-
 <script src="https://widget.packeta.com/www/js/library.js"></script>
-  
-<script>
-  // Cart stuff
-  const cartKey = "cart";
-
-  function getCart() {
-    return JSON.parse(localStorage.getItem(cartKey) || "{}");
-  }
-
-  function saveCart(cart) {
-    localStorage.setItem(cartKey, JSON.stringify(cart));
-  }
-
-  function updateCartAppearance() {
-    const cart = getCart();
-
-    // In order clamp the product count inside the allowed range
-    Object.keys(cart).forEach(id => {
-      cart[id] = Math.max(1, Math.min(99, cart[id]));
-    });
-    saveCart(cart);
-    
-    const count = Object.values(cart).reduce(
-            (sum, quantity) => sum + quantity,
-            0
-    );
-    document.getElementById("cart-count").textContent = count;
-  }
-
-  updateCartAppearance();
-
-</script>
+<script src="{% static 'eshop/js/cart.js' %}"></script>
 
 {% block scripts %}
 {% endblock %}
 
-
-<!--TODO zmazať?-->
-<div class="packeta-selector-value"></div>
-<script src="script.js"></script>
-
+</body>
 
 </html>

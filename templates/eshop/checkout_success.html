@@ -1,4 +1,5 @@
 {% extends 'eshop/base.html' %}
+{% load static %}
 {% block content %}
 
 <div class="articles">
@@ -13,8 +14,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-  localStorage.removeItem("cart");
-  updateCartAppearance();
-</script>
+<script src="{% static 'eshop/js/checkout-success.js' %}"></script>
 {% endblock %}

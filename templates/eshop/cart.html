@@ -11,58 +11,62 @@
     <p class="error">{{ message }}</p>
     {% endfor %}
     {% endif %}
-    
-    <button class="packeta-selector-open" onclick="Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions)">Select pick-up point</button>
 
-    <div class="packeta-selector-value"></div>
+    <p id="pickup-point-error" class="error" hidden>
+        Please select a pick-up point.
+    </p>
+
+    <button type="button" class="packeta-selector-open">Select pick-up point</button>
+
+    <div id="packeta-selector-value"></div>
     
     <form id="checkout-form" action="{% url 'checkout' %}" method="post">
         {% csrf_token %}
 
         <h2>Billing information</h2>
 
-        <label>
-            First name
-            <input type="text" name="first_name" required autocomplete="given-name">
-        </label>
+<!--        <label>-->
+<!--            First name-->
+<!--            <input type="text" name="first_name" required autocomplete="given-name">-->
+<!--        </label>-->
 
-        <label>
-            Last name
-            <input type="text" name="last_name" required autocomplete="family-name">
-        </label>
+<!--        <label>-->
+<!--            Last name-->
+<!--            <input type="text" name="last_name" required autocomplete="family-name">-->
+<!--        </label>-->
 
         <label>
             Email
             <input type="email" name="email" required autocomplete="email">
         </label>
 
-        <label>
-            Phone
-            <input type="tel" name="phone" autocomplete="tel">
-        </label>
+<!--        <label>-->
+<!--            Phone-->
+<!--            <input type="tel" name="phone" autocomplete="tel">-->
+<!--        </label>-->
 
-        <label>
-            Address
-            <input type="text" name="address" required autocomplete="street-address">
-        </label>
+<!--        <label>-->
+<!--            Address-->
+<!--            <input type="text" name="address" required autocomplete="street-address">-->
+<!--        </label>-->
 
-        <label>
-            City
-            <input type="text" name="city" required autocomplete="address-level2">
-        </label>
+<!--        <label>-->
+<!--            City-->
+<!--            <input type="text" name="city" required autocomplete="address-level2">-->
+<!--        </label>-->
 
-        <label>
-            Postal code
-            <input type="text" name="postal_code" required autocomplete="postal-code">
-        </label>
+<!--        <label>-->
+<!--            Postal code-->
+<!--            <input type="text" name="postal_code" required autocomplete="postal-code">-->
+<!--        </label>-->
 
-        <label>
-            Country
-            <select name="country" required autocomplete="country">
-                <option value="SK">Slovakia</option>
-                <option value="CZ">Czech Republic</option>
-            </select>
-        </label>
+<!--        <label>-->
+<!--            Country-->
+<!--            <select name="country" required autocomplete="country">-->
+<!--                <option value="SK">Slovakia</option>-->
+<!--                <option value="CZ">Czech Republic</option>-->
+<!--            </select>-->
+<!--        </label>-->
 
         <input
                 type="hidden"
@@ -112,87 +116,7 @@
 
 
 {% block scripts %}
-<script>
-    // Cart stuff
-    const cart = JSON.parse(
-        localStorage.getItem("cart") || "{}"
-    );
-
-    const productIds = Object.keys(cart);
-
-    if (productIds.length === 0) {
-        document.getElementById("cart").innerHTML = `
-            <p>Your cart is empty.</p>
-        `;
-    } else {
-        fetch("/cart/data/?ids=" + productIds.join(","))
-            .then(response => response.json())
-            .then(products => {
-                const cartElement = document.getElementById("cart");
-
-                let total = 0;
-
-                products.forEach(product => {
-                    const quantity = cart[product.id];
-                    const itemTotal = product.price * quantity;
-
-                    total += itemTotal;
-
-                    cartElement.innerHTML += `
-                        <div>
-                            <h2>${product.name}</h2>
-                            <p>
-                                ${product.price} ${product.currency}
-                                × ${quantity}
-                            </p>
-                            <p>
-                                ${itemTotal.toFixed(2)}
-                                ${product.currency}
-                            </p>
-                        </div>
-                    `;
-                });
-
-                cartElement.innerHTML += `
-                    <hr>
-                    <h2>Total: ${total.toFixed(2)} EUR</h2>
-                `;
-            });
-    }
-
-    // To send cart data from local storage to backend
-    document.getElementById("checkout-form").addEventListener("submit", function () {
-        document.getElementById("cart-data").value =
-            JSON.stringify(cart);
-    });
-
-</script>
-
-
-<script>
-// Packeta stuff
-const packetaApiKey = '';
-
-const packetaOptions = {
-    country: "cz,sk",
-    language: "sk",
-    view: "modal",
-    defaultCurrency: "EUR"
-};
-
-function showSelectedPickupPoint(point) {
-    const saveElement = document.querySelector(".packeta-selector-value");
-    // Add here an action on pickup point selection
-    saveElement.innerText = point.name;
-    
-    if (point) {
-        console.log("Selected point", point);
-        document.getElementById("pickup-point-id").value =
-            point.id;
-        document.getElementById("pickup-point-address").value =
-            point.routingName;
-    }
-}
-</script>
+<script src="{% static 'eshop/js/cart-page.js' %}"></script>
+<script src="{% static 'eshop/js/packeta.js' %}"></script>
 {% endblock %}
 
