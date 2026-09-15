@@ -112,8 +112,8 @@ header {
     top: 1em;
     right: 0.4em;
     box-sizing: border-box;
-    min-width: 1.8em;
-    height: 1.8em;
+    min-width: 1.7em;
+    height: 1.7em;
     padding: 0 0.35em;
     display: flex;
     align-items: center;
@@ -123,8 +123,7 @@ header {
     color: #fff;
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 0.7em;
-    line-height: 1;
+    font-size: 0.8em;
 }
 
 .cart-count[hidden] {
