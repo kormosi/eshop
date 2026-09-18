@@ -56,6 +56,20 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.id}"
 
+class Invoice(models.Model):
+    order = models.OneToOneField(
+        Order,
+        on_delete=models.PROTECT,
+        related_name="invoice",
+    )
+    number = models.CharField(max_length=32, unique=True)
+    issued_at = models.DateField(auto_now_add=True)
+    pdf = models.FileField(upload_to="invoices/")
+
+    def __str__(self):
+        return self.number
+
+
 class OrderItem(models.Model):
     order = models.ForeignKey(
         Order,

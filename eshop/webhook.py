@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .emails import send_order_confirmation_email
+from .invoices import create_invoice
 from .models import Order
 
 logger = logging.getLogger(__name__)
@@ -56,12 +57,13 @@ def stripe_webhook(request):
 
             if is_paid:
                 try:
-                    send_order_confirmation_email(order)
+                    invoice = create_invoice(order)
+                    send_order_confirmation_email(order, invoice)
                 except Exception:
-                    # Don't let a Resend hiccup turn into a 500 and a
+                    # Don't let a PDF/Resend hiccup turn into a 500 and a
                     # pointless Stripe retry of an already-paid order.
                     logger.exception(
-                        "Failed to send confirmation email for order %s", order.id
+                        "Failed to create/send invoice for order %s", order.id
                     )
 
     return HttpResponse(status=200)
