@@ -166,7 +166,7 @@
             <td>{{ item.product.name }}</td>
             <td class="num">{{ item.quantity }}</td>
             <td class="num">{{ item.unit_base|floatformat:2 }} €</td>
-            <td class="num">{{ vat_rate_percent }} %</td>
+            <td class="num">{{ item.vat_rate|floatformat:0 }} %</td>
             <td class="num">{{ item.line_vat|floatformat:2 }} €</td>
             <td class="num">{{ item.line_total|floatformat:2 }} €</td>
         </tr>
@@ -175,8 +175,10 @@
 </table>
 
 <div class="totals">
-    <div class="totals-row"><span>Základ dane</span><span>{{ base_total|floatformat:2 }} €</span></div>
-    <div class="totals-row"><span>DPH {{ vat_rate_percent }} %</span><span>{{ vat_total|floatformat:2 }} €</span></div>
+    {% for row in vat_breakdown %}
+    <div class="totals-row"><span>Základ dane ({{ row.rate|floatformat:0 }} % DPH)</span><span>{{ row.base|floatformat:2 }} €</span></div>
+    <div class="totals-row"><span>DPH {{ row.rate|floatformat:0 }} %</span><span>{{ row.vat|floatformat:2 }} €</span></div>
+    {% endfor %}
     <div class="totals-row grand-total"><span>Spolu k úhrade</span><span>{{ total|floatformat:2 }} €</span></div>
 </div>
 

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 
 
@@ -6,6 +8,12 @@ class Product(models.Model):
     description = models.TextField(blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3, default="EUR")
+    vat_rate = models.DecimalField(
+        max_digits=3,
+        decimal_places=2,
+        default=Decimal("5.00"),
+        help_text="VAT rate in percent, e.g. 23.00 (standard) or 5.00 (books)",
+    )
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -87,6 +95,14 @@ class OrderItem(models.Model):
     unit_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
+    )
+
+    # Snapshotted from product.vat_rate at order time, so a later change to
+    # the product's rate doesn't alter already-issued invoices.
+    vat_rate = models.DecimalField(
+        max_digits=3,
+        decimal_places=2,
+        default=Decimal("5.00"),
     )
 
     def __str__(self):

@@ -91,6 +91,7 @@ def checkout(request):
         product=product,
         quantity=int(cart[PRODUCT_ID]),
         unit_price=product.price,
+        vat_rate=product.vat_rate,
     )
     session = create_checkout_session(order)
     

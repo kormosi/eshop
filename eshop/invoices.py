@@ -17,7 +17,6 @@ from weasyprint import HTML
 
 from .models import Invoice
 
-VAT_RATE = Decimal("0.05")  # Slovak standard VAT rate for books
 CENTS = Decimal("0.01")
 
 
@@ -31,24 +30,37 @@ def create_invoice(order):
     issued_at = timezone.now().date()
 
     items = []
-    base_total = Decimal("0")
-    vat_total = Decimal("0")
+    totals_by_rate = {}  # vat_rate (percent) -> {"base": Decimal, "vat": Decimal}
 
     for item in order.items.all():
+        rate = item.vat_rate / 100
         line_total = item.unit_price * item.quantity
-        line_base = (line_total / (1 + VAT_RATE)).quantize(CENTS)
+        line_base = (line_total / (1 + rate)).quantize(CENTS)
         line_vat = line_total - line_base
 
-        base_total += line_base
-        vat_total += line_vat
+        bucket = totals_by_rate.setdefault(
+            item.vat_rate, {"base": Decimal("0"), "vat": Decimal("0")}
+        )
+        bucket["base"] += line_base
+        bucket["vat"] += line_vat
 
         items.append({
             "product": item.product,
             "quantity": item.quantity,
-            "unit_base": (item.unit_price / (1 + VAT_RATE)).quantize(CENTS),
+            "vat_rate": item.vat_rate,
+            "unit_base": (item.unit_price / (1 + rate)).quantize(CENTS),
             "line_vat": line_vat,
             "line_total": line_total,
         })
+
+    # A separate base/VAT subtotal per rate, as Slovak VAT law requires
+    # when an invoice mixes items taxed at different rates.
+    vat_breakdown = [
+        {"rate": rate, "base": totals["base"], "vat": totals["vat"]}
+        for rate, totals in sorted(totals_by_rate.items())
+    ]
+    base_total = sum((row["base"] for row in vat_breakdown), Decimal("0"))
+    vat_total = sum((row["vat"] for row in vat_breakdown), Decimal("0"))
 
     with transaction.atomic():
         number = _next_invoice_number()
@@ -58,7 +70,7 @@ def create_invoice(order):
             "number": number,
             "issued_at": issued_at,
             "items": items,
-            "vat_rate_percent": int(VAT_RATE * 100),
+            "vat_breakdown": vat_breakdown,
             "base_total": base_total,
             "vat_total": vat_total,
             "total": base_total + vat_total,
