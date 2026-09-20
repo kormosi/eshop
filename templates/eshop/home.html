@@ -30,7 +30,9 @@
         <article id="sk-content" class="lang active">
             <img class="images" src="{% static 'eshop/images/cover.jpg' %}" alt="Book">
             <h1>{{ product.name }}</h1>
-            <p>{{ product.description }}</p>
+            {% for paragraph in product.description.splitlines %}
+            {% if paragraph %}<p>{{ paragraph }}</p>{% endif %}
+            {% endfor %}
             <p>{{ product.price }} {{ product.currency }}</p>
             
 <!--            <h1>Krištáľové Puto</h1>-->
