@@ -272,6 +272,14 @@ p b {
     font-weight: bold;
 }
 
+.book-details {
+    font-family: Georgia, serif;
+    font-size: 1em;
+    line-height: 1.7;
+    color: #292929;
+    margin-top: 1em;
+}
+
 p i {
     font-style: italic;
 }

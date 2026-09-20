@@ -34,7 +34,20 @@
             {% if paragraph %}<p>{{ paragraph }}</p>{% endif %}
             {% endfor %}
             <p>{{ product.price }} {{ product.currency }}</p>
-            
+
+            {% if product.category == 'book' and product.book_details %}
+            <ul class="book-details">
+                {% if product.book_details.isbn %}<li><strong>ISBN:</strong> {{ product.book_details.isbn }}</li>{% endif %}
+                {% if product.book_details.page_count %}<li><strong>Počet strán:</strong> {{ product.book_details.page_count }}</li>{% endif %}
+                {% if product.book_details.binding %}<li><strong>Väzba:</strong> {{ product.book_details.get_binding_display }}</li>{% endif %}
+                {% if product.book_details.dimensions %}<li><strong>Rozmery:</strong> {{ product.book_details.dimensions }}</li>{% endif %}
+                {% if product.book_details.weight %}<li><strong>Hmotnosť:</strong> {{ product.book_details.weight }}g</li>{% endif %}
+                {% if product.book_details.language %}<li><strong>Jazyk:</strong> {{ product.book_details.language }}</li>{% endif %}
+                {% if product.book_details.publisher %}<li><strong>Vydavateľstvo:</strong> {{ product.book_details.publisher }}</li>{% endif %}
+                {% if product.book_details.published_at %}<li><strong>Dátum vydania:</strong> {{ product.book_details.published_at|date:"d.m.Y" }}</li>{% endif %}
+            </ul>
+            {% endif %}
+
 <!--            <h1>Krištáľové Puto</h1>-->
 <!--            <div class="images">-->
 <!--                <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book cover">-->

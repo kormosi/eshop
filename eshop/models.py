@@ -4,6 +4,10 @@ from django.db import models
 
 
 class Product(models.Model):
+    class Category(models.TextChoices):
+        BOOK = "book", "Book"
+        MERCH = "merch", "Merch"
+
     name = models.CharField(max_length=100)
     description = models.TextField(blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -14,11 +18,55 @@ class Product(models.Model):
         default=Decimal("5.00"),
         help_text="VAT rate in percent, e.g. 23.00 (standard) or 5.00 (books)",
     )
+    category = models.CharField(
+        max_length=20,
+        choices=Category.choices,
+        default=Category.BOOK,
+    )
     active = models.BooleanField(default=True)
     is_shipping = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
+
+class BookDetails(models.Model):
+    class Binding(models.TextChoices):
+        HARDCOVER = "hardcover", "Pevná väzba"
+        PAPERBACK = "paperback", "Brožovaná väzba"
+
+    product = models.OneToOneField(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="book_details",
+    )
+    isbn = models.CharField(max_length=20, blank=True)
+    page_count = models.PositiveIntegerField(null=True, blank=True)
+    binding = models.CharField(max_length=20, choices=Binding.choices, blank=True)
+    dimensions = models.CharField(
+        max_length=50, blank=True, help_text="e.g. 210 × 148 × 20 mm"
+    )
+    weight = models.PositiveIntegerField(null=True, blank=True, help_text="grams")
+    language = models.CharField(max_length=50, blank=True, default="Slovenský")
+    publisher = models.CharField(max_length=200, blank=True, default="PK Bytes")
+    published_at = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f"Book details for {self.product.name}"
+
+
+class MerchDetails(models.Model):
+    product = models.OneToOneField(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="merch_details",
+    )
+    size = models.CharField(max_length=50, blank=True)
+    color = models.CharField(max_length=50, blank=True)
+    material = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return f"Merch details for {self.product.name}"
 
 
 class Order(models.Model):
