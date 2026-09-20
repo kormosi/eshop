@@ -215,6 +215,27 @@ h1 {
     color: #292929;
 }
 
+.vop-consent {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.vop-text {
+    font-family: Georgia, serif;
+    font-size: 1em;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    color: #292929;
+    margin-top: 0.7em;
+    margin-bottom: 1em;
+}
+
+.vop-consent svg {
+    height: 1.5em;
+}
+
 .clear-cart-button {
     width: 2em;
     height: 2em;
@@ -332,6 +353,7 @@ footer img {
     color:  #efd7cf;
     border: 0.15em solid #efd7cf;
 }
+
 
 @media (min-width: 1200px) {
 

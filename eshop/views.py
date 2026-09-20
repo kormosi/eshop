@@ -1,4 +1,7 @@
 import json
+from pathlib import Path
+
+from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
@@ -17,6 +20,8 @@ def home(request):
 
 def cart(request):
     return render(request, "eshop/cart.html")
+
+
 
 
 def cart_data(request):
@@ -65,7 +70,12 @@ def checkout(request):
     if not pickup_point_id:
         messages.error(request, "Please select a pick-up point.")
         return redirect("cart")
-    
+
+    # Reject missing VOP consent
+    if not request.POST.get("vop_consent"):
+        messages.error(request, "Please confirm that you have read the terms and conditions.")
+        return redirect("cart")
+
     product = Product.objects.get(
         id=PRODUCT_ID,
         active=True,
@@ -129,3 +139,6 @@ def checkout_cancel(request):
 
     return render(request, "eshop/checkout_cancel.html")
 
+def vop(request):
+    vop_text = (Path(settings.BASE_DIR) / "VOP.txt").read_text(encoding="utf-8")
+    return render(request, "eshop/vop.html", {"vop_text": vop_text})

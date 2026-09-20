@@ -1,0 +1,10 @@
+{% extends 'eshop/base.html' %}
+{% block content %}
+
+<div class="articles">
+    <h1>Všeobecné obchodné podmienky</h1>
+    <pre class="vop-text">{{ vop_text }}</pre>
+    <a href="{% url 'cart' %}">Späť do košíka</a>
+</div>
+
+{% endblock %}
