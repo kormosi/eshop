@@ -9,12 +9,13 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3, default="EUR")
     vat_rate = models.DecimalField(
-        max_digits=3,
+        max_digits=4,
         decimal_places=2,
         default=Decimal("5.00"),
         help_text="VAT rate in percent, e.g. 23.00 (standard) or 5.00 (books)",
     )
     active = models.BooleanField(default=True)
+    is_shipping = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -50,6 +51,11 @@ class Order(models.Model):
         decimal_places=2,
     )
     currency = models.CharField(max_length=3, default="EUR")
+
+    # Snapshotted from the shipping Product's price/vat_rate at order
+    # time, so a later change doesn't alter already-issued invoices.
+    delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal("0.00"))
+    delivery_vat_rate = models.DecimalField(max_digits=4, decimal_places=2, default=Decimal("23.00"))
     stripe_checkout_session_id = models.CharField(
         max_length=255,
         unique=True,
@@ -100,7 +106,7 @@ class OrderItem(models.Model):
     # Snapshotted from product.vat_rate at order time, so a later change to
     # the product's rate doesn't alter already-issued invoices.
     vat_rate = models.DecimalField(
-        max_digits=3,
+        max_digits=4,
         decimal_places=2,
         default=Decimal("5.00"),
     )

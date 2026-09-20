@@ -10,6 +10,7 @@ def send_order_confirmation_email(order, invoice):
         f"({item.unit_price} {order.currency})</li>"
         for item in order.items.all()
     )
+    items_html += f"<li>Doprava ({order.delivery_fee} {order.currency})</li>"
 
     with invoice.pdf.open("rb") as pdf_file:
         pdf_content = list(pdf_file.read())

@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 def home(request):
-    product = Product.objects.filter(active=True).first()
+    product = Product.objects.filter(active=True, is_shipping=False).first()
 
     return render(
         request,
@@ -19,10 +19,8 @@ def home(request):
     )
 
 def cart(request):
-    return render(request, "eshop/cart.html")
-
-
-
+    shipping = Product.objects.get(is_shipping=True)
+    return render(request, "eshop/cart.html", {"delivery_fee": shipping.price})
 
 def cart_data(request):
     ids = request.GET.get("ids", "")
@@ -36,6 +34,7 @@ def cart_data(request):
     products = Product.objects.filter(
         id__in=product_ids,
         active=True,
+        is_shipping=False,
     )
 
     return JsonResponse([
@@ -80,7 +79,8 @@ def checkout(request):
         id=PRODUCT_ID,
         active=True,
     )
-    
+    shipping = Product.objects.get(is_shipping=True)
+
     order = Order.objects.create(
         email=request.POST["email"],
         # first_name=request.POST["first_name"],
@@ -92,8 +92,10 @@ def checkout(request):
         # country=request.POST["country"],
         pickup_point_id=request.POST["pickup_point_id"],
         pickup_point_address=request.POST["pickup_point_address"],
-        total=product.price, 
+        total=product.price * quantity + shipping.price,
         currency=product.currency,
+        delivery_fee=shipping.price,
+        delivery_vat_rate=shipping.vat_rate,
     )
     
     OrderItem.objects.create(

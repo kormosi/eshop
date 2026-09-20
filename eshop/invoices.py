@@ -45,13 +45,34 @@ def create_invoice(order):
         bucket["vat"] += line_vat
 
         items.append({
-            "product": item.product,
+            "name": item.product.name,
             "quantity": item.quantity,
             "vat_rate": item.vat_rate,
             "unit_base": (item.unit_price / (1 + rate)).quantize(CENTS),
             "line_vat": line_vat,
             "line_total": line_total,
         })
+
+    # Delivery is a flat fee, not tied to a product, so it's folded into
+    # the same items/VAT-breakdown structures as its own line.
+    delivery_rate = order.delivery_vat_rate / 100
+    delivery_base = (order.delivery_fee / (1 + delivery_rate)).quantize(CENTS)
+    delivery_vat = order.delivery_fee - delivery_base
+
+    bucket = totals_by_rate.setdefault(
+        order.delivery_vat_rate, {"base": Decimal("0"), "vat": Decimal("0")}
+    )
+    bucket["base"] += delivery_base
+    bucket["vat"] += delivery_vat
+
+    items.append({
+        "name": "Doprava",
+        "quantity": 1,
+        "vat_rate": order.delivery_vat_rate,
+        "unit_base": delivery_base,
+        "line_vat": delivery_vat,
+        "line_total": order.delivery_fee,
+    })
 
     # A separate base/VAT subtotal per rate, as Slovak VAT law requires
     # when an invoice mixes items taxed at different rates.

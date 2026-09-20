@@ -10,6 +10,8 @@ if (productIds.length === 0) {
 } else {
   clearCartButton.hidden = false;
 
+  const deliveryFee = parseFloat(cartElement.dataset.deliveryFee);
+
   fetch("/cart/data/?ids=" + productIds.join(","))
     .then((response) => response.json())
     .then((products) => {
@@ -30,7 +32,13 @@ if (productIds.length === 0) {
         `;
       });
 
+      total += deliveryFee;
+
       cartElement.innerHTML += `
+        <div>
+          <h2>Doprava</h2>
+          <p>${deliveryFee.toFixed(2)} EUR</p>
+        </div>
         <hr>
         <h2>Total: ${total.toFixed(2)} EUR</h2>
       `;

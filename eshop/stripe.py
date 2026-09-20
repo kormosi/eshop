@@ -22,6 +22,17 @@ def create_checkout_session(order):
                 "quantity": item.quantity,
             }
             for item in order.items.all()
+        ] + [
+            {
+                "price_data": {
+                    "currency": order.currency.lower(),
+                    "product_data": {
+                        "name": "Doprava",
+                    },
+                    "unit_amount": int(order.delivery_fee * 100),
+                },
+                "quantity": 1,
+            }
         ],
         customer_email=order.email,
         # payment_method_types=["card"],
