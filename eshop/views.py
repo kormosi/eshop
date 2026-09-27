@@ -145,8 +145,8 @@ def vop(request):
     vop_text = (Path(settings.BASE_DIR) / "VOP.txt").read_text(encoding="utf-8")
     return render(request, "eshop/vop.html", {"vop_text": vop_text})
 
-def withdrawal(request):
-    return render(request, "eshop/withdrawal.html")
+def odstupenie(request):
+    return render(request, "eshop/odstupenie.html")
 
-def privacy(request):
-    return render(request, "eshop/privacy.html")
+def osobne_udaje(request):
+    return render(request, "eshop/osobne_udaje.html")
