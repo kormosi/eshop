@@ -36,6 +36,14 @@
 {% endblock content %}
 </div>
 
+<footer>
+  <nav class="footer-links">
+    <a href="{% url 'vop' %}">Všeobecné obchodné podmienky</a>
+    <a href="{% url 'withdrawal' %}">Odstúpenie od zmluvy</a>
+    <a href="{% url 'privacy' %}">Ochrana osobných údajov</a>
+  </nav>
+</footer>
+
 <script src="{% static 'eshop/js/cart.js' %}"></script>
 
 {% block scripts %}

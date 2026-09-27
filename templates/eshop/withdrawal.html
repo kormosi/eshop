@@ -1,0 +1,51 @@
+{% extends 'eshop/base.html' %}
+{% block content %}
+
+<div class="articles">
+    <h1>Odstúpenie od zmluvy</h1>
+
+    <p>
+        Ako spotrebiteľ máte právo odstúpiť od kúpnej zmluvy bez uvedenia dôvodu
+        v lehote 14 dní od prevzatia tovaru, v súlade s Čl. VII Všeobecných
+        obchodných podmienok a zákonom č. 102/2014 Z. z.
+    </p>
+    <p>
+        Odstúpenie od zmluvy nám prosím zašlite e-mailom na adresu
+        <a href="mailto:info@silviakormosi.com">info@silviakormosi.com</a>,
+        alebo písomne poštou na adresu predávajúceho:
+    </p>
+    <p>
+        PK Bytes s. r. o.<br>
+        Cintorínska 7669/12<br>
+        811 08 Bratislava – mestská časť Staré Mesto
+    </p>
+    <p>
+        Nižšie nájdete vzorový formulár na odstúpenie od zmluvy. Vyplňte ho a
+        zašlite nám ho spolu s číslom vašej objednávky.
+    </p>
+
+    <pre class="vop-text">Predávajúci:
+PK Bytes s. r. o.
+Cintorínska 7669/12
+811 08 Bratislava – mestská časť Staré Mesto
+E-mail: info@silviakormosi.com
+
+Týmto oznamujem, že odstupujem od zmluvy o nákupe tohto tovaru:
+
+Číslo objednávky: ..........................
+Objednané dňa: ..........................
+Prevzaté dňa: ..........................
+
+Meno a priezvisko spotrebiteľa: ..........................
+Adresa spotrebiteľa: ..........................
+
+Kúpnu cenu žiadam vrátiť na bankový účet (IBAN): ..........................
+
+..........................
+Dátum a podpis spotrebiteľa
+(iba ak sa tento formulár podáva v listinnej podobe)</pre>
+
+    <a href="{% url 'cart' %}">Späť do košíka</a>
+</div>
+
+{% endblock %}

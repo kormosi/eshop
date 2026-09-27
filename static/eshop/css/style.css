@@ -314,6 +314,18 @@ footer img {
     height: 1.8em;
 }
 
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-links a {
+    text-decoration: underline;
+}
+
 .btncontainer {
     display: flex;
     justify-content: center;
