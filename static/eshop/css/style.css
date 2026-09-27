@@ -105,6 +105,21 @@ header {
 .cart-icon {
     height: 2em;
     display: block;
+    transform-origin: 50% 50%;
+}
+
+.cart-icon.shake {
+    animation: cart-icon-shake 0.5s ease;
+}
+
+@keyframes cart-icon-shake {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(-18deg); }
+    30% { transform: rotate(14deg); }
+    45% { transform: rotate(-10deg); }
+    60% { transform: rotate(8deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
 }
 
 .cart-count {
@@ -369,13 +384,25 @@ footer img {
     background-color: #6fbf73;
     border-color: #2f7a3d;
     color: #ffffff;
-    animation: added-pulse 0.2s ease;
+    animation: added-punch 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes added-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-    100% { transform: scale(1); }
+@keyframes added-punch {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(111, 191, 115, 0.55);
+    }
+    30% {
+        transform: scale(0.88);
+    }
+    60% {
+        transform: scale(1.15);
+        box-shadow: 0 0 0 0.7em rgba(111, 191, 115, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(111, 191, 115, 0);
+    }
 }
 
 #price {
