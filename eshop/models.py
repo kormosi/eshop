@@ -32,8 +32,8 @@ class Product(models.Model):
 
 class BookDetails(models.Model):
     class Binding(models.TextChoices):
-        HARDCOVER = "hardcover", "Pevná väzba"
-        PAPERBACK = "paperback", "Brožovaná väzba"
+        HARDCOVER = "hardcover", "Pevná"
+        PAPERBACK = "paperback", "Brožovaná"
 
     product = models.OneToOneField(
         Product,

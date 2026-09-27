@@ -286,6 +286,12 @@ p i {
     font-style: italic;
 }
 
+strong {
+    font-family: "Georgia", serif;
+    font-weight: bold;
+}
+
+
 .images {
     float: left;
     width: 42%;
@@ -328,12 +334,12 @@ footer img {
     text-decoration: underline;
 }
 
-/*.btncontainer {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    margin-top: 2em;*/
-/*    margin-bottom: 2em;*/
-/*}*/
+.btncontainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    /*margin-bottom: 2em;*/
+}
 
 .call-to-action {
     height: 3em;
@@ -360,8 +366,9 @@ footer img {
 }
 
 #price {
-    font-family: sans-serif;
-    font-weight: bold; 
+    font-family: "Georgia", serif;
+    /*font-family: sans-serif;*/
+    /*font-weight: bold; */
     font-size: 1.5em; 
 }
 
