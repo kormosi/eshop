@@ -1,3 +1,7 @@
+function formatPrice(value) {
+  return value.toFixed(2).replace(".", ",");
+}
+
 const cart = getCart();
 const productIds = Object.keys(cart);
 const cartElement = document.getElementById("cart");
@@ -26,8 +30,8 @@ if (productIds.length === 0) {
         cartElement.innerHTML += `
           <div>
             <h2>${product.name}</h2>
-            <p>${product.price} ${product.currency} × ${quantity}</p>
-            <p>${itemTotal.toFixed(2)} ${product.currency}</p>
+            <p>${formatPrice(product.price)} ${product.currency} × ${quantity}</p>
+            <p>${formatPrice(itemTotal)} ${product.currency}</p>
           </div>
         `;
       });
@@ -37,10 +41,10 @@ if (productIds.length === 0) {
       cartElement.innerHTML += `
         <div>
           <h2>Doprava</h2>
-          <p>${deliveryFee.toFixed(2)} EUR</p>
+          <p>${formatPrice(deliveryFee)} EUR</p>
         </div>
         <hr>
-        <h2>Total: ${total.toFixed(2)} EUR</h2>
+        <h2>Total: ${formatPrice(total)} EUR</h2>
       `;
     });
 }
