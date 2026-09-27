@@ -1,5 +1,6 @@
 {% extends 'eshop/base.html' %}
 {% load static %}
+{% load eshop_extras %}
 {% block content %}
 
 <!--    <nav id="sk-nav" class="lang active">-->
@@ -33,7 +34,7 @@
             {% for paragraph in product.description.splitlines %}
             {% if paragraph %}<p>{{ paragraph }}</p>{% endif %}
             {% endfor %}
-            <p>{{ product.price }} {{ product.currency }}</p>
+            <p>{{ product.price|sk_price }} {{ product.currency }}</p>
 
             {% if product.category == 'book' and product.book_details %}
             <ul class="book-details">
