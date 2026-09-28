@@ -15,6 +15,8 @@ if (productIds.length === 0) {
   clearCartButton.hidden = false;
 
   const deliveryFee = parseFloat(cartElement.dataset.deliveryFee);
+  const productImageUrl = cartElement.dataset.productImage;
+  const packetaLogoUrl = cartElement.dataset.packetaLogo;
 
   fetch("/cart/data/?ids=" + productIds.join(","))
     .then((response) => response.json())
@@ -28,23 +30,29 @@ if (productIds.length === 0) {
         total += itemTotal;
 
         cartElement.innerHTML += `
-          <div>
-            <h2>${product.name}</h2>
-            <p>${formatPrice(product.price)} ${product.currency} × ${quantity}</p>
-            <p>${formatPrice(itemTotal)} ${product.currency}</p>
-          </div>
+            <div class="cart-line-items-wrapper">
+              <img class="cart-product-image" src="${productImageUrl}" alt="Book">
+              <div class="cart-line-items">
+                <h2>${product.name} × ${quantity}</h2>
+                <h2>${formatPrice(itemTotal)} €</h2>
+              </div>
+            </div>
         `;
       });
 
       total += deliveryFee;
 
       cartElement.innerHTML += `
-        <div>
-          <h2>Doprava</h2>
-          <p>${formatPrice(deliveryFee)} EUR</p>
+        <div class="cart-line-items-wrapper">
+          <img class="cart-product-image" src="${packetaLogoUrl}" alt="Packeta">
+          <div class="cart-line-items">
+            <h2>Doprava</h2>
+            <h2>${formatPrice(deliveryFee)} €</h2>
+          </div>
         </div>
         <hr>
-        <h2>Total: ${formatPrice(total)} EUR</h2>
+        <h2 class="cart-total">Spolu ${formatPrice(total)} €</h2>
+        <br>
       `;
     });
 }

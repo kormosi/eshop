@@ -27,5 +27,5 @@ addToCartButton.addEventListener("click", function () {
   addToCartResetTimeoutId = setTimeout(() => {
     addToCartButton.textContent = addToCartButtonOriginalText;
     addToCartButton.classList.remove("added");
-  }, 2000);
+  }, 1750);
 });

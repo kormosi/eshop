@@ -3,28 +3,44 @@
 {% block content %}
 
 <div class="articles">
-    <h1>Váš košík</h1>
-    <button type="button" id="clear-cart" class="clear-cart-button" aria-label="Empty cart" hidden>×</button>
-    <div id="cart" data-delivery-fee="{{ delivery_fee }}"></div>
+    <div class="cart-header">
+        <h1>Váš košík</h1>
+        <button type="button" id="clear-cart" class="clear-cart-button" aria-label="Empty cart" hidden>Vyprázdniť košík</button>
+    </div>
+    <hr />
+    
+    <div id="cart" data-delivery-fee="{{ delivery_fee }}" data-product-image="{% static 'eshop/images/cover.jpg' %}" data-packeta-logo="{% static 'eshop/images/packeta.svg' %}"></div>
 
     {% if messages %}
     {% for message in messages %}
     <p class="error">{{ message }}</p>
     {% endfor %}
     {% endif %}
+    
+</div>
+
+<div class="articles">
+    
+    <div class="cart-header">
+        <h1>Doprava a platba</h1>
+    </div>
+    <hr />
 
     <p id="pickup-point-error" class="error" hidden>
         Please select a pick-up point.
     </p>
 
-    <button type="button" class="packeta-selector-open">Select pick-up point</button>
+    <div class="cart-delivery-address">
+        <h2>Miesto doručenia</h2>
+            <button type="button" class="packeta-selector-open">Zvoľte miesto doručenia</button>
+    </div>
 
     <div id="packeta-selector-value"></div>
     
     <form id="checkout-form" action="{% url 'checkout' %}" method="post">
         {% csrf_token %}
 
-        <h2>Billing information</h2>
+        <h2>Fakturačné údaje</h2>
 
 <!--        <label>-->
 <!--            First name-->
@@ -98,7 +114,8 @@
         <button type="submit" id="checkout-submit">Objednávka s povinnosťou platby</button>
         <!--    TODO doplniť sem, že "budete presmerovaní na...-->
     </form>
-    
+
+</div>
 <!--    <form id="checkout-form" action="{% url 'checkout' %}" method="post">-->
 <!--        {% csrf_token %}-->
 
@@ -120,7 +137,7 @@
 
     
     <a href="{% url 'home' %}">Späť k nákupu</a>
-</div>
+<!--</div>-->
 {% endblock %}
 
 
