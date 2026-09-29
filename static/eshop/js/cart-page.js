@@ -9,7 +9,7 @@ const clearCartButton = document.getElementById("clear-cart");
 const checkoutSubmitButton = document.getElementById("checkout-submit");
 
 if (productIds.length === 0) {
-  cartElement.innerHTML = "<p>Your cart is empty.</p>";
+  cartElement.innerHTML = "<p>Váš košík je prázdny.</p>";
   checkoutSubmitButton.disabled = true;
 } else {
   clearCartButton.hidden = false;

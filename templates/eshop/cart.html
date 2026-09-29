@@ -5,7 +5,7 @@
 <div class="articles">
     <div class="cart-header">
         <h1>Váš košík</h1>
-        <button type="button" id="clear-cart" class="clear-cart-button" aria-label="Empty cart" hidden>Vyprázdniť košík</button>
+        <button type="button" id="clear-cart" class="cart-button" aria-label="Empty cart" hidden>Vyprázdniť košík</button>
     </div>
     <hr />
     
@@ -16,7 +16,6 @@
     <p class="error">{{ message }}</p>
     {% endfor %}
     {% endif %}
-    
 </div>
 
 <div class="articles">
@@ -26,64 +25,65 @@
     </div>
     <hr />
 
+    <div class="cart-delivery-address">
+        <h2 class="cart-sub-header">Miesto doručenia</h2>
+        <button type="button" id="packeta-selector-open" class="cart-button">Zvoľte miesto doručenia</button>
+    </div>
+    
+    <div id="packeta-selector-value"></div>
+    
     <p id="pickup-point-error" class="error" hidden>
-        Please select a pick-up point.
+        Prosím, zvoľte miesto doručenia.
     </p>
 
-    <div class="cart-delivery-address">
-        <h2>Miesto doručenia</h2>
-            <button type="button" class="packeta-selector-open">Zvoľte miesto doručenia</button>
-    </div>
-
-    <div id="packeta-selector-value"></div>
     
     <form id="checkout-form" action="{% url 'checkout' %}" method="post">
         {% csrf_token %}
 
         <h2>Fakturačné údaje</h2>
 
-<!--        <label>-->
-<!--            First name-->
-<!--            <input type="text" name="first_name" required autocomplete="given-name">-->
-<!--        </label>-->
-
-<!--        <label>-->
-<!--            Last name-->
-<!--            <input type="text" name="last_name" required autocomplete="family-name">-->
-<!--        </label>-->
-
-        <label>
-            Email
-            <input type="email" name="email" required autocomplete="email">
+        <label class="checkout-label">
+            Meno
+            <input type="text" name="first_name" required autocomplete="given-name" class="checkout-input">
         </label>
 
-<!--        <label>-->
-<!--            Phone-->
-<!--            <input type="tel" name="phone" autocomplete="tel">-->
-<!--        </label>-->
+        <label class="checkout-label">
+            Priezvisko
+            <input type="text" name="last_name" required autocomplete="family-name" class="checkout-input">
+        </label>
 
-<!--        <label>-->
-<!--            Address-->
-<!--            <input type="text" name="address" required autocomplete="street-address">-->
-<!--        </label>-->
+        <label class="checkout-label">
+            Email
+            <input type="email" name="email" required autocomplete="email" class="checkout-input">
+        </label>
 
-<!--        <label>-->
-<!--            City-->
-<!--            <input type="text" name="city" required autocomplete="address-level2">-->
-<!--        </label>-->
+        <label class="checkout-label">
+            Tel. číslo
+            <input type="tel" name="phone" autocomplete="tel" class="checkout-input">
+        </label>
 
-<!--        <label>-->
-<!--            Postal code-->
-<!--            <input type="text" name="postal_code" required autocomplete="postal-code">-->
-<!--        </label>-->
+        <label class="checkout-label">
+            Ulica a číslo domu
+            <input type="text" name="address" required autocomplete="street-address" class="checkout-input">
+        </label>
 
-<!--        <label>-->
-<!--            Country-->
-<!--            <select name="country" required autocomplete="country">-->
-<!--                <option value="SK">Slovakia</option>-->
-<!--                <option value="CZ">Czech Republic</option>-->
-<!--            </select>-->
-<!--        </label>-->
+        <label class="checkout-label">
+            Mesto
+            <input type="text" name="city" required autocomplete="address-level2" class="checkout-input">
+        </label>
+
+        <label class="checkout-label">
+            Poštové smerové číslo
+            <input type="text" name="postal_code" required autocomplete="postal-code" class="checkout-input">
+        </label>
+
+        <label class="checkout-label">
+            Krajina
+            <select name="country" required autocomplete="country" class="checkout-input">
+                <option value="SK">Slovensko</option>
+                <option value="CZ">Česko</option>
+            </select>
+        </label>
 
         <input
                 type="hidden"
@@ -106,12 +106,9 @@
         <label class="vop-consent">
             <input type="checkbox" name="vop_consent" required>
             Oboznámil/a som sa s <a href="{% url 'vop' %}" target="_blank" rel="noopener">obchodnými podmienkami.</a>
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
-                <path d="M 25.980469 2.9902344 A 1.0001 1.0001 0 0 0 25.869141 3 L 20 3 A 1.0001 1.0001 0 1 0 20 5 L 23.585938 5 L 13.292969 15.292969 A 1.0001 1.0001 0 1 0 14.707031 16.707031 L 25 6.4140625 L 25 10 A 1.0001 1.0001 0 1 0 27 10 L 27 4.1269531 A 1.0001 1.0001 0 0 0 25.980469 2.9902344 z M 6 7 C 4.9069372 7 4 7.9069372 4 9 L 4 24 C 4 25.093063 4.9069372 26 6 26 L 21 26 C 22.093063 26 23 25.093063 23 24 L 23 14 L 23 11.421875 L 21 13.421875 L 21 16 L 21 24 L 6 24 L 6 9 L 14 9 L 16 9 L 16.578125 9 L 18.578125 7 L 16 7 L 14 7 L 6 7 z"></path>
-            </svg>
         </label>
 
-        <button type="submit" id="checkout-submit">Objednávka s povinnosťou platby</button>
+        <button type="submit" id="checkout-submit" class="call-to-action-pay">Objednávka s povinnosťou platby</button>
         <!--    TODO doplniť sem, že "budete presmerovaní na...-->
     </form>
 

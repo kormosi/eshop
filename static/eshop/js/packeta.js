@@ -18,6 +18,6 @@ function showSelectedPickupPoint(point) {
   document.getElementById("pickup-point-address").value = point.routingName;
 }
 
-document.querySelector(".packeta-selector-open").addEventListener("click", function () {
+document.getElementById("packeta-selector-open").addEventListener("click", function () {
   Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions);
 });
