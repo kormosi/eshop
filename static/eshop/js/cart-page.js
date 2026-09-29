@@ -7,12 +7,14 @@ const productIds = Object.keys(cart);
 const cartElement = document.getElementById("cart");
 const clearCartButton = document.getElementById("clear-cart");
 const checkoutSubmitButton = document.getElementById("checkout-submit");
+const checkoutSection = document.getElementById("checkout-section");
 
 if (productIds.length === 0) {
   cartElement.innerHTML = "<p>Váš košík je prázdny.</p>";
   checkoutSubmitButton.disabled = true;
 } else {
   clearCartButton.hidden = false;
+  checkoutSection.hidden = false;
 
   const deliveryFee = parseFloat(cartElement.dataset.deliveryFee);
   const productImageUrl = cartElement.dataset.productImage;

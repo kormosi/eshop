@@ -18,29 +18,17 @@
     {% endif %}
 </div>
 
-<div class="articles">
-    
+<div class="articles" id="checkout-section" hidden>
+
     <div class="cart-header">
         <h1>Doprava a platba</h1>
     </div>
     <hr />
 
-    <div class="cart-delivery-address">
-        <h2 class="cart-sub-header">Miesto doručenia</h2>
-        <button type="button" id="packeta-selector-open" class="cart-button">Zvoľte miesto doručenia</button>
-    </div>
-    
-    <div id="packeta-selector-value"></div>
-    
-    <p id="pickup-point-error" class="error" hidden>
-        Prosím, zvoľte miesto doručenia.
-    </p>
-
-    
     <form id="checkout-form" action="{% url 'checkout' %}" method="post">
         {% csrf_token %}
 
-        <h2>Fakturačné údaje</h2>
+        <h3>Fakturačné údaje</h3>
 
         <label class="checkout-label">
             Meno
@@ -102,39 +90,33 @@
                 name="cart"
                 id="cart-data"
         >
+        
+        <div class="cart-delivery-address">
+            <h2 class="cart-sub-header">Miesto doručenia</h2>
+            <button type="button" id="packeta-selector-open" class="cart-button">Zvoľte miesto doručenia</button>
+        </div>
+
+        <div id="packeta-selector-value"></div>
+
+        <p id="pickup-point-error" class="error" hidden>
+            Prosím, zvoľte miesto doručenia.
+        </p>
 
         <label class="vop-consent">
             <input type="checkbox" name="vop_consent" required>
-            Oboznámil/a som sa s <a href="{% url 'vop' %}" target="_blank" rel="noopener">obchodnými podmienkami.</a>
+            <span>Oboznámil/a som sa s <a href="{% url 'vop' %}" target="_blank" rel="noopener">obchodnými podmienkami.</a></span>
         </label>
 
         <button type="submit" id="checkout-submit" class="call-to-action-pay">Objednávka s povinnosťou platby</button>
-        <!--    TODO doplniť sem, že "budete presmerovaní na...-->
+        <p>Budete presmerovaní na platobnú bránu Stripe</p>
+        
     </form>
+    
+
+
 
 </div>
-<!--    <form id="checkout-form" action="{% url 'checkout' %}" method="post">-->
-<!--        {% csrf_token %}-->
-
-<!--        <input-->
-<!--                type="email"-->
-<!--                name="email"-->
-<!--                placeholder="Your email"-->
-<!--                required-->
-<!--        >-->
-<!--        <input type="hidden" name="cart" id="cart-data">-->
-<!--        <input-->
-<!--                type="hidden"-->
-<!--                name="pickup_point_id"-->
-<!--                id="pickup-point-id"-->
-<!--        >-->
-
-<!--        <button type="submit">Zaplatiť</button>-->
-<!--    </form>-->
-
     
-    <a href="{% url 'home' %}">Späť k nákupu</a>
-<!--</div>-->
 {% endblock %}
 
 

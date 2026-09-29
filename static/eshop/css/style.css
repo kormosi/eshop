@@ -72,13 +72,16 @@ header {
     border-style: solid;
     border-color: #707070;
     width: 100%; /* Otherwise it will shrink-to-content */
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 4em;
+    height: 3.4em;
     width: 100%; /* Otherwise it will shrink-to-content */
 }
 
@@ -237,6 +240,13 @@ h2 {
     color: #292929;
 }
 
+h3 {
+    font-family: Georgia, serif;
+    font-size: 1.2em;
+    color: #292929;
+    margin-bottom: 1em;
+}
+
 .vop-consent {
     display: flex;
     align-items: center;
@@ -312,7 +322,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 hr {
@@ -323,7 +334,6 @@ hr {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-
 
 p {
     font-family: Georgia, serif;
@@ -361,6 +371,12 @@ strong {
     font-size: 1.3em;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+#pickup-point-error {
+    color: #d14949;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 #checkout-form {
