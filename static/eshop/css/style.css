@@ -368,14 +368,13 @@ strong {
 
 #packeta-selector-value {
     font-family: "Georgia", serif;
-    font-size: 1.3em;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
 }
 
 #pickup-point-error {
     color: #d14949;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
 }
 
@@ -472,8 +471,6 @@ footer img {
     font-weight: bold;
     position: relative;
 }
-
-
 
 .call-to-action:hover {
     background-color: #f38f4b;

@@ -3,6 +3,7 @@ from pathlib import Path
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
+from .forms import CheckoutForm
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
 from django.http import JsonResponse
@@ -75,6 +76,12 @@ def checkout(request):
         messages.error(request, "Please confirm that you have read the terms and conditions.")
         return redirect("cart")
 
+    # Reject invalid or missing billing details
+    form = CheckoutForm(request.POST)
+    if not form.is_valid():
+        messages.error(request, "Please check the highlighted fields.")
+        return redirect("cart")
+
     product = Product.objects.get(
         id=PRODUCT_ID,
         active=True,
@@ -82,14 +89,7 @@ def checkout(request):
     shipping = Product.objects.get(is_shipping=True)
 
     order = Order.objects.create(
-        email=request.POST["email"],
-        # first_name=request.POST["first_name"],
-        # last_name=request.POST["last_name"],
-        # phone=request.POST["phone"],
-        # address=request.POST["address"],
-        # city=request.POST["city"],
-        # postal_code=request.POST["postal_code"],
-        # country=request.POST["country"],
+        **form.cleaned_data,
         pickup_point_id=request.POST["pickup_point_id"],
         pickup_point_address=request.POST["pickup_point_address"],
         total=product.price * quantity + shipping.price,

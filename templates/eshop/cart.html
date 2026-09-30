@@ -47,7 +47,8 @@
 
         <label class="checkout-label">
             Tel. číslo
-            <input type="tel" name="phone" autocomplete="tel" class="checkout-input">
+            <input type="tel" name="phone" required autocomplete="tel" class="checkout-input"
+                   pattern="[0-9+ ]{6,}" title="Formát: 0919 123 456, alebo +421 919 123 456">
         </label>
 
         <label class="checkout-label">
@@ -62,7 +63,8 @@
 
         <label class="checkout-label">
             Poštové smerové číslo
-            <input type="text" name="postal_code" required autocomplete="postal-code" class="checkout-input">
+            <input type="text" name="postal_code" required autocomplete="postal-code" class="checkout-input"
+                   pattern="\d{3}\s?\d{2}" inputmode="numeric" title="Formát: 123 45">
         </label>
 
         <label class="checkout-label">
