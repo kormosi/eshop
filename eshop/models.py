@@ -5,8 +5,9 @@ from django.db import models
 
 class Product(models.Model):
     class Category(models.TextChoices):
-        BOOK = "book", "Book"
+        BOOK = "book", "Kniha"
         MERCH = "merch", "Merch"
+        SHIPPING = "shipping", "Doprava"
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank=False)
@@ -24,7 +25,6 @@ class Product(models.Model):
         default=Category.BOOK,
     )
     active = models.BooleanField(default=True)
-    is_shipping = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

@@ -14,8 +14,8 @@ class MerchDetailsInline(admin.StackedInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("name", "price", "currency", "vat_rate", "category", "active", "is_shipping")
-    list_filter = ("active", "is_shipping", "category")
+    list_display = ("name", "price", "currency", "vat_rate", "category", "active")
+    list_filter = ("active", "category")
 
     def get_inlines(self, request, obj):
         if obj is None:

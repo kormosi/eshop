@@ -361,6 +361,12 @@ p i {
     font-style: italic;
 }
 
+.shipping-description {
+    margin: 0;
+    color: #00b30f;
+    font-size: 1em;
+}
+
 strong {
     font-family: "Georgia", serif;
     font-weight: bold;
