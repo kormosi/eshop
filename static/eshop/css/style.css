@@ -89,7 +89,7 @@ header {
     padding: .5em;
     font-family: "Georgia", serif;
     font-size: 2em;
-    color: #292929;
+    color: #000000;
     letter-spacing: 0.02em;
     text-decoration: none;
 }
@@ -155,7 +155,7 @@ header {
 
 .lang-switch a {
     cursor: pointer;
-    color: #292929;
+    color: #000000;
     text-decoration: underline;
 }
 
@@ -212,6 +212,7 @@ nav ul li img {
 }
 
 .articles {
+    /*display: flex;*/
     background-color: #dcd4c161;
     border-radius: 0.2em;
     margin-top: 0.7em;
@@ -231,19 +232,19 @@ article {
 h1 {
     font-family: Georgia, serif;
     font-size: 1.7em;
-    color: #292929;
+    color: #000000;
 }
 
 h2 {
     font-family: Georgia, serif;
     font-size: 1.2em;
-    color: #292929;
+    color: #000000;
 }
 
 h3 {
     font-family: Georgia, serif;
     font-size: 1.2em;
-    color: #292929;
+    color: #000000;
     margin-bottom: 1em;
 }
 
@@ -259,7 +260,7 @@ h3 {
     font-size: 1em;
     line-height: 1.5;
     white-space: pre-wrap;
-    color: #292929;
+    color: #000000;
     margin-top: 0.7em;
     margin-bottom: 1em;
 }
@@ -277,7 +278,7 @@ h3 {
 
 .cart-button {
     height: 2em;
-    border: 0.1em solid #292929;
+    border: 0.1em solid #000000;
     background-color: #efd7cf;
     border-radius: 0.4em;
     color: #000000;
@@ -328,7 +329,7 @@ h3 {
 
 hr {
     height: 1px;
-    background: #292929;
+    background: #000000;
     /*font-size: 0;*/
     border: 0;
     margin-top: 0.5em;
@@ -342,19 +343,23 @@ p {
     line-height: 1.5; /* 1.5 times the font size */
     text-align: justify;
     margin-top: 0.7em;
-    color: #292929;
+    color: #000000;
 }
 
 p b {
     font-weight: bold;
 }
 
-.book-details {
+.images {
+    margin-top: 0.7em;
+    margin-bottom: 1.5em;
+}
+
+.product-details {
     font-family: Georgia, serif;
     font-size: 1em;
     line-height: 1.7;
-    color: #292929;
-    margin-top: 1em;
+    color: #000000;
 }
 
 p i {
@@ -365,6 +370,7 @@ p i {
     margin: 0;
     color: #00b30f;
     font-size: 1em;
+    font-weight: bold;
 }
 
 strong {
@@ -424,10 +430,11 @@ strong {
 
 footer {
     margin-top: 2em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .footer_icons {
@@ -443,20 +450,28 @@ footer img {
 .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.8em;
     align-items: center;
     text-align: center;
+    font-family: Georgia, serif;
+    font-size: 1em;
+    width: 100%;
 }
 
 .footer-links a {
     text-decoration: underline;
+    color: #000000;
+}
+
+.footer-links a:visited {
+    color: #000000;
 }
 
 .btncontainer {
     display: flex;
     justify-content: center;
-    margin-top: 3em;
-    /*margin-bottom: 2em;*/
+    margin-top: 0.7em;
+    margin-bottom: 1.5em;
 }
 
 .call-to-action {
@@ -466,7 +481,7 @@ footer img {
     padding: 0 1.5em;
     align-items: center;
     font-size: 0.9em;
-    color: #292929;
+    color: #000000;
     background-color: #ff9e54;
     border: 0.12em solid #ac5211;
     border-radius: 0.5em;
@@ -538,8 +553,10 @@ footer img {
 #price {
     font-family: "Georgia", serif;
     /*font-family: sans-serif;*/
-    /*font-weight: bold; */
+    font-weight: bold; 
     font-size: 1.5em; 
+    margin-top: 0;
+    margin-bottom: 0.5em;
 }
 
 

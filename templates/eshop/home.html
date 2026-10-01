@@ -16,10 +16,11 @@
 
     <div class="articles">
         <article id="sk-content" class="lang active">
-            <img class="images" src="{% static 'eshop/images/cover.jpg' %}" alt="Book">
-            <h1>{{ product.name }}</h1>
+
+                <img class="images" src="{% static 'eshop/images/cover.jpg' %}" alt="Book">
             
-            <p id="price">{{ product.price|sk_price }} €</p>
+            <div class="product-details">
+            <h1>{{ product.name }}</h1>
             
             {% if product.category == 'book' and product.book_details %}
             <ul class="book-details">
@@ -35,71 +36,30 @@
                 <li>Posielame ihneď</li>
             </ul>
             {% endif %}
-            
-            
+                
+            </div>
+
+            <p id="price">{{ product.price|sk_price }} €</p>
+
+
             <div class="btncontainer"> 
-                <button
-                        type="button"
-                        id="add-to-cart"
-                        class="call-to-action"
-                        data-product-id="{{ product.id }}"
-                >
-                    Pridať do košíka
-                </button>
+            <button
+                    type="button"
+                    id="add-to-cart"
+                    class="call-to-action"
+                    data-product-id="{{ product.id }}"
+            >
+                Pridať do košíka
+            </button>
             </div>
             
             {% for paragraph in product.description.splitlines %}
             {% if paragraph %}<p>{{ paragraph }}</p>{% endif %}
             {% endfor %}
 
-
-
         </article>
 
-<!--        <form action="{% url 'checkout' %}" method="post">-->
-<!--            {% csrf_token %}-->
-
-<!--            <input-->
-<!--                    type="email"-->
-<!--                    name="email"-->
-<!--                    placeholder="Your email"-->
-<!--                    required-->
-<!--            >-->
-
-<!--            <button type="submit">Buy now</button>-->
-<!--        </form>-->
-
-<!--        <article id="en-content" class="lang">-->
-<!--            <h1>The Crystal Bond</h1>-->
-<!--            <div class="images">-->
-<!--                <img src="{% static 'eshop/images/cover.jpg' %}" alt="Book cover">-->
-<!--            </div>-->
-<!--            <p>-->
-<!--                When Elizabeth and Ashley Kings finished high-school, they thought only boring adult life awaited them.-->
-<!--                Looking for jobs, starting a career, paying rent.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--                But that is impossible when James is their roommate because he is a traveler through space and time who has no control over his ability.-->
-<!--                On his journeys, he unintentionally takes along anyone close to him who happens to be nearby.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--                As if that wasn't enough, a new neighbor on their street takes a suspicious interest in them, and the sisters begin to suspect that James isn't the only one with a special ability.-->
-<!--                That creates problems, unexpected situations, and unwanted attention that could change their lives far more than they ever imagined.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--                For now, their peaceful life is on hold.-->
-<!--            </p>-->
-<!--        </article>-->
-
         <br>
-
-
-        <div class="btncontainer">
-            <!-- TODO pridať do tohto tlačidla obrázok košíka, ako majú na martinuse-->
-<!--            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="sk-content" class="call-to-action lang active">Vložiť do košíka</a>-->
-<!--            <a href="https://www.martinus.sk/4100133-kristalove-puto/kniha" id="en-content" class="call-to-action lang">Add to shopping cart</a>-->
-            
-        </div>
 
 <!--    <div class="separator">-->
 <!--        <img src="separator2.svg" alt="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;">-->
