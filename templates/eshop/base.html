@@ -18,10 +18,10 @@
   <div class="header-container">
     <a href="{% url 'home' %}" class="logo">Silvia Kormosi</a>
 
-    <!--        <div class="lang-switch">-->
-    <!--            <a id="sk" onclick="setLang('sk')">SK</a> |-->
-    <!--            <a id="en" onclick="setLang('en')">EN</a>-->
-    <!--        </div>-->
+    <div class="lang-switch">
+        <a id="sk" onclick="setLang('sk')">SK</a> |
+        <a id="en" onclick="setLang('en')">EN</a>
+    </div>
     
     <a href="{% url 'cart' %}" id="cart-link" aria-label="Cart">
       <img src="{% static 'eshop/images/cart.svg' %}" alt="" class="cart-icon">
@@ -36,15 +36,17 @@
     <nav id="sk-nav" class="lang active">
       <ul>
 <!--          <li><img src="chevron-double-right.svg" alt=">">E-shop</li>-->
-          <li>E-shop</li>
+          <li><a href="{% url 'home' %}">E-shop</a></li>
           <li>Pripravujeme</li>
-          <li>O autorke</li>
+          <li><a href="{% url 'about' %}">O autorke</a></li>
       </ul>
     </nav>
 
     <nav id="en-nav" class="lang">
-      <ul> <li>About me</li>
-          <li><img src="chevron-double-right.svg" alt=">">Bookstore</li>
+      <ul> 
+      <li><a href="{% url 'home' %}">Store</a></li>
+      <li>Coming soon</li>
+      <li><a href="{% url 'about' %}">About me</a></li>
       </ul>
       
     </nav>
@@ -62,6 +64,7 @@
   </nav>
 </footer>
 
+<script src="{% static 'eshop/js/lang.js' %}"></script>
 <script src="{% static 'eshop/js/cart.js' %}"></script>
 
 {% block scripts %}

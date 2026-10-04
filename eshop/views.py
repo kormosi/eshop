@@ -19,6 +19,10 @@ def home(request):
         {"product": product},
     )
 
+def about(request):
+    return render(request, "eshop/about.html")
+
+
 def cart(request):
     shipping = Product.objects.get(category=Product.Category.SHIPPING)
     return render(request, "eshop/cart.html", {"delivery_fee": shipping.price})

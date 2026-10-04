@@ -1,0 +1,44 @@
+{% extends 'eshop/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="articles">
+    <article id="sk-content" class="lang active">
+        <h1>O autorke:</h1>
+
+        <div class="images">
+            <img src="{% static 'eshop/images/siska.jpg' %}" alt="Silvia image">
+        </div>
+
+        <p>
+            Silvia Kormosi je slovenská spisovateľka a autorka série mestského fantasy <i>Tajomstvá svetla</i>, ktorej prvý diel <i>Krištáľové puto </i> vyjde v roku 2026.
+        </p>
+        <p>
+            Vymýšľaniu postáv a príbehov sa venuje už od útleho veku, no k samotnému písaniu sa naplno dostala až počas materskej dovolenky.
+            Odvtedy s písaním neprestala.
+        </p>
+        <p>
+            V minulosti sa venovala prekladu a výučbe anglického jazyka, dnes sa sústreďuje najmä na beletriu v žánri YA fantasy.
+        </p>
+    </article>
+
+    <article id="en-content" class="lang">
+        <h1>About the author:</h1>
+        <div class="images">
+            <img src="{% static 'eshop/images/siska.jpg' %}" alt="Silvia image">
+        </div>
+        <p>
+            Silvia Kormosi is the author of the <i>The Mysteries of Lights</i> trilogy.
+            The first installment of the series, named the <i>The Crystal Bond</i>, is set to release in 2026.
+        </p>
+        <p>
+            Silvia has been creating characters and envisioning stories since early childhood, but began writing full-time only during her recent maternity leave.
+            Having discovered a propensity for putting words to paper, she hasn't stopped since.
+        </p>
+        <p>
+            She previously worked as a translator and English teacher, and now focuses primarily on writing YA fiction. She is based in Slovakia.
+        </p>
+    </article>
+</div>
+
+{% endblock %}
