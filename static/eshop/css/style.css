@@ -172,8 +172,20 @@ nav {
 
 nav ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 1em;
+}
+
+nav ul li a{
+    color: #000000;
+}
+
+nav ul li a:visited{
+    color: #000000;
+}
+
+nav ul li a.active {
+    text-decoration: none;
 }
 
 nav ul li img {

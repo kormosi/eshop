@@ -35,20 +35,19 @@
 
     <nav id="sk-nav" class="lang active">
       <ul>
-<!--          <li><img src="chevron-double-right.svg" alt=">">E-shop</li>-->
-          <li><a href="{% url 'home' %}">E-shop</a></li>
-          <li><a href="{% url 'coming_soon' %}">Pripravujeme</a></li>
-          <li><a href="{% url 'about' %}">O autorke</a></li>
+          <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">E-shop</a></li>
+          <li><a href="{% url 'coming_soon' %}" class="{% if request.resolver_match.url_name == 'coming_soon' %}active{% endif %}">Pripravujeme</a></li>
+          <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">O autorke</a></li>
       </ul>
     </nav>
 
     <nav id="en-nav" class="lang">
-      <ul> 
-      <li><a href="{% url 'home' %}">Store</a></li>
-      <li><a href="{% url 'coming_soon' %}">Coming soon</a></li>
-      <li><a href="{% url 'about' %}">About me</a></li>
+      <ul>
+      <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Store</a></li>
+      <li><a href="{% url 'coming_soon' %}" class="{% if request.resolver_match.url_name == 'coming_soon' %}active{% endif %}">Coming soon</a></li>
+      <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About me</a></li>
       </ul>
-      
+
     </nav>
 
 <div class="container">
