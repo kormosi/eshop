@@ -22,6 +22,9 @@ def home(request):
 def about(request):
     return render(request, "eshop/about.html")
 
+def coming_soon(request):
+    return render(request, "eshop/coming_soon.html")
+
 
 def cart(request):
     shipping = Product.objects.get(category=Product.Category.SHIPPING)
