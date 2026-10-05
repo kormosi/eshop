@@ -80,6 +80,13 @@ header {
     width: 100%; /* Otherwise it will shrink-to-content */
 }
 
+.lang-and-cart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3em;
+}
+
 .logo {
     padding: .5em;
     font-size: 1.8em;

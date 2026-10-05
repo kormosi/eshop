@@ -17,16 +17,20 @@
 <header>
   <div class="header-container">
     <a href="{% url 'home' %}" class="logo">Silvia Kormosi</a>
-
-    <div class="lang-switch">
-        <a id="sk" onclick="setLang('sk')">SK</a> |
-        <a id="en" onclick="setLang('en')">EN</a>
-    </div>
-    
-    <a href="{% url 'cart' %}" id="cart-link" aria-label="Cart">
-      <img src="{% static 'eshop/images/cart.svg' %}" alt="" class="cart-icon">
-      <span id="cart-count" class="cart-count" hidden>0</span>
-    </a>
+      
+      <div class="lang-and-cart">
+          
+        <div class="lang-switch">
+            <a id="sk" onclick="setLang('sk')">SK</a> |
+            <a id="en" onclick="setLang('en')">EN</a>
+        </div>
+        
+        <a href="{% url 'cart' %}" id="cart-link" aria-label="Cart">
+          <img src="{% static 'eshop/images/cart.svg' %}" alt="" class="cart-icon">
+          <span id="cart-count" class="cart-count" hidden>0</span>
+        </a>
+              
+      </div>
 
   </div>
 </header>
