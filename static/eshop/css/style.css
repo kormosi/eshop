@@ -84,7 +84,7 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 3em;
+    gap: 1em;
 }
 
 .logo {
@@ -102,13 +102,11 @@ header {
     justify-content: center;
     padding: 1em;
     margin-right: 0.5em;
-    border-radius: 50%;
     text-decoration: none;
 }
 
 .cart-icon {
     height: 2em;
-    display: block;
     transform-origin: 50% 50%;
 }
 
@@ -167,7 +165,7 @@ header {
 nav {
     font-size: 1.4em;
     width: 90%;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.5em;
 }
 
 nav ul {
@@ -177,10 +175,6 @@ nav ul {
 }
 
 nav ul li a {
-    color: #000000;
-}
-
-nav ul li a:visited {
     color: #000000;
 }
 
@@ -200,10 +194,11 @@ nav ul li a.active::before {
 }
 
 .articles {
-    background-color: #dcd4c161;
+    background-color: #f2ecdf;
     border-radius: 0.2em;
-    margin-top: 0.7em;
+    margin-top: 0.5em;
     padding: 0.5em;
+    padding-top: 0;
     border: 1px solid;
     border-color: #efd7cf;
     width: 100%;
@@ -211,17 +206,17 @@ nav ul li a.active::before {
 
 h1 {
     font-size: 1.7em;
-    color: #000000;
+    /*color: #000000;*/
 }
 
 h2 {
     font-size: 1.2em;
-    color: #000000;
+    /*color: #000000;*/
 }
 
 h3 {
     font-size: 1.2em;
-    color: #000000;
+    /*color: #000000;*/
     margin-bottom: 1em;
 }
 
@@ -509,14 +504,22 @@ footer img {
 @media (min-width: 1200px) {
 
     .header-container {
-        width: 50%;
+        width: 52%;
     }
 
     .container {
-        width: 30%;
+        width: 50%;
     }
 
     .images {
         width: 21%;
+    }
+
+    .lang-and-cart {
+        gap: 3em;
+    }
+    
+    nav {
+        width: 30%;
     }
 }
