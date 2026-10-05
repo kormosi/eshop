@@ -49,19 +49,14 @@ table {
 .call-to-action.lang { display: none; }
 .call-to-action.lang.active { display: flex; }
 
-html {
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    width: 100%;
-}
-
 body {
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #fffaf2;
+    font-family: Georgia, serif;
+    color: #000000;
 }
 
 header {
@@ -87,7 +82,6 @@ header {
 
 .logo {
     padding: .5em;
-    font-family: "Georgia", serif;
     font-size: 1.8em;
     color: #000000;
     letter-spacing: 0.02em;
@@ -164,7 +158,6 @@ header {
 }
 
 nav {
-    font-family: "Georgia", serif;
     font-size: 1.4em;
     width: 90%;
     margin-bottom: 0.8em;
@@ -176,11 +169,11 @@ nav ul {
     margin-top: 1em;
 }
 
-nav ul li a{
+nav ul li a {
     color: #000000;
 }
 
-nav ul li a:visited{
+nav ul li a:visited {
     color: #000000;
 }
 
@@ -188,8 +181,8 @@ nav ul li a.active {
     text-decoration: none;
 }
 
-nav ul li img {
-    padding-right: 0.2em;
+nav ul li a.active::before {
+    content: "» ";
 }
 
 .container {
@@ -199,32 +192,7 @@ nav ul li img {
     align-items: center;
 }
 
-.intro {
-    margin-top: 2em;
-    display: flex;
-    justify-content: space-around;
-    width: 90%;
-}
-
-.intro img {
-    width: 7em;
-    height: auto;
-}
-
-.separator {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 2em;
-}
-
-.separator img {
-    width: 100%;
-    display: block;
-}
-
 .articles {
-    /*display: flex;*/
     background-color: #dcd4c161;
     border-radius: 0.2em;
     margin-top: 0.7em;
@@ -234,27 +202,17 @@ nav ul li img {
     width: 100%;
 }
 
-article {
-    display: block;
-}
-
-/*.book-details li { font-size: 0.8em;*/
-/*}*/
-
 h1 {
-    font-family: Georgia, serif;
     font-size: 1.7em;
     color: #000000;
 }
 
 h2 {
-    font-family: Georgia, serif;
     font-size: 1.2em;
     color: #000000;
 }
 
 h3 {
-    font-family: Georgia, serif;
     font-size: 1.2em;
     color: #000000;
     margin-bottom: 1em;
@@ -268,11 +226,8 @@ h3 {
 }
 
 .vop-text {
-    font-family: Georgia, serif;
-    font-size: 1em;
     line-height: 1.5;
     white-space: pre-wrap;
-    color: #000000;
     margin-top: 0.7em;
     margin-bottom: 1em;
 }
@@ -287,7 +242,6 @@ h3 {
     justify-content: space-between;
 }
 
-
 .cart-button {
     height: 2em;
     border: 0.1em solid #000000;
@@ -301,15 +255,11 @@ h3 {
 
 .cart-button:hover {
     background-color: #edc0b1;
-    color: #000000;
 }
 
 .cart-line-items-wrapper {
     display: flex;
     justify-content: flex-start;
-}
-
-.cart-line-items-wrapper {
     margin-bottom: 0.5em;
 }
 
@@ -342,20 +292,17 @@ h3 {
 hr {
     height: 1px;
     background: #000000;
-    /*font-size: 0;*/
     border: 0;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
 
 p {
-    font-family: Georgia, serif;
     font-size: 1.1em;
     letter-spacing: 0.02em;
     line-height: 1.5; /* 1.5 times the font size */
     text-align: justify;
     margin-top: 0.7em;
-    color: #000000;
 }
 
 p b {
@@ -363,15 +310,22 @@ p b {
 }
 
 .images {
+    float: left;
+    width: 42%;
     margin-top: 0.7em;
+    margin-right: 1em;
     margin-bottom: 1.5em;
+    border-radius: 0.2em;
+}
+
+.images img {
+    border-radius: 0.5em;
+    width: 100%;
+    height: auto;
 }
 
 .product-details {
-    font-family: Georgia, serif;
-    font-size: 1em;
     line-height: 1.7;
-    color: #000000;
 }
 
 p i {
@@ -386,12 +340,10 @@ p i {
 }
 
 strong {
-    font-family: "Georgia", serif;
     font-weight: bold;
 }
 
 #packeta-selector-value {
-    font-family: "Georgia", serif;
     font-size: 1.1em;
     margin-bottom: 1.5em;
 }
@@ -412,7 +364,6 @@ strong {
     width: 100%;
     gap: 0.3em;
     margin-bottom: 0.8em;
-    font-family: "Georgia", serif;
 }
 
 .checkout-input {
@@ -421,31 +372,14 @@ strong {
     height: 2.3em;
     padding: 0 0.6em;
     font-size: 16px;
-    border: 0.1em solid  #efd7cf;
+    border: 0.1em solid #efd7cf;
     border-radius: 0.4em;
     background-color: #fffaf2;
-}
-
-
-.images {
-    float: left;
-    width: 42%;
-    margin-right: 1em;
-    border-radius: 0.2em;
-}
-
-.images img {
-    border-radius: 0.5em;
-    width: 100%;
-    height: auto;
 }
 
 footer {
     margin-top: 2em;
     margin-bottom: 1em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
 }
 
@@ -465,7 +399,6 @@ footer img {
     gap: 0.8em;
     align-items: center;
     text-align: center;
-    font-family: Georgia, serif;
     font-size: 1em;
     width: 100%;
 }
@@ -520,18 +453,15 @@ footer img {
 .call-to-action-pay {
     display: block;
     height: 3em;
-    /*width: 20em;*/
     margin: 1em auto 0;
     padding: 0 1.5em;
     font-size: 0.9em;
-    /*background: linear-gradient(180deg, #83cb87 0%, #6fbf73 45%, #5da862 100%);*/
-    background-color: #6fbf73; ;
+    background-color: #6fbf73;
     border: 0.1em solid #2f7a3d;
     color: #ffffff;
     border-radius: 0.5em;
     font-weight: bold;
     cursor: pointer;
-    /*box-shadow: 0 0.2em 0 #2f7a3d, 0 0.3em 0.4em rgba(0, 0, 0, 0.2);*/
     transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
 }
 
@@ -563,28 +493,16 @@ footer img {
 }
 
 #price {
-    font-family: "Georgia", serif;
-    /*font-family: sans-serif;*/
-    font-weight: bold; 
-    font-size: 1.5em; 
+    font-weight: bold;
+    font-size: 1.5em;
     margin-top: 0;
     margin-bottom: 0.5em;
 }
 
-
 @media (min-width: 1200px) {
-
-    header {
-        width: 100%;
-        border-bottom-width: 0.10em;
-    }
 
     .header-container {
         width: 50%;
-    }
-
-    .intro {
-        width: 40%;
     }
 
     .container {
@@ -593,9 +511,5 @@ footer img {
 
     .images {
         width: 21%;
-    }
-
-    .separator img {
-        width: 30%;
     }
 }
