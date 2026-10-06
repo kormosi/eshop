@@ -9,3 +9,7 @@ TODO.txt
 
 # Generated invoices (contain customer data)
 /media/
+.env
+db.sqlite3*
+__pycache__/
+.venv/
