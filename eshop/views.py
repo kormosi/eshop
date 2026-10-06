@@ -7,6 +7,7 @@ from .forms import CheckoutForm
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -35,8 +36,8 @@ def cart_data(request):
 
     product_ids = [
         int(product_id)
-        for product_id in ids.split(",")
-        if product_id.isdigit()
+        for product_id in ids.split(",")[:20]
+        if product_id.isdecimal() and len(product_id) <= 9
     ]
 
     products = Product.objects.filter(
@@ -54,26 +55,34 @@ def cart_data(request):
         for product in products
     ], safe=False)
 
+@require_POST
 def checkout(request):
     PRODUCT_ID = "1"
-    
-    cart = json.loads(request.POST["cart"])
 
-    # Reject empty cart
-    quantity = cart.get(PRODUCT_ID)
+    try:
+        cart = json.loads(request.POST.get("cart", ""))
+        quantity = cart.get(PRODUCT_ID)
+    except (ValueError, AttributeError):
+        quantity = None
+
+    # Reject empty or malformed cart
     if quantity is None:
         messages.error(request, "Your cart is empty.")
         return redirect("cart")
 
     # Reject invalid product counts
-    quantity = int(quantity)
+    try:
+        quantity = int(quantity)
+    except (ValueError, TypeError):
+        quantity = 0
     if not 1 <= quantity <= 99:
         messages.error(request, "Quantity must be between 1 and 99.")
         return redirect("cart")
 
     # Reject invalid pickup point
-    pickup_point_id = request.POST.get("pickup_point_id")
-    if not pickup_point_id:
+    pickup_point_id = request.POST.get("pickup_point_id", "")
+    pickup_point_address = request.POST.get("pickup_point_address", "")
+    if not pickup_point_id or not pickup_point_address or len(pickup_point_id) > 16 or len(pickup_point_address) > 255:
         messages.error(request, "Please select a pick-up point.")
         return redirect("cart")
 
@@ -88,16 +97,13 @@ def checkout(request):
         messages.error(request, "Please check the highlighted fields.")
         return redirect("cart")
 
-    product = Product.objects.get(
-        id=PRODUCT_ID,
-        active=True,
-    )
-    shipping = Product.objects.get(category=Product.Category.SHIPPING)
+    product = get_object_or_404(Product, id=PRODUCT_ID, active=True)
+    shipping = get_object_or_404(Product, category=Product.Category.SHIPPING)
 
     order = Order.objects.create(
         **form.cleaned_data,
-        pickup_point_id=request.POST["pickup_point_id"],
-        pickup_point_address=request.POST["pickup_point_address"],
+        pickup_point_id=pickup_point_id,
+        pickup_point_address=pickup_point_address,
         total=product.price * quantity + shipping.price,
         currency=product.currency,
         delivery_fee=shipping.price,
@@ -107,7 +113,7 @@ def checkout(request):
     OrderItem.objects.create(
         order=order,
         product=product,
-        quantity=int(cart[PRODUCT_ID]),
+        quantity=quantity,
         unit_price=product.price,
         vat_rate=product.vat_rate,
     )

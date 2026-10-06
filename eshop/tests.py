@@ -60,3 +60,14 @@ class WebhookTests(TestCase):
     def test_bad_signature_400(self):
         self.assertEqual(self.client.post("/stripe/webhook/", "{}", content_type="application/json",
                                           HTTP_STRIPE_SIGNATURE="t=1,v1=bad").status_code, 400)
+
+
+class InputTests(TestCase):
+    def test_no_500_on_garbage(self):
+        c = self.client
+        self.assertEqual(c.get("/checkout/").status_code, 405)
+        for cart in ["", "nope", "[]", "null", '{"1": "abc"}', '{"1": {"a":1}}', '{"1": 0}', '{"1": 100}', '{"1": 1}']:
+            r = c.post("/checkout/", {"cart": cart})
+            self.assertEqual(r.status_code, 302, cart)
+        for ids in ["²,٣", "9" * 40, ",".join(["1"] * 500), "", "-1"]:
+            self.assertEqual(c.get("/cart/data/", {"ids": ids}).status_code, 200, ids)
