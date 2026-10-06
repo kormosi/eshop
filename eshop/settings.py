@@ -18,6 +18,7 @@ load_dotenv()
 STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]
 STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
 RESEND_API_KEY = os.environ["RESEND_API_KEY"]
+SITE_URL = os.environ.get("SITE_URL", "http://127.0.0.1:8000").rstrip("/")
 RESEND_FROM_EMAIL = "info@silviakormosi.com"
 
 

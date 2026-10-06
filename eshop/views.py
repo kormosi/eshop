@@ -137,14 +137,8 @@ def checkout_success(request):
 
 
 def checkout_cancel(request):
-    session_id = request.GET.get("session_id")
-
-    if session_id:
-        order = Order.objects.filter(stripe_checkout_session_id=session_id).first()
-        if order and order.status == Order.Status.PENDING:
-            order.status = Order.Status.CANCELLED
-            order.save(update_fields=["status"])
-
+    # No state change on GET: a user can go back and still pay. Abandoned
+    # orders are cancelled by the checkout.session.expired webhook.
     return render(request, "eshop/checkout_cancel.html")
 
 def vop(request):

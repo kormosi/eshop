@@ -36,12 +36,6 @@ def create_checkout_session(order):
         ],
         customer_email=order.email,
         # payment_method_types=["card"],
-        success_url=(
-            "http://127.0.0.1:8000/checkout/success/"
-            "?session_id={CHECKOUT_SESSION_ID}"
-        ),
-        cancel_url=(
-            "http://127.0.0.1:8000/checkout/cancel/"
-            "?session_id={CHECKOUT_SESSION_ID}"
-        ),
+        success_url=f"{settings.SITE_URL}/checkout/success/?session_id={{CHECKOUT_SESSION_ID}}",
+        cancel_url=f"{settings.SITE_URL}/checkout/cancel/",
     )
