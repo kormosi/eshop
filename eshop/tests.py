@@ -71,3 +71,11 @@ class InputTests(TestCase):
             self.assertEqual(r.status_code, 302, cart)
         for ids in ["²,٣", "9" * 40, ",".join(["1"] * 500), "", "-1"]:
             self.assertEqual(c.get("/cart/data/", {"ids": ids}).status_code, 200, ids)
+
+
+class NotFoundTests(TestCase):
+    def test_custom_404(self):
+        for url in ["/nope/", "/checkout/success/?session_id=cs_x"]:
+            r = self.client.get(url)
+            self.assertEqual(r.status_code, 404, url)
+            self.assertContains(r, "Page not found", status_code=404)
