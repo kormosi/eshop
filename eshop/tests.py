@@ -63,6 +63,10 @@ class WebhookTests(TestCase):
 
 
 class InputTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+
     def test_no_500_on_garbage(self):
         c = self.client
         self.assertEqual(c.get("/checkout/").status_code, 405)
@@ -79,3 +83,24 @@ class NotFoundTests(TestCase):
             r = self.client.get(url)
             self.assertEqual(r.status_code, 404, url)
             self.assertContains(r, "Page not found", status_code=404)
+
+
+class AbuseTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+
+    def test_honeypot(self):
+        r = self.client.post("/checkout/", {"website": "x", "cart": '{"1": 1}'}, follow=True)
+        self.assertContains(r, "Too many attempts")
+        self.assertEqual(Order.objects.count(), 0)
+
+    def test_rate_limit(self):
+        for _ in range(10):
+            r = self.client.post("/checkout/", {"cart": ""}, follow=True)
+            self.assertNotContains(r, "Too many attempts")
+        self.assertContains(self.client.post("/checkout/", {"cart": ""}, follow=True), "Too many attempts")
+
+    def test_csp_header(self):
+        r = self.client.get("/about")
+        self.assertIn("script-src", r["Content-Security-Policy"])

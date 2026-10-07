@@ -25,37 +25,39 @@ if (productIds.length === 0) {
     .then((products) => {
       let total = 0;
 
+      function addLine(imageUrl, alt, label, price) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "cart-line-items-wrapper";
+        const img = document.createElement("img");
+        img.className = "cart-product-image";
+        img.src = imageUrl;
+        img.alt = alt;
+        const lines = document.createElement("div");
+        lines.className = "cart-line-items";
+        for (const text of [label, formatPrice(price) + " €"]) {
+          const h2 = document.createElement("h2");
+          h2.textContent = text;
+          lines.append(h2);
+        }
+        wrapper.append(img, lines);
+        cartElement.append(wrapper);
+      }
+
       products.forEach((product) => {
-        const quantity = cart[product.id];
+        const quantity = Number(cart[product.id]) || 0;
         const itemTotal = product.price * quantity;
-
         total += itemTotal;
-
-        cartElement.innerHTML += `
-            <div class="cart-line-items-wrapper">
-              <img class="cart-product-image" src="${productImageUrl}" alt="Book">
-              <div class="cart-line-items">
-                <h2>${product.name} × ${quantity}</h2>
-                <h2>${formatPrice(itemTotal)} €</h2>
-              </div>
-            </div>
-        `;
+        addLine(productImageUrl, "Book", `${product.name} × ${quantity}`, itemTotal);
       });
 
       total += deliveryFee;
+      addLine(packetaLogoUrl, "Packeta", "Doprava", deliveryFee);
 
-      cartElement.innerHTML += `
-        <div class="cart-line-items-wrapper">
-          <img class="cart-product-image" src="${packetaLogoUrl}" alt="Packeta">
-          <div class="cart-line-items">
-            <h2>Doprava</h2>
-            <h2>${formatPrice(deliveryFee)} €</h2>
-          </div>
-        </div>
-        <hr>
-        <h2 class="cart-total">Spolu ${formatPrice(total)} €</h2>
-        <br>
-      `;
+      cartElement.append(document.createElement("hr"));
+      const totalEl = document.createElement("h2");
+      totalEl.className = "cart-total";
+      totalEl.textContent = `Spolu ${formatPrice(total)} €`;
+      cartElement.append(totalEl, document.createElement("br"));
     });
 }
 

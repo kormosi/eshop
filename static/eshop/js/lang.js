@@ -16,3 +16,5 @@ function setLang(lang) {
 
 const initialLang = localStorage.getItem(STORAGE_KEY) || 'sk';
 setLang(initialLang);
+
+document.querySelectorAll('.lang-switch a').forEach(a => a.addEventListener('click', () => setLang(a.id)));

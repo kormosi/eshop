@@ -1,12 +1,13 @@
 import resend
 from django.conf import settings
+from django.utils.html import escape
 
 resend.api_key = settings.RESEND_API_KEY
 
 
 def send_order_confirmation_email(order, invoice):
     items_html = "".join(
-        f"<li>{item.quantity} × {item.product.name} "
+        f"<li>{item.quantity} × {escape(item.product.name)} "
         f"({item.unit_price} {order.currency})</li>"
         for item in order.items.all()
     )

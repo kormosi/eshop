@@ -467,6 +467,11 @@ footer img {
     transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
 }
 
+.hp {
+    position: absolute;
+    left: -9999px;
+}
+
 /*.call-to-action-pay:hover {*/
 /*    background: linear-gradient(180deg, #8fd393, #6fbf73 45%, #649a67 100%);*/
 /*}*/
@@ -523,3 +528,4 @@ footer img {
         width: 30%;
     }
 }
+

@@ -9,6 +9,7 @@ from .stripe import create_checkout_session
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.core.cache import cache
 from django.shortcuts import redirect
 
 def home(request):
@@ -55,9 +56,21 @@ def cart_data(request):
         for product in products
     ], safe=False)
 
+def _rate_limited(request, limit=10, window=600):
+    # ponytail: per-process cache + REMOTE_ADDR; behind a proxy use its
+    # forwarded-IP header, with several workers use a shared cache (redis).
+    key = f"checkout-rl:{request.META.get('REMOTE_ADDR')}"
+    cache.add(key, 0, window)
+    return cache.incr(key) > limit
+
+
 @require_POST
 def checkout(request):
     PRODUCT_ID = "1"
+
+    if request.POST.get("website") or _rate_limited(request):  # honeypot / abuse
+        messages.error(request, "Too many attempts, try again later.")
+        return redirect("cart")
 
     try:
         cart = json.loads(request.POST.get("cart", ""))

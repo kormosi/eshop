@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csp.ContentSecurityPolicyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -137,11 +138,26 @@ STATICFILES_DIRS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
-# Email
-# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
+# Content Security Policy (built into Django 6). Packeta widget hosts are a
+# best guess: check the browser console on /cart/ and adjust if blocked.
+from django.utils.csp import CSP
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
+SECURE_CSP = {
+    "default-src": [CSP.SELF],
+    "script-src": [CSP.SELF, "https://widget.packeta.com"],
+    "style-src": [CSP.SELF, CSP.UNSAFE_INLINE, "https://widget.packeta.com"],
+    "img-src": [CSP.SELF, "data:", "https:"],
+    "connect-src": [CSP.SELF, "https://*.packeta.com", "https://*.packeta.net"],
+    "frame-src": ["https://*.packeta.com"],
+    "object-src": [CSP.NONE],
+    "base-uri": [CSP.SELF],
+    "frame-ancestors": [CSP.NONE],
 }
+
+# Set HTTPS=1 in the production environment (behind a TLS-terminating proxy
+# also set SECURE_PROXY_SSL_HEADER, or the redirect will loop).
+if os.environ.get("HTTPS") == "1":
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30  # raise to 1 year once stable
