@@ -87,7 +87,14 @@ WSGI_APPLICATION = 'eshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.environ.get("DB_PATH", BASE_DIR / 'db.sqlite3'),
+        'OPTIONS': {
+            # IMMEDIATE takes the write lock up front, so concurrent writers
+            # wait for `timeout` instead of failing with "database is locked".
+            'transaction_mode': 'IMMEDIATE',
+            'init_command': 'PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;',
+            'timeout': 20,
+        },
     }
 }
 
@@ -128,15 +135,18 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Source: where our own static files live (on top of each app's static/ folder).
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+# Output: `collectstatic` copies ours + the admin's files here; Caddy serves
+# this folder in production. Just differ from the source.
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # User-uploaded / generated files (invoices)
 # https://docs.djangoproject.com/en/6.1/topics/files/
-
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT", BASE_DIR / "media")
 
 # Content Security Policy (built into Django 6). Packeta widget hosts are a
 # best guess: check the browser console on /cart/ and adjust if blocked.
@@ -154,9 +164,10 @@ SECURE_CSP = {
     "frame-ancestors": [CSP.NONE],
 }
 
-# Set HTTPS=1 in the production environment (behind a TLS-terminating proxy
-# also set SECURE_PROXY_SSL_HEADER, or the redirect will loop).
+# Set HTTPS=1 in the production environment. Assumes a TLS-terminating proxy
+# (Caddy) that overwrites X-Forwarded-Proto; without the header the redirect loops.
 if os.environ.get("HTTPS") == "1":
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True

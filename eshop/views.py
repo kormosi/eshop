@@ -56,10 +56,11 @@ def cart_data(request):
         for product in products
     ], safe=False)
 
-def _rate_limited(request, limit=10, window=600):
-    # ponytail: per-process cache + REMOTE_ADDR; behind a proxy use its
-    # forwarded-IP header, with several workers use a shared cache (redis).
-    key = f"checkout-rl:{request.META.get('REMOTE_ADDR')}"
+def rate_limited(request, limit=10, window=600):
+    # Caddy overwrites X-Forwarded-For and is the only way in, so its last
+    # entry is the real client; REMOTE_ADDR would be Caddy for everyone.
+    forwarded = request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[-1].strip()
+    key = f"checkout-rl:{forwarded or request.META.get('REMOTE_ADDR')}"
     cache.add(key, 0, window)
     return cache.incr(key) > limit
 
@@ -68,7 +69,7 @@ def _rate_limited(request, limit=10, window=600):
 def checkout(request):
     PRODUCT_ID = "1"
 
-    if request.POST.get("website") or _rate_limited(request):  # honeypot / abuse
+    if request.POST.get("website") or rate_limited(request):  # honeypot / abuse
         messages.error(request, "Too many attempts, try again later.")
         return redirect("cart")
 

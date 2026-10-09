@@ -2,7 +2,7 @@ import hmac, json, time
 from hashlib import sha256
 
 from django.conf import settings
-from django.test import TestCase
+from django.test import Client, TestCase
 
 from .models import Order
 
@@ -100,6 +100,13 @@ class AbuseTests(TestCase):
             r = self.client.post("/checkout/", {"cart": ""}, follow=True)
             self.assertNotContains(r, "Too many attempts")
         self.assertContains(self.client.post("/checkout/", {"cart": ""}, follow=True), "Too many attempts")
+
+    def test_rate_limit_is_per_forwarded_ip(self):
+        for _ in range(11):
+            self.client.post("/checkout/", {"cart": ""}, HTTP_X_FORWARDED_FOR="1.1.1.1")
+        # fresh client: the first one's session still holds its queued error messages
+        r = Client().post("/checkout/", {"cart": ""}, follow=True, HTTP_X_FORWARDED_FOR="2.2.2.2")
+        self.assertNotContains(r, "Too many attempts")
 
     def test_csp_header(self):
         r = self.client.get("/about")
