@@ -17,7 +17,6 @@ if (productIds.length === 0) {
   checkoutSection.hidden = false;
 
   const deliveryFee = parseFloat(cartElement.dataset.deliveryFee);
-  const productImageUrl = cartElement.dataset.productImage;
   const packetaLogoUrl = cartElement.dataset.packetaLogo;
 
   fetch("/cart/data/?ids=" + productIds.join(","))
@@ -30,7 +29,7 @@ if (productIds.length === 0) {
         wrapper.className = "cart-line-items-wrapper";
         const img = document.createElement("img");
         img.className = "cart-product-image";
-        img.src = imageUrl;
+        if (imageUrl) img.src = imageUrl;
         img.alt = alt;
         const lines = document.createElement("div");
         lines.className = "cart-line-items";
@@ -47,7 +46,7 @@ if (productIds.length === 0) {
         const quantity = Number(cart[product.id]) || 0;
         const itemTotal = product.price * quantity;
         total += itemTotal;
-        addLine(productImageUrl, "Book", `${product.name} × ${quantity}`, itemTotal);
+        addLine(product.image, product.name, `${product.name} × ${quantity}`, itemTotal);
       });
 
       total += deliveryFee;

@@ -25,6 +25,12 @@ class Product(models.Model):
         default=Category.BOOK,
     )
     active = models.BooleanField(default=True)
+    # Stored in the DB so one SQLite backup covers everything; uploaded via the
+    # admin, served by views.product_image.
+    # ponytail: every Product query loads the blob; move it to its own table
+    # (or .defer it) if there are ever more than a handful of products.
+    image = models.BinaryField(null=True, blank=True)
+    image_type = models.CharField(max_length=20, blank=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -138,19 +144,15 @@ class OrderItem(models.Model):
         related_name="items",
         on_delete=models.CASCADE,
     )
-
     product = models.ForeignKey(
         Product,
         on_delete=models.PROTECT,
     )
-
     quantity = models.PositiveIntegerField(default=1)
-
     unit_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
     )
-
     # Snapshotted from product.vat_rate at order time, so a later change to
     # the product's rate doesn't alter already-issued invoices.
     vat_rate = models.DecimalField(

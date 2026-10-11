@@ -9,7 +9,7 @@
     </div>
     <hr />
     
-    <div id="cart" data-delivery-fee="{{ delivery_fee }}" data-product-image="{% static 'eshop/images/cover.jpg' %}" data-packeta-logo="{% static 'eshop/images/packeta.svg' %}"></div>
+    <div id="cart" data-delivery-fee="{{ delivery_fee }}" data-packeta-logo="{% static 'eshop/images/packeta.svg' %}"></div>
 
     {% if messages %}
     {% for message in messages %}
@@ -115,14 +115,9 @@
         <p>Budete presmerovaní na platobnú bránu Stripe</p>
         
     </form>
-    
-
-
-
 </div>
     
 {% endblock %}
-
 
 {% block scripts %}
 <script src="https://widget.packeta.com/www/js/library.js"></script>

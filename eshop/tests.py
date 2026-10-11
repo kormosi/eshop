@@ -4,7 +4,7 @@ from hashlib import sha256
 from django.conf import settings
 from django.test import Client, TestCase
 
-from .models import Order
+from .models import Order, Product
 
 
 def post_event(client, type_, order_id, **session):
@@ -75,6 +75,37 @@ class InputTests(TestCase):
             self.assertEqual(r.status_code, 302, cart)
         for ids in ["²,٣", "9" * 40, ",".join(["1"] * 500), "", "-1"]:
             self.assertEqual(c.get("/cart/data/", {"ids": ids}).status_code, 200, ids)
+
+
+class ProductImageTests(TestCase):
+    PNG = b"\x89PNG\r\n\x1a\n" + b"x" * 20
+
+    def test_served_from_db(self):
+        with_image = Product.objects.create(name="a", description="d", price="1", image=self.PNG, image_type="image/png")
+        hidden = Product.objects.create(name="b", description="d", price="1", image=self.PNG, image_type="image/png", active=False)
+        without = Product.objects.create(name="c", description="d", price="1")
+        r = self.client.get(f"/product/{with_image.id}/image/")
+        self.assertEqual((r.status_code, r["Content-Type"], r.content), (200, "image/png", self.PNG))
+        self.assertEqual(self.client.get(f"/product/{hidden.id}/image/").status_code, 404)
+        self.assertEqual(self.client.get(f"/product/{without.id}/image/").status_code, 404)
+        images = {p["id"]: p["image"] for p in self.client.get("/cart/data/", {"ids": f"{with_image.id},{without.id}"}).json()}
+        self.assertEqual(images, {with_image.id: f"/product/{with_image.id}/image/", without.id: None})
+
+    def test_admin_upload(self):
+        from django.contrib.auth.models import User
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        self.client.force_login(User.objects.create_superuser("admin"))
+        product = Product.objects.create(name="a", description="d", price="1", category="shipping")
+        fields = {"name": "a", "description": "d", "price": "1", "currency": "EUR", "vat_rate": "5.00",
+                  "category": "shipping", "active": "on"}
+        url = f"/admin/eshop/product/{product.id}/change/"
+
+        r = self.client.post(url, {**fields, "image_upload": SimpleUploadedFile("x.png", b"<svg onload=alert(1)>")})
+        self.assertContains(r, "Not a JPEG, PNG or WebP image.")
+        self.assertEqual(self.client.post(url, {**fields, "image_upload": SimpleUploadedFile("x.png", self.PNG)}).status_code, 302)
+        self.assertEqual(self.client.post(url, fields).status_code, 302)  # saving without a file keeps the image
+        product.refresh_from_db()
+        self.assertEqual((bytes(product.image), product.image_type), (self.PNG, "image/png"))
 
 
 class NotFoundTests(TestCase):

@@ -13,7 +13,6 @@ from django.core.files.base import ContentFile
 from django.db import transaction
 from django.template.loader import render_to_string
 from django.utils import timezone
-from weasyprint import HTML
 
 from .models import Invoice
 
@@ -97,6 +96,8 @@ def create_invoice(order):
             "total": base_total + vat_total,
         })
 
+        # Imported here so the app boots without Pango (not in the Docker image).
+        from weasyprint import HTML
         pdf_bytes = HTML(string=html).write_pdf()
 
         invoice = Invoice(order=order, number=number)

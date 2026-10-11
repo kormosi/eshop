@@ -3,10 +3,12 @@ from pathlib import Path
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.views.decorators.cache import cache_control
 from .forms import CheckoutForm
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
-from django.http import JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.core.cache import cache
@@ -20,6 +22,14 @@ def home(request):
         "eshop/home.html",
         {"product": product},
     )
+
+@cache_control(max_age=600)
+def product_image(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if not product.image or not (product.active or request.user.is_staff):
+        raise Http404
+    return HttpResponse(bytes(product.image), content_type=product.image_type)
+
 
 def about(request):
     return render(request, "eshop/about.html")
@@ -52,6 +62,7 @@ def cart_data(request):
             "name": product.name,
             "price": float(product.price),
             "currency": product.currency,
+            "image": reverse("product-image", args=[product.id]) if product.image else None,
         }
         for product in products
     ], safe=False)

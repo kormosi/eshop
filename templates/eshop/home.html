@@ -17,7 +17,7 @@
     <div class="articles">
         <article id="sk-content" class="lang active">
 
-                <img class="images" src="{% static 'eshop/images/cover.jpg' %}" alt="Book">
+                {% if product.image %}<img class="images" src="{% url 'product-image' product.id %}" alt="{{ product.name }}">{% endif %}
             
             <div class="product-details">
             <h1>{{ product.name }}</h1>

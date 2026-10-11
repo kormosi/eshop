@@ -11,6 +11,8 @@ urlpatterns = [
     path("about", views.about, name="about"),
     path("coming-soon/", views.coming_soon, name="coming_soon"),
 
+    path("product/<int:product_id>/image/", views.product_image, name="product-image"),
+
     path("cart/", views.cart, name="cart"),
     path("cart/data/", views.cart_data, name="cart-data"),
     path("vop/", views.vop, name="vop"),
