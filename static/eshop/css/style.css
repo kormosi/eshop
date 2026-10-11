@@ -42,13 +42,17 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
+/**/
 /* My edits */
+/**/
+
+/* Localization */
 .lang { display: none; }
 .lang.active { display: block; }
 .call-to-action.lang { display: none; }
 .call-to-action.lang.active { display: flex; }
 
+/* Body */
 body {
     margin: 0;
     display: flex;
@@ -59,6 +63,7 @@ body {
     color: #000000;
 }
 
+/* Header */
 header {
     display: flex;
     justify-content: space-around;
@@ -80,12 +85,6 @@ header {
     width: 100%; /* Otherwise it will shrink-to-content */
 }
 
-.lang-and-cart {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1em;
-}
 
 .logo {
     padding: .5em;
@@ -93,6 +92,14 @@ header {
     color: #000000;
     letter-spacing: 0.02em;
     text-decoration: none;
+}
+
+/* Cart icon + cart view*/
+.lang-and-cart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
 }
 
 #cart-link {
@@ -145,6 +152,10 @@ header {
 
 .cart-count[hidden] {
     display: none;
+}
+
+#clear-cart {
+    margin-top: 0.3em;
 }
 
 .lang-switch {
@@ -202,11 +213,12 @@ nav ul li a.active::before {
     border: 1px solid;
     border-color: #efd7cf;
     width: 100%;
+    min-height: 20em;
 }
 
 h1 {
     font-size: 1.7em;
-    margin-top: 0.3em;
+    margin-top: 0.5em;
     margin-bottom: 0.3em;
 }
 
@@ -318,7 +330,7 @@ p b {
     float: left;
     width: 42%;
     margin-top: 0.2em;
-    margin-right: 1em;
+    margin-right: 1.5em;
     border-radius: 0.2em;
 }
 
@@ -414,7 +426,7 @@ footer img {
 
 .btncontainer {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-top: 0.7em;
     margin-bottom: 1.5em;
 }
@@ -464,36 +476,28 @@ footer img {
     transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
 }
 
-.hp {
-    position: absolute;
-    left: -9999px;
+.call-to-action-pay:hover {
+    background-color: #79ca7d;
 }
-
-/*.call-to-action-pay:hover {*/
-/*    background: linear-gradient(180deg, #8fd393, #6fbf73 45%, #649a67 100%);*/
-/*}*/
-
-/*.call-to-action-pay:active {*/
-/*    transform: translateY(0.15em);*/
-/*    box-shadow: 0 0.05em 0 #2f7a3d, 0 0.1em 0.2em rgba(0, 0, 0, 0.2);*/
-/*}*/
 
 @keyframes added-punch {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(111, 191, 115, 0.55);
     }
     30% {
         transform: scale(0.88);
     }
     60% {
-        transform: scale(1.15);
-        box-shadow: 0 0 0 0.7em rgba(111, 191, 115, 0);
+        transform: scale(1.10);
     }
     100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(111, 191, 115, 0);
     }
+}
+
+.hp {
+    position: absolute;
+    left: -9999px;
 }
 
 #price {
@@ -510,11 +514,11 @@ footer img {
     }
 
     .container {
-        width: 50%;
+        width: 40%;
     }
 
     .images {
-        width: 21%;
+        width: 35%;
     }
 
     .lang-and-cart {
@@ -523,6 +527,10 @@ footer img {
     
     nav {
         width: 30%;
+    }
+
+    .checkout-label {
+        width: 70%;
     }
 }
 
