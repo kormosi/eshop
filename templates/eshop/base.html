@@ -38,7 +38,7 @@
     <nav id="sk-nav" class="lang active">
       <ul>
           <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">E-shop</a></li>
-          <li><a href="{% url 'coming_soon' %}" class="{% if request.resolver_match.url_name == 'coming_soon' %}active{% endif %}">Pripravujeme</a></li>
+          <li><a href="{% url 'coming_soon' %}" class="{% if request.resolver_match.url_name == 'coming_soon' %}active{% endif %}">Pripravujem</a></li>
           <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">O autorke</a></li>
       </ul>
     </nav>

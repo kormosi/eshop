@@ -3,44 +3,28 @@
 {% load eshop_extras %}
 {% block content %}
 
-
-<!--    <section class="intro">-->
-<!--        <img id="sk-content" class="lang active" src="tagline-sk.svg" alt="Young Adult & Urban Fantasy autorka">-->
-<!--        <img id="en-content" class="lang" src="tagline-en.svg" alt="Young Adult & Urban Fantasy autorka">-->
-<!--        <img src="profile_pic.png" alt="Silvia's photo">-->
-<!--    </section>-->
-
-<!--    <div class="separator">-->
-<!--        <img src="separator2.svg" alt="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;">-->
-<!--    </div>-->
-
     <div class="articles">
         <article id="sk-content" class="lang active">
 
+                <h1>{{ product.name }}</h1>
                 {% if product.image %}<img class="images" src="{% url 'product-image' product.id %}" alt="{{ product.name }}">{% endif %}
-            
-            <div class="product-details">
-            <h1>{{ product.name }}</h1>
-            
-            {% if product.category == 'book' and product.book_details %}
-            <ul class="book-details">
-                <li><strong>Typ:</strong> {{ product.get_category_display }}</li>
-                {% if product.book_details.binding %}<li><strong>Väzba:</strong> {{ product.book_details.get_binding_display }}</li>{% endif %}
-                {% if product.book_details.language %}<li><strong>Jazyk:</strong> {{ product.book_details.language }}</li>{% endif %}
-                {% if product.book_details.page_count %}<li><strong>Počet strán:</strong> {{ product.book_details.page_count }}</li>{% endif %}
-<!--                {% if product.book_details.dimensions %}<li><strong>Rozmery:</strong> {{ product.book_details.dimensions }}</li>{% endif %}-->
-                {% if product.book_details.weight %}<li><strong>Hmotnosť:</strong> {{ product.book_details.weight }}g</li>{% endif %}
-<!--                {% if product.book_details.publisher %}<li><strong>Vydavateľstvo:</strong> {{ product.book_details.publisher }}</li>{% endif %}-->
-<!--                {% if product.book_details.published_at %}<li><strong>Dátum vydania:</strong> {{ product.book_details.published_at|date:"d.m.Y" }}</li>{% endif %}-->
-                <li class="shipping-description">Na sklade >5 ks</li>
-                <li>Posielame ihneď</li>
-            </ul>
-            {% endif %}
                 
-            </div>
+                {% if product.category == 'book' and product.book_details %}
+                    <ul class="book-details">
+                        <li><strong>Typ:</strong> {{ product.get_category_display }}</li>
+                        {% if product.book_details.binding %}<li><strong>Väzba:</strong> {{ product.book_details.get_binding_display }}</li>{% endif %}
+                        {% if product.book_details.language %}<li><strong>Jazyk:</strong> {{ product.book_details.language }}</li>{% endif %}
+                        {% if product.book_details.page_count %}<li><strong>Počet strán:</strong> {{ product.book_details.page_count }}</li>{% endif %}
+        <!--                {% if product.book_details.dimensions %}<li><strong>Rozmery:</strong> {{ product.book_details.dimensions }}</li>{% endif %}-->
+                        {% if product.book_details.weight %}<li><strong>Hmotnosť:</strong> {{ product.book_details.weight }}g</li>{% endif %}
+        <!--                {% if product.book_details.publisher %}<li><strong>Vydavateľstvo:</strong> {{ product.book_details.publisher }}</li>{% endif %}-->
+        <!--                {% if product.book_details.published_at %}<li><strong>Dátum vydania:</strong> {{ product.book_details.published_at|date:"d.m.Y" }}</li>{% endif %}-->
+                        <li class="shipping-description">Na sklade >5 ks</li>
+                        <li>Posielame ihneď</li>
+                    </ul>
+                {% endif %}
 
             <p id="price">{{ product.price|sk_price }} €</p>
-
 
             <div class="btncontainer"> 
             <button
@@ -59,11 +43,11 @@
 
         </article>
 
-        <br>
+        <article id="en-content" class="lang">
+            <h1> Store only available in Slovak language.</h1>
+        </article>
 
-<!--    <div class="separator">-->
-<!--        <img src="separator2.svg" alt="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;">-->
-<!--    </div>-->
+        <br>
 
 <!--    <footer>-->
 <!--        <div class="footer_icons">-->
