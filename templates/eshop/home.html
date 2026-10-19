@@ -5,8 +5,8 @@
 
     <div class="articles">
         <article id="sk-content" class="lang active">
-
                 <h1>{{ product.name }}</h1>
+            
                 {% if product.image %}<img class="images" src="{% url 'product-image' product.id %}" alt="{{ product.name }}">{% endif %}
                 
                 {% if product.category == 'book' and product.book_details %}
@@ -18,23 +18,23 @@
         <!--                {% if product.book_details.dimensions %}<li><strong>Rozmery:</strong> {{ product.book_details.dimensions }}</li>{% endif %}-->
                         {% if product.book_details.weight %}<li><strong>Hmotnosť:</strong> {{ product.book_details.weight }}g</li>{% endif %}
         <!--                {% if product.book_details.publisher %}<li><strong>Vydavateľstvo:</strong> {{ product.book_details.publisher }}</li>{% endif %}-->
-        <!--                {% if product.book_details.published_at %}<li><strong>Dátum vydania:</strong> {{ product.book_details.published_at|date:"d.m.Y" }}</li>{% endif %}-->
+<!--                        {% if product.book_details.published_at %}<li><strong>Dátum vydania:</strong> {{ product.book_details.published_at|date:"d.m.Y" }}</li>{% endif %}-->
                         <li class="shipping-description">Na sklade >5 ks</li>
                         <li>Posielame ihneď</li>
                     </ul>
                 {% endif %}
 
             <p id="price">{{ product.price|sk_price }} €</p>
-
+            
             <div class="btncontainer"> 
-            <button
-                    type="button"
-                    id="add-to-cart"
-                    class="call-to-action"
-                    data-product-id="{{ product.id }}"
-            >
-                Pridať do košíka
-            </button>
+                <button
+                        type="button"
+                        id="add-to-cart"
+                        class="call-to-action"
+                        data-product-id="{{ product.id }}"
+                >
+                    Pridať do košíka
+                </button>
             </div>
             
             {% for paragraph in product.description.splitlines %}
@@ -49,22 +49,22 @@
 
         <br>
 
-<!--    <footer>-->
-<!--        <div class="footer_icons">-->
-<!--            <a href="https://www.instagram.com/silvia.library/">-->
-<!--                <img src="instagram.svg" alt="Instagram icon">-->
-<!--            </a>-->
+    </div>
 
-<!--            <a href="mailto:silviakormosi@gmail.com">-->
-<!--                <img src="envelope.svg" alt="Envelope icon">-->
-<!--            </a>-->
-<!--        </div>-->
+    <footer>
+        <div class="footer_icons">
+            <a href="https://www.instagram.com/silvia.library/">
+                <img src="{% static 'eshop/images/instagram.svg' %}" alt="Instagram icon">
+            </a>
+            
+            <a href="mailto:info@silviakormosi.com">
+                <img src="{% static 'eshop/images/envelope.svg' %}" alt="Envelope icon" id="envelope-icon">
+            </a>
+        </div>
 
 <!--        <p id="sk-content" class="copyright lang active">© Silvia Kormosi. Všetky práva vyhradené.</p>-->
 <!--        <p id="en-content" class="copyright lang">© Silvia Kormosi. All rights reserved.</p>-->
-<!--    </footer>-->
-
-    </div>
+    </footer>
 
 {% endblock %}
 

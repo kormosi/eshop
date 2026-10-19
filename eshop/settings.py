@@ -148,6 +148,11 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", BASE_DIR / "media")
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://static.131.102.29.2.clients.your-server.de",
+    # "localhost"
+]
+
 # Content Security Policy (built into Django 6). Packeta widget hosts are a
 # best guess: check the browser console on /cart/ and adjust if blocked.
 from django.utils.csp import CSP
