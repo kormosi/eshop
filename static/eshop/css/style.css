@@ -412,8 +412,8 @@ strong {
 /*Footer*/
 footer {
     margin-top: 2em;
-    margin-bottom: 1em;
-    width: 90%;
+    margin-bottom: 0.5em;
+    width: 40%;
 }
 
 .footer-links {
@@ -449,7 +449,6 @@ footer img {
 #envelope-icon {
     height: 2.1em;
 }
-
 
 .btncontainer {
     display: flex;

@@ -15,7 +15,9 @@ urlpatterns = [
 
     path("cart/", views.cart, name="cart"),
     path("cart/data/", views.cart_data, name="cart-data"),
+    
     path("vop/", views.vop, name="vop"),
+    path("rp/", views.rp, name="rp"),
     path("odstupenie-od-zmluvy/", views.odstupenie, name="odstupenie"),
     path("ochrana-osobnych-udajov/", views.osobne_udaje, name="osobne_udaje"),
 
