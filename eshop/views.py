@@ -34,6 +34,7 @@ def product_image(request, product_id):
 def about(request):
     return render(request, "eshop/about.html")
 
+
 def coming_soon(request):
     return render(request, "eshop/coming_soon.html")
 
@@ -41,6 +42,7 @@ def coming_soon(request):
 def cart(request):
     shipping = Product.objects.get(category=Product.Category.SHIPPING)
     return render(request, "eshop/cart.html", {"delivery_fee": shipping.price})
+
 
 def cart_data(request):
     ids = request.GET.get("ids", "")
@@ -66,6 +68,7 @@ def cart_data(request):
         }
         for product in products
     ], safe=False)
+
 
 def rate_limited(request, limit=10, window=600):
     # Caddy overwrites X-Forwarded-For and is the only way in, so its last
@@ -172,12 +175,14 @@ def checkout_cancel(request):
     # orders are cancelled by the checkout.session.expired webhook.
     return render(request, "eshop/checkout_cancel.html")
 
+
 def vop(request):
-    vop_text = (Path(settings.BASE_DIR) / "VOP.txt").read_text(encoding="utf-8")
-    return render(request, "eshop/vop.html", {"vop_text": vop_text})
+    return render(request, "eshop/vop.html")
+
 
 def odstupenie(request):
     return render(request, "eshop/odstupenie.html")
+
 
 def osobne_udaje(request):
     return render(request, "eshop/osobne_udaje.html")
