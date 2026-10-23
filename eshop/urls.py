@@ -18,8 +18,9 @@ urlpatterns = [
     
     path("vop/", views.vop, name="vop"),
     path("rp/", views.rp, name="rp"),
-    path("odstupenie-od-zmluvy/", views.odstupenie, name="odstupenie"),
+    path("odstupenie-od-zmluvy/", views.odstupenie_od_zmluvy, name="odstupenie_od_zmluvy"),
     path("ochrana-osobnych-udajov/", views.osobne_udaje, name="osobne_udaje"),
+    path("reklamacny-formular/", views.reklamacny_formular, name="reklamacny_formular"),
 
     path("checkout/", views.checkout, name="checkout"),
     path("checkout/success/", views.checkout_success, name="checkout-success"),

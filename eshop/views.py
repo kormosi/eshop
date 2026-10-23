@@ -184,9 +184,13 @@ def rp(request):
     return render(request, "eshop/rp.html")
 
 
-def odstupenie(request):
-    return render(request, "eshop/odstupenie.html")
+def odstupenie_od_zmluvy(request):
+    return render(request, "eshop/odstupenie_od_zmluvy.html")
 
 
 def osobne_udaje(request):
     return render(request, "eshop/osobne_udaje.html")
+
+
+def reklamacny_formular(request):
+    return render(request, "eshop/reklamacny_formular.html")
