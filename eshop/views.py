@@ -179,11 +179,14 @@ def checkout_cancel(request):
 def vop(request):
     return render(request, "eshop/vop.html")
 
+
 def rp(request):
     return render(request, "eshop/rp.html")
 
+
 def odstupenie(request):
     return render(request, "eshop/odstupenie.html")
+
 
 def osobne_udaje(request):
     return render(request, "eshop/osobne_udaje.html")
