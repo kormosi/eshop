@@ -1,6 +1,7 @@
 import resend
 from django.conf import settings
 from django.utils.html import escape
+from django.utils.timezone import localtime
 
 resend.api_key = settings.RESEND_API_KEY
 
@@ -34,4 +35,23 @@ def send_order_confirmation_email(order, invoice):
                 "content_type": "application/pdf",
             }
         ],
+    })
+    
+    
+def send_withdrawal_confirmation_email(withdrawal):
+    submitted_at = localtime(withdrawal.created_at).strftime("%d.%m.%Y %H:%M")
+    resend.Emails.send({
+        "from": settings.RESEND_FROM_EMAIL,
+        "to": withdrawal.email,
+        "bcc": settings.RESEND_FROM_EMAIL,
+        "subject": f"Potvrdenie odstúpenia od zmluvy (objednávka {withdrawal.order_number})",
+        "html": (
+            "<p>Potvrdzujeme prijatie Vášho odstúpenia od zmluvy.</p>"
+            "<ul>"
+            f"<li>Meno a priezvisko: {escape(withdrawal.name)}</li>"
+            f"<li>Číslo objednávky: {escape(withdrawal.order_number)}</li>"
+            f"<li>Dátum a čas odstúpenia: {submitted_at}</li>"
+            "</ul>"
+            "<p>Na tento email neodpovedajte.</p>"
+        ),
     })

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 
-from .models import BookDetails, MerchDetails, Product, Order, OrderItem
+from .models import BookDetails, MerchDetails, Product, Order, OrderItem, Withdrawal
 
 # Caddy rejects request bodies over 1 MB, so stay under it.
 MAX_IMAGE_BYTES = 900_000
@@ -89,11 +89,26 @@ class OrderItemInline(admin.TabularInline):
     extra = 0
 
 
+class WithdrawalInline(admin.TabularInline):
+    model = Withdrawal
+    extra = 0
+    fields = ("created_at", "name", "email", "order_number", "processed")
+    readonly_fields = ("created_at", "name", "email", "order_number")
+    can_delete = False
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("id", "email", "status", "delivery_fee", "total", "created_at")
     list_filter = ("status",)
-    inlines = [OrderItemInline]
+    inlines = [OrderItemInline, WithdrawalInline]
+
+
+@admin.register(Withdrawal)
+class WithdrawalAdmin(admin.ModelAdmin):
+    list_display = ("created_at", "order_number", "order", "name", "email", "processed")
+    list_filter = ("processed",)
+    readonly_fields = ("created_at",)
 
 
 admin.site.register(OrderItem)

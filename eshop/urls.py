@@ -21,6 +21,7 @@ urlpatterns = [
     path("odstupenie-od-zmluvy/", views.odstupenie_od_zmluvy, name="odstupenie_od_zmluvy"),
     path("ochrana-osobnych-udajov/", views.osobne_udaje, name="osobne_udaje"),
     path("reklamacny-formular/", views.reklamacny_formular, name="reklamacny_formular"),
+    path("odstupit-od-zmluvy/", views.withdrawal, name="withdrawal"),
 
     path("checkout/", views.checkout, name="checkout"),
     path("checkout/success/", views.checkout_success, name="checkout-success"),

@@ -2,9 +2,11 @@ import hmac, json, time
 from hashlib import sha256
 
 from django.conf import settings
+from unittest import mock
+
 from django.test import Client, TestCase
 
-from .models import Order, Product
+from .models import Order, Product, Withdrawal
 
 
 def post_event(client, type_, order_id, **session):
@@ -142,3 +144,17 @@ class AbuseTests(TestCase):
     def test_csp_header(self):
         r = self.client.get("/about")
         self.assertIn("script-src", r["Content-Security-Policy"])
+
+
+class WithdrawalTests(TestCase):
+    @mock.patch("eshop.views.send_withdrawal_confirmation_email")
+    def test_success_only_when_order_and_email_match(self, send):
+        order = Order.objects.create(
+            first_name="a", last_name="b", address="c", city="d", postal_code="81101",
+            country="SK", email="a@b.sk", phone="123456", total="10.00",
+            pickup_point_id="1", pickup_point_address="x")
+        post = lambda email: self.client.post("/odstupit-od-zmluvy/", {"name": "A B", "email": email, "order_number": str(order.id)})
+        self.assertContains(post("other@b.sk"), "nepodarilo")
+        self.assertContains(post("A@b.sk"), "bolo prijaté")
+        self.assertEqual([w.order for w in Withdrawal.objects.all()], [order])
+        self.assertEqual(send.call_count, 1)

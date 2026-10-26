@@ -124,6 +124,26 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.id}"
 
+class Withdrawal(models.Model):
+    # order_number is kept as typed; order is set only when it and the email
+    # match, so a mistyped number is still recorded and acknowledged.
+    order = models.ForeignKey(
+        Order,
+        null=True,
+        blank=True,
+        related_name="withdrawals",
+        on_delete=models.PROTECT,
+    )
+    order_number = models.CharField(max_length=32)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    processed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Withdrawal #{self.id} (order {self.order_number})"
+
+
 class Invoice(models.Model):
     order = models.OneToOneField(
         Order,

@@ -1,6 +1,6 @@
 import re
 from django import forms
-from .models import Order
+from .models import Order, Withdrawal
 
 
 class CheckoutForm(forms.ModelForm):
@@ -34,3 +34,9 @@ class CheckoutForm(forms.ModelForm):
         if country not in ("SK", "CZ"):
             raise forms.ValidationError("Unsupported country.")
         return country
+    
+    
+class WithdrawalForm(forms.ModelForm):
+    class Meta:
+        model = Withdrawal
+        fields = ["name", "email", "order_number"]

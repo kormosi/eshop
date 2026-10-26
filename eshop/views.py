@@ -1,11 +1,13 @@
 import json
+import logging
 from pathlib import Path
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.cache import cache_control
-from .forms import CheckoutForm
+from .emails import send_withdrawal_confirmation_email
+from .forms import CheckoutForm, WithdrawalForm
 from .models import Product, Order, OrderItem
 from .stripe import create_checkout_session
 from django.http import Http404, HttpResponse, JsonResponse
@@ -13,6 +15,8 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.core.cache import cache
 from django.shortcuts import redirect
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     product = Product.objects.filter(active=True).exclude(category=Product.Category.SHIPPING).first()
@@ -70,26 +74,27 @@ def cart_data(request):
     ], safe=False)
 
 
-def rate_limited(request, limit=10, window=600):
+def rate_limited(request, limit=10, window=600, scope="checkout"):
     # Caddy overwrites X-Forwarded-For and is the only way in, so its last
     # entry is the real client; REMOTE_ADDR would be Caddy for everyone.
     forwarded = request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[-1].strip()
-    key = f"checkout-rl:{forwarded or request.META.get('REMOTE_ADDR')}"
+    key = f"{scope}-rl:{forwarded or request.META.get('REMOTE_ADDR')}"
     cache.add(key, 0, window)
     return cache.incr(key) > limit
 
 
 @require_POST
 def checkout(request):
-    PRODUCT_ID = "1"
-
     if request.POST.get("website") or rate_limited(request):  # honeypot / abuse
         messages.error(request, "Too many attempts, try again later.")
         return redirect("cart")
 
+    # ponytail: single-product shop, same lookup as home(); iterate the cart if more products get sold
+    product = Product.objects.filter(active=True).exclude(category=Product.Category.SHIPPING).first()
+
     try:
         cart = json.loads(request.POST.get("cart", ""))
-        quantity = cart.get(PRODUCT_ID)
+        quantity = cart.get(str(product.id))
     except (ValueError, AttributeError):
         quantity = None
 
@@ -125,7 +130,6 @@ def checkout(request):
         messages.error(request, "Please check the highlighted fields.")
         return redirect("cart")
 
-    product = get_object_or_404(Product, id=PRODUCT_ID, active=True)
     shipping = get_object_or_404(Product, category=Product.Category.SHIPPING)
 
     order = Order.objects.create(
@@ -194,3 +198,28 @@ def osobne_udaje(request):
 
 def reklamacny_formular(request):
     return render(request, "eshop/reklamacny_formular.html")
+
+
+def withdrawal(request):
+    if request.method == "POST":
+        if request.POST.get("website") or rate_limited(request, scope="withdrawal"):  # honeypot / abuse
+            return render(request, "eshop/withdrawal_result.html", {"ok": False})
+
+        form = WithdrawalForm(request.POST)
+        if form.is_valid():
+            w = form.save(commit=False)
+            number = w.order_number.strip().lstrip("#")
+            w.order = Order.objects.filter(id=number, email__iexact=w.email).first() if number.isdigit() else None
+            if w.order is None:
+                return render(request, "eshop/withdrawal_result.html", {"ok": False})
+            w.save()
+            try:
+                send_withdrawal_confirmation_email(w)
+            except Exception:
+                # The request is saved; a Resend hiccup shouldn't hide that from the customer.
+                logger.exception("Failed to send withdrawal confirmation %s", w.id)
+            return render(request, "eshop/withdrawal_result.html", {"ok": True})
+    else:
+        form = WithdrawalForm()
+
+    return render(request, "eshop/withdrawal.html", {"form": form})

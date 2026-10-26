@@ -1,0 +1,37 @@
+{% extends 'eshop/base.html' %}
+{% block content %}
+
+<div class="articles">
+
+<h1>Odstúpenie od zmluvy</h1>
+<p class="align-left">Vyplnením a odoslaním tohto formulára odstupujete od kúpnej zmluvy. Prijatie odstúpenia Vám potvrdíme emailom.</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label class="checkout-label">
+        Meno a priezvisko
+        <input type="text" name="name" required maxlength="200" autocomplete="name" class="checkout-input" value="{{ form.name.value|default:'' }}">
+    </label>
+    {% for e in form.name.errors %}<p class="error">{{ e }}</p>{% endfor %}
+
+    <label class="checkout-label">
+        Email
+        <input type="email" name="email" required autocomplete="email" class="checkout-input" value="{{ form.email.value|default:'' }}">
+    </label>
+    {% for e in form.email.errors %}<p class="error">{{ e }}</p>{% endfor %}
+
+    <label class="checkout-label">
+        Číslo objednávky
+        <input type="text" name="order_number" required maxlength="32" class="checkout-input" value="{{ form.order_number.value|default:'' }}">
+    </label>
+    {% for e in form.order_number.errors %}<p class="error">{{ e }}</p>{% endfor %}
+
+    <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <button type="submit" class="call-to-action-pay">Potvrdiť odstúpenie od zmluvy</button>
+</form>
+
+</div>
+
+{% endblock %}

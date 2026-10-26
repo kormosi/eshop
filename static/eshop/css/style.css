@@ -431,6 +431,10 @@ footer {
     color: #000000;
 }
 
+.footer-links a b{
+    font-weight: bold;
+}
+
 .footer-links a:visited {
     color: #000000;
 }

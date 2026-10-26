@@ -1,0 +1,17 @@
+{% extends 'eshop/base.html' %}
+{% block content %}
+
+<div class="articles">
+
+{% if ok %}
+<h1>Odstúpenie od zmluvy bolo prijaté</h1>
+<p class="align-left">Potvrdenie sme Vám zaslali emailom.</p>
+{% else %}
+<h1>Odstúpenie sa nepodarilo odoslať</h1>
+<p class="align-left">Objednávku s týmto číslom a emailom sme nenašli. Skontrolujte údaje a skúste to znova, alebo nás kontaktujte na info@silviakormosi.com.</p>
+<p class="align-left"><a href="{% url 'withdrawal' %}">Späť na formulár</a></p>
+{% endif %}
+
+</div>
+
+{% endblock %}
