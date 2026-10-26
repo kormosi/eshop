@@ -6,16 +6,13 @@ from django.utils.timezone import localtime
 resend.api_key = settings.RESEND_API_KEY
 
 
-def send_order_confirmation_email(order, invoice):
+def send_order_confirmation_email(order):
     items_html = "".join(
         f"<li>{item.quantity} × {escape(item.product.name)} "
         f"({item.unit_price} {order.currency})</li>"
         for item in order.items.all()
     )
     items_html += f"<li>Doprava ({order.delivery_fee} {order.currency})</li>"
-
-    with invoice.pdf.open("rb") as pdf_file:
-        pdf_content = list(pdf_file.read())
 
     resend.Emails.send({
         "from": settings.RESEND_FROM_EMAIL,
@@ -25,16 +22,9 @@ def send_order_confirmation_email(order, invoice):
             "<p>Ďakujeme za Vašu objednávku!</p>"
             f"<ul>{items_html}</ul>"
             f"<p>Total: {order.total} {order.currency}</p>"
-            "<p>Faktúru nájdete v prílohe.</p>"
+            "<p>Faktúru Vám zašleme samostatne.</p>"
             "<p>Na tento email neodpovedajte.</p>"
         ),
-        "attachments": [
-            {
-                "filename": f"faktura-{invoice.number}.pdf",
-                "content": pdf_content,
-                "content_type": "application/pdf",
-            }
-        ],
     })
     
     

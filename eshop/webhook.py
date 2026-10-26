@@ -65,17 +65,13 @@ def stripe_webhook(request):
             **({"paid_at": timezone.now()} if is_paid else {}),
         )
 
-        if changed:
-            pass  # invoicing disabled for now, re-enable below
-            # if is_paid:
-            #     try:
-            #         invoice = create_invoice(order)
-            #         send_order_confirmation_email(order, invoice)
-            #     except Exception:
-            #         # Don't let a PDF/Resend hiccup turn into a 500 and a
-            #         # pointless Stripe retry of an already-paid order.
-            #         logger.exception(
-            #             "Failed to create/send invoice for order %s", order.id
-            #         )
+        # Invoices are sent manually for now; create_invoice() is unused.
+        if changed and is_paid:
+            try:
+                send_order_confirmation_email(order)
+            except Exception:
+                # Don't let a Resend hiccup turn into a 500 and a
+                # pointless Stripe retry of an already-paid order.
+                logger.exception("Failed to send confirmation for order %s", order.id)
 
     return HttpResponse(status=200)

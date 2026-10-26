@@ -35,10 +35,13 @@ class WebhookTests(TestCase):
         s = {"payment_status": "paid", "amount_total": 1000, "currency": "eur", **kw}
         return post_event(self.client, "checkout.session.completed", self.order.id, **s)
 
-    def test_paid(self):
+    @mock.patch("eshop.webhook.send_order_confirmation_email")
+    def test_paid(self, send):
         self.assertEqual(self.paid().status_code, 200)
         self.assertEqual(self.status(), "paid")
         self.assertIsNotNone(Order.objects.get(id=self.order.id).paid_at)
+        self.paid()  # duplicate delivery doesn't email twice
+        send.assert_called_once()
 
     def test_unpaid_waits_for_async_success(self):
         self.paid(payment_status="unpaid")
