@@ -21,7 +21,7 @@ def send_order_confirmation_email(order):
         "html": (
             "<p>Ďakujeme za Vašu objednávku!</p>"
             f"<ul>{items_html}</ul>"
-            f"<p>Total: {order.total} {order.currency}</p>"
+            f"<p>Spolu: {order.total} {order.currency}</p>"
             "<p>Faktúru Vám zašleme samostatne.</p>"
             "<p>Na tento email neodpovedajte.</p>"
         ),
