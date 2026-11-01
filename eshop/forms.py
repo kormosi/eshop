@@ -15,6 +15,7 @@ class CheckoutForm(forms.ModelForm):
             "city",
             "postal_code",
             "country",
+            "note",
         ]
 
     def clean_postal_code(self):

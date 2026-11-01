@@ -75,6 +75,11 @@
             </select>
         </label>
 
+        <label class="checkout-label">
+            Poznámka (napr. komu má byť kniha venovaná)
+            <textarea name="note" maxlength="500" rows="1" class="checkout-input"></textarea>
+        </label>
+
         <input
                 type="hidden"
                 name="pickup_point_id"
@@ -108,7 +113,7 @@
 
         <label class="vop-consent">
             <input type="checkbox" name="vop_consent" required>
-            <span>Oboznámil/a som sa s <a href="{% url 'vop' %}" target="_blank" rel="noopener">obchodnými podmienkami.</a></span>
+            <span>Oboznámil/a som sa s obchodnými podmienkami.</span>
         </label>
 
         <button type="submit" id="checkout-submit" class="call-to-action-pay">Odoslať objednávku s povinnosťou platby</button>

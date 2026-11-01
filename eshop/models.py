@@ -120,6 +120,7 @@ class Order(models.Model):
     paid_at = models.DateTimeField(null=True, blank=True)
     pickup_point_id= models.CharField(max_length=16, blank=False)
     pickup_point_address = models.CharField(max_length=255, blank=False)
+    note = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
         return f"Order #{self.id}"
