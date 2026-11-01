@@ -345,6 +345,10 @@ section {
     margin-bottom: 2em;
 }
 
+#checkout-submit {
+   width: 70%;
+}
+
 
 .images {
     float: left;
@@ -552,9 +556,11 @@ footer img {
     nav {
         width: 30%;
     }
-
-    .checkout-label {
+    
+    #checkout-form {
         width: 70%;
+        margin-inline: auto;
     }
+    
 }
 
