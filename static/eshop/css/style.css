@@ -413,6 +413,12 @@ strong {
     background-color: #fffaf2;
 }
 
+textarea.checkout-input {
+    resize: none;
+    height: auto;
+    padding: 0.4em 0.6em;
+}
+
 /*Footer*/
 footer {
     margin-top: 2em;
