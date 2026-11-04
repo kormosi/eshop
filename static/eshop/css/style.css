@@ -454,10 +454,16 @@ footer {
     gap: 3em;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2em;
 }
 
 footer img {
     height: 1.8em;
+}
+
+.copyright {
+    margin-top: 2em;
+    font-size: 0.8em;
 }
 
 #envelope-icon {

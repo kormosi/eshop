@@ -58,6 +58,16 @@
 </div>
 
 <footer>
+  <div class="footer_icons">
+    <a href="https://www.instagram.com/silvia.library/">
+      <img src="{% static 'eshop/images/instagram.svg' %}" alt="Instagram icon">
+    </a>
+    <a href="mailto:info@silviakormosi.com">
+      <img src="{% static 'eshop/images/envelope.svg' %}" alt="Envelope icon" id="envelope-icon">
+    </a>
+  </div>
+
+
   <nav class="footer-links">
     <a href="{% url 'vop' %}">Všeobecné obchodné podmienky</a>
     <a href="{% url 'osobne_udaje' %}">Ochrana osobných údajov</a>
@@ -67,6 +77,9 @@
     <a href="{% static 'eshop/images/zakonna_zaruka.png' %}" target="_blank">Zákonná záruka</a>
     <a href="{% url 'withdrawal' %}"><b>Odstúpiť od zmluvy tu</b></a>
   </nav>
+  
+  <p id="sk-content" class="copyright lang active">© Silvia Kormosi. Všetky práva vyhradené.</p>
+  <p id="en-content" class="copyright lang">© Silvia Kormosi. All rights reserved.</p>
 </footer>
 
 <script src="{% static 'eshop/js/lang.js' %}"></script>
