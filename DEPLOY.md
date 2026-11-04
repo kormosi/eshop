@@ -18,7 +18,7 @@ One Ubuntu box, Docker Compose: Caddy (auto-HTTPS, static files) â†’ gunicorn â†
 6. **App**:
    ```
    git clone <repo> /opt/eshop && cd /opt/eshop
-   cp .env.example .env && chmod 600 .env   # fill in
+   # copy your local .env here, chmod 600 it, and swap in prod values (see comments in it)
    docker compose up -d --build
    docker compose exec web python manage.py createsuperuser
    ```

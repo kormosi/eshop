@@ -5,6 +5,7 @@ from django.conf import settings
 from unittest import mock
 
 from django.test import Client, TestCase
+from django.urls import reverse
 
 from .models import Order, Product, Withdrawal
 
@@ -103,7 +104,7 @@ class ProductImageTests(TestCase):
         product = Product.objects.create(name="a", description="d", price="1", category="shipping")
         fields = {"name": "a", "description": "d", "price": "1", "currency": "EUR", "vat_rate": "5.00",
                   "category": "shipping", "active": "on"}
-        url = f"/admin/eshop/product/{product.id}/change/"
+        url = reverse("admin:eshop_product_change", args=[product.id])
 
         r = self.client.post(url, {**fields, "image_upload": SimpleUploadedFile("x.png", b"<svg onload=alert(1)>")})
         self.assertContains(r, "Not a JPEG, PNG or WebP image.")

@@ -37,6 +37,9 @@ DEBUG = os.environ.get("DEBUG") == "1"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1").split(",")
 
+# Set a random value in prod (e.g. "sprava-7f3k9q/") so bots don't find the admin.
+ADMIN_PATH = os.environ.get("ADMIN_PATH", "admin/")
+
 
 # Application definition
 
@@ -148,10 +151,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", BASE_DIR / "media")
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://static.131.102.29.2.clients.your-server.de",
-    # "localhost"
-]
+# Comma-separated, with scheme, e.g. "https://example.com,https://www.example.com".
+CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if o]
 
 # Content Security Policy (built into Django 6). Packeta widget hosts are a
 # best guess: check the browser console on /cart/ and adjust if blocked.
