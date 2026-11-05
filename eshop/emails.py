@@ -6,6 +6,15 @@ from django.utils.timezone import localtime
 resend.api_key = settings.RESEND_API_KEY
 
 
+def notify_owner(subject):
+    resend.Emails.send({
+        "from": settings.RESEND_FROM_EMAIL,
+        "to": settings.NOTIFY_EMAIL,
+        "subject": subject,
+        "text": subject,
+    })
+
+
 def send_order_confirmation_email(order):
     items_html = "".join(
         f"<li>{item.quantity} × {escape(item.product.name)} "
@@ -28,13 +37,14 @@ def send_order_confirmation_email(order):
         ),
     })
 
+    notify_owner(f"Nová objednávka {order.id}")
+
 
 def send_withdrawal_confirmation_email(withdrawal):
     submitted_at = localtime(withdrawal.created_at).strftime("%d.%m.%Y %H:%M")
     resend.Emails.send({
         "from": settings.RESEND_FROM_EMAIL,
         "to": withdrawal.email,
-        "bcc": settings.RESEND_FROM_EMAIL,
         "subject": f"Potvrdenie odstúpenia od zmluvy (objednávka {withdrawal.order_number})",
         "html": (
             "<p>Potvrdzujeme prijatie Vášho odstúpenia od zmluvy.</p>"
@@ -47,3 +57,5 @@ def send_withdrawal_confirmation_email(withdrawal):
             '<p><a href="https://silviakormosi.com">www.silviakormosi.com</a></p>'
         ),
     })
+
+    notify_owner(f"Nové odstúpenie od zmluvy (objednávka {withdrawal.order_number})")

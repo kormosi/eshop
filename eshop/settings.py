@@ -20,6 +20,8 @@ STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
 RESEND_API_KEY = os.environ["RESEND_API_KEY"]
 SITE_URL = os.environ.get("SITE_URL", "http://127.0.0.1:8000").rstrip("/")
 RESEND_FROM_EMAIL = "info@silviakormosi.com"
+# Where new-order / withdrawal notifications go.
+NOTIFY_EMAIL = os.environ.get("NOTIFY_EMAIL", RESEND_FROM_EMAIL)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
