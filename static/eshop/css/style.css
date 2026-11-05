@@ -417,6 +417,8 @@ strong {
 textarea.checkout-input {
     resize: none;
     height: auto;
+    /* inputs use the browser's system font; textareas default to monospace */
+    font-family: system-ui, sans-serif;
     padding: 0.4em 0.6em;
 }
 
@@ -424,7 +426,7 @@ textarea.checkout-input {
 footer {
     margin-top: 2em;
     margin-bottom: 0.5em;
-    width: 40%;
+    width: 80%;
 }
 
 .footer-links {
@@ -549,6 +551,10 @@ footer img {
 
 
 @media (min-width: 1200px) {
+
+    footer {
+        width: 40%;
+    }
 
     .header-container {
         width: 52%;
