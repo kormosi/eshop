@@ -24,10 +24,11 @@ def send_order_confirmation_email(order):
             f"<p>Spolu: {order.total} {order.currency}</p>"
             "<p>Faktúru Vám zašleme samostatne.</p>"
             "<p>Na tento email neodpovedajte.</p>"
+            '<p><a href="https://silviakormosi.com">www.silviakormosi.com</a></p>'
         ),
     })
-    
-    
+
+
 def send_withdrawal_confirmation_email(withdrawal):
     submitted_at = localtime(withdrawal.created_at).strftime("%d.%m.%Y %H:%M")
     resend.Emails.send({
@@ -43,5 +44,6 @@ def send_withdrawal_confirmation_email(withdrawal):
             f"<li>Dátum a čas odstúpenia: {submitted_at}</li>"
             "</ul>"
             "<p>Na tento email neodpovedajte.</p>"
+            '<p><a href="https://silviakormosi.com">www.silviakormosi.com</a></p>'
         ),
     })
