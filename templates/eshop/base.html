@@ -37,7 +37,8 @@
 
     <nav id="sk-nav" class="lang active">
       <ul>
-          <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">E-shop</a></li>
+          <li><a href="{% url 'home' %}" aria-label="Domov"><img src="{% static 'eshop/images/house-door-fill.svg' %}" class="nav-home-icon" alt=""></a></li>
+          <li><a href="{% url 'eshop' %}" class="{% if request.resolver_match.url_name == 'eshop' %}active{% endif %}">E-shop</a></li>
           <li><a href="{% url 'coming_soon' %}" class="{% if request.resolver_match.url_name == 'coming_soon' %}active{% endif %}">Pripravujem</a></li>
           <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">O autorke</a></li>
       </ul>
@@ -45,7 +46,8 @@
 
     <nav id="en-nav" class="lang">
       <ul>
-      <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Store</a></li>
+      <li><a href="{% url 'home' %}" aria-label="Home"><img src="{% static 'eshop/images/house-door-fill.svg' %}" class="nav-home-icon" alt=""></a></li>
+      <li><a href="{% url 'eshop' %}" class="{% if request.resolver_match.url_name == 'eshop' %}active{% endif %}">Store</a></li>
       <li><a href="{% url 'coming_soon' %}" class="{% if request.resolver_match.url_name == 'coming_soon' %}active{% endif %}">Coming soon</a></li>
       <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About me</a></li>
       </ul>
