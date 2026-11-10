@@ -8,7 +8,6 @@ from .webhook import stripe_webhook
 urlpatterns = [
     path(settings.ADMIN_PATH, admin.site.urls),
     path("", views.home, name="home"),
-    path("eshop/", views.eshop, name="eshop"),
     path("about", views.about, name="about"),
     path("coming-soon/", views.coming_soon, name="coming_soon"),
 

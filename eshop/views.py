@@ -19,14 +19,10 @@ from django.shortcuts import redirect
 logger = logging.getLogger(__name__)
 
 def home(request):
-    return render(request, "eshop/home.html")
-
-
-def eshop(request):
     product = Product.objects.filter(active=True).exclude(category=Product.Category.SHIPPING).first()
     return render(
         request,
-        "eshop/eshop.html",
+        "eshop/home.html",
         {"product": product},
     )
 
@@ -92,7 +88,7 @@ def checkout(request):
         messages.error(request, "Too many attempts, try again later.")
         return redirect("cart")
 
-    # ponytail: single-product shop, same lookup as eshop(); iterate the cart if more products get sold
+    # ponytail: single-product shop, same lookup as home(); iterate the cart if more products get sold
     product = Product.objects.filter(active=True).exclude(category=Product.Category.SHIPPING).first()
 
     try:
