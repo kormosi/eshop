@@ -20,10 +20,12 @@
       
       <div class="lang-and-cart">
           
+        {% comment %} lang switch hidden for now; lang.js still works without it
         <div class="lang-switch">
             <a id="sk">SK</a> |
             <a id="en">EN</a>
         </div>
+        {% endcomment %}
         
         <a href="{% url 'cart' %}" id="cart-link" aria-label="Cart">
           <img src="{% static 'eshop/images/cart.svg' %}" alt="" class="cart-icon">

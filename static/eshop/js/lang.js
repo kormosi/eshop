@@ -12,7 +12,9 @@ function setLang(lang) {
 
 }
 
-const initialLang = localStorage.getItem(STORAGE_KEY) || 'sk';
+// lang switch is hidden in base.html: force Slovak so visitors who picked EN aren't stuck
+// restore when the switch comes back: const initialLang = localStorage.getItem(STORAGE_KEY) || 'sk';
+const initialLang = 'sk';
 setLang(initialLang);
 
 document.querySelectorAll('.lang-switch a').forEach(a => a.addEventListener('click', () => {

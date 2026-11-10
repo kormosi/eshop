@@ -104,11 +104,27 @@ header {
     text-decoration: none;
 }
 
+.logo::before,
+.logo::after {
+    content: "✦";
+    font-size: 0.5em;
+    vertical-align: middle;
+}
+
+.logo::before {
+    margin-right: 0.5em;
+}
+
+.logo::after {
+    margin-left: 0.5em;
+}
+
 /* Cart icon + cart view */
 .lang-and-cart {
     display: flex;
     align-items: center;
     gap: 0.5em;
+    margin-right: 0.5em;
 }
 
 #cart-link {
@@ -246,7 +262,7 @@ nav ul li a.active,
     padding: 0 0.5em 0.5em;
     border: 1px solid color-mix(in srgb, var(--heading) 40%, transparent);
     width: 100%;
-    min-height: 20em;
+    min-height: 15em;
 }
 
 h1, h2, h3, h4, h5, h6, #price {
