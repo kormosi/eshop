@@ -1,0 +1,30 @@
+{% extends 'eshop/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="articles">
+        <h1>Niektoré tajomstvá majú zostať ukryté</h1>
+        <div class="hero">
+            <img src="{% static 'eshop/images/puto_horizontal.jpeg' %}" alt="Krištáľové puto">
+            <a href="{% url 'eshop' %}" class="call-to-action hero-cta">
+                <span id="sk-content" class="lang active">Do obchodu</span>
+                <span id="en-content" class="lang">Visit the store</span>
+            </a>
+        </div>
+
+        <article id="sk-content" class="lang active">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </article>
+
+        <article id="en-content" class="lang">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </article>
+    </div>
+
+{% endblock %}

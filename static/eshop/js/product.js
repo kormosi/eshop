@@ -1,5 +1,6 @@
 const addToCartButton = document.getElementById("add-to-cart");
-const addToCartButtonOriginalText = addToCartButton.textContent.trim();
+const addToCartLabel = addToCartButton.querySelector(".cta-label");
+const addToCartButtonOriginalText = addToCartLabel.textContent;
 const cartIcon = document.querySelector(".cart-icon");
 let addToCartResetTimeoutId;
 
@@ -19,13 +20,13 @@ addToCartButton.addEventListener("click", function () {
   updateCartAppearance();
 
   clearTimeout(addToCartResetTimeoutId);
-  addToCartButton.textContent = "Pridané do košíka ✓";
+  addToCartLabel.textContent = "Pridané do košíka ✓";
   addToCartButton.classList.add("added");
   
   shakeCartIcon();
 
   addToCartResetTimeoutId = setTimeout(() => {
-    addToCartButton.textContent = addToCartButtonOriginalText;
+    addToCartLabel.textContent = addToCartButtonOriginalText;
     addToCartButton.classList.remove("added");
   }, 1750);
 });

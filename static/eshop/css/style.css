@@ -423,7 +423,7 @@ p i {
 .shipping-description {
     margin: 0;
     margin-top: 1em;
-    color: #00b30f;
+    color: #6fbf73;
     font-size: 1em;
     font-weight: bold;
 }
@@ -552,6 +552,13 @@ footer img {
     position: relative;
 }
 
+.cta-icon {
+    display: block;
+    height: 1.4em;
+    width: auto;
+    margin-right: 0.5em;
+}
+
 .call-to-action:hover {
     color: var(--button-text);
     background: var(--heading);
@@ -583,6 +590,18 @@ footer img {
 
 .call-to-action-pay:hover {
     background-color: #79ca7d;
+}
+
+.call-to-action-pay.cta-gold {
+    color: var(--button-text);
+    background: linear-gradient(var(--heading), var(--button));
+    border-color: var(--heading);
+    border-radius: 999px;
+}
+
+.call-to-action-pay.cta-gold:hover {
+    /* gradient, not a plain color: the inherited background transition fades from transparent otherwise */
+    background: linear-gradient(var(--heading), var(--heading));
 }
 
 @keyframes added-punch {
