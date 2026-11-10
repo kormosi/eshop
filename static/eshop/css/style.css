@@ -389,6 +389,21 @@ section {
 
 #checkout-submit {
     width: 70%;
+    margin-bottom: 0.5em;
+}
+
+.payment-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
+    margin-bottom: 2em;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.payment-note img { /* Stripe logo */
+    height: 1.1em;
 }
 
 .images {
