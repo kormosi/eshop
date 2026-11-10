@@ -46,6 +46,23 @@ table {
 /* My edits */
 /**/
 
+/* Palette */
+:root {
+    --nav: #211829;
+    --section: #291C30;
+    --heading: #D8BD8A;
+    --text: #E8D4B5;
+    --text-muted: #B9A9B9;
+    --button: #B99A62;
+    --button-text: #181220;
+    --link: #A987B8;
+    --deco: #A9D2D6;
+    --bg: #181220;
+}
+
+a { color: var(--link); }
+a:hover { color: var(--deco); }
+
 /* Localization */
 .lang { display: none; }
 .lang.active { display: block; }
@@ -58,19 +75,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fffaf2;
+    background-color: var(--bg);
     font-family: Georgia, serif;
-    color: #000000;
+    color: var(--text);
 }
 
 /* Header */
 header {
     display: flex;
     justify-content: space-around;
-    background-color: #442541;
-    /*border-bottom: 0.10em;*/
-    /*border-style: solid;*/
-    /*border-color: #707070;*/
+    background-color: var(--nav);
+    border-bottom: 1px solid color-mix(in srgb, var(--heading) 30%, transparent);
     width: 100%; /* Otherwise it will shrink-to-content */
     position: sticky;
     top: 0;
@@ -88,7 +103,7 @@ header {
 .logo {
     margin-left: .3em;
     font-size: 1.8em;
-    color: white;
+    color: var(--text);
     letter-spacing: 0.02em;
     text-decoration: none;
 }
@@ -164,7 +179,7 @@ header {
 
 .lang-switch a {
     cursor: pointer;
-    color: #000000;
+    color: var(--text);
     text-decoration: underline;
 }
 
@@ -191,7 +206,13 @@ nav ul {
 }
 
 nav ul li a {
-    color: #000000;
+    color: var(--text);
+}
+
+nav ul li a:hover,
+.lang-switch a:hover,
+.logo:hover {
+    color: var(--link);
 }
 
 nav ul li a.active {
@@ -228,19 +249,24 @@ nav ul li a.active {
 }
 
 .articles {
-    background-color: #f2ecdf;
-    border-radius: 0.2em;
+    background-color: var(--section);
+    border-radius: 0.4em;
     margin-top: 0.5em;
     padding: 0.5em;
     padding-top: 0;
     border: 1px solid;
-    border-color: #efd7cf;
+    border-color: color-mix(in srgb, var(--heading) 40%, transparent);
     width: 100%;
     min-height: 20em;
 }
 
+h1, h2, h3, h4, h5, h6, #price {
+    color: var(--text);
+}
+
 h1 {
     font-size: 1.7em;
+    letter-spacing: 0.02em;
     margin-top: 0.5em;
     margin-bottom: 0.3em;
 }
@@ -266,7 +292,8 @@ h3 {
 
 hr {
     height: 1px;
-    background: #000000;
+    background: var(--deco);
+    opacity: 0.5;
     border: 0;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -325,17 +352,17 @@ section {
 
 .cart-button {
     height: 2em;
-    border: 0.1em solid #000000;
-    background-color: #efd7cf;
+    border: 0.1em solid var(--heading);
+    background-color: var(--button);
     border-radius: 0.4em;
-    color: #000000;
+    color: var(--button-text);
     font-family: sans-serif;
     font-size: 0.9em;
     cursor: pointer;
 }
 
 .cart-button:hover {
-    background-color: #edc0b1;
+    background-color: var(--heading);
 }
 
 .cart-line-items-wrapper {
@@ -434,9 +461,10 @@ strong {
     height: 2.3em;
     padding: 0 0.6em;
     font-size: 16px;
-    border: 0.1em solid #efd7cf;
+    border: 0.1em solid color-mix(in srgb, var(--text-muted) 50%, transparent);
     border-radius: 0.4em;
-    background-color: #fffaf2;
+    background-color: var(--nav);
+    color: var(--text);
 }
 
 textarea.checkout-input {
@@ -466,15 +494,16 @@ footer {
 
 .footer-links a {
     text-decoration: underline;
-    color: #000000;
+    color: var(--link);
 }
 
 .footer-links a b{
     font-weight: bold;
+    color: var(--text);
 }
 
 .footer-links a:visited {
-    color: #000000;
+    color: var(--link);
 }
 
 .footer_icons {
@@ -492,6 +521,7 @@ footer img {
 .copyright {
     margin-top: 2em;
     font-size: 0.8em;
+    color: var(--text-muted);
 }
 
 #envelope-icon {
@@ -510,13 +540,10 @@ footer img {
     padding: 0 1.5em;
     align-items: center;
     font-size: 0.9em;
-    /*color: #000000;*/
-    /*background-color: #ff9e54;*/
-    /*border: 0.12em solid #ac5211;*/
-    color: #ffffff;
-    background-color: #af3997;
-    border: 0.12em solid #ffffff;
-    border-radius: 0.5em;
+    color: var(--button-text);
+    background: linear-gradient(var(--heading), var(--button));
+    border: 0.12em solid var(--heading);
+    border-radius: 999px;
     display: flex;
     justify-content: center;
     font-family: sans-serif;
@@ -526,12 +553,13 @@ footer img {
 }
 
 .call-to-action:hover {
-    background-color: #f38f4b;
+    color: var(--button-text);
+    background: var(--heading);
     cursor: pointer;
 }
 
 .call-to-action.added {
-    background-color: #6fbf73;
+    background: #6fbf73;
     border-color: #2f7a3d;
     color: #ffffff;
     animation: added-punch 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
