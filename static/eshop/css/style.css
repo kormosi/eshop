@@ -394,15 +394,18 @@ section {
 .images {
     float: left;
     width: 42%;
-    margin-top: 0.2em;
-    margin-right: 1em;
+    margin: 0.2em 1em 0 0;
     border-radius: 0.2em;
 }
 
+/* product cover: cap growth on wide screens so it stays level with the details beside it */
+img.images {
+    max-width: 13em;
+}
+
 .images img {
-    border-radius: 0.5em;
     width: 100%;
-    height: auto;
+    border-radius: 0.5em;
 }
 
 p i {
