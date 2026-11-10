@@ -330,10 +330,14 @@ section {
 }
 
 .cart-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
     height: 2em;
+    padding: 0 1em;
     border: 0.1em solid var(--heading);
     background-color: var(--button);
-    border-radius: 0.4em;
+    border-radius: 99em;
     color: var(--button-text);
     font-family: sans-serif;
     font-size: 0.9em;
@@ -342,6 +346,16 @@ section {
 
 .cart-button:hover {
     background-color: var(--heading);
+}
+
+/* display: inline-flex above would otherwise override the hidden attribute (#clear-cart) */
+.cart-button[hidden] {
+    display: none;
+}
+
+.button-icon {
+    height: 1.1em;
+    width: 1.1em;
 }
 
 .cart-line-items-wrapper {
@@ -520,7 +534,7 @@ footer img {
     color: var(--button-text);
     background: linear-gradient(var(--heading), var(--button));
     border-color: var(--heading);
-    border-radius: 999px;
+    border-radius: 99em;
 }
 
 /* gradient, not a plain color: .call-to-action-pay's background transition would fade from transparent */
