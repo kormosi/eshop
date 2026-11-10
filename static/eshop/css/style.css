@@ -315,11 +315,17 @@ section {
 .vop-consent {
     display: flex;
     align-items: center;
+    gap: 0.7em;
     margin: 1em 0;
 }
 
-.vop-consent svg {
-    height: 1.5em;
+.vop-consent input {
+    flex-shrink: 0;
+    width: 1.9em;
+    height: 1.9em;
+    margin: 0;
+    accent-color: var(--button);
+    cursor: pointer;
 }
 
 /* Cart view */

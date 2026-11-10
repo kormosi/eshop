@@ -13,6 +13,7 @@ function showSelectedPickupPoint(point) {
   }
 
   document.getElementById("pickup-point-error").hidden = true;
+  document.getElementById("pickup-point-divider").hidden = false;
   document.getElementById("packeta-selector-value").innerText = point.name;
   document.getElementById("pickup-point-id").value = point.id;
   document.getElementById("pickup-point-address").value = point.routingName;
