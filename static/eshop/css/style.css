@@ -279,10 +279,10 @@ h3 {
 }
 
 hr {
-    height: 1px;
-    background: var(--deco);
-    opacity: 0.5;
+    /* border, not a 1px background: borders snap to whole pixels, so every hr renders equally thick */
     border: 0;
+    border-top: 1px solid var(--text);
+    opacity: 0.6;
     margin: 0.5em 0;
 }
 
