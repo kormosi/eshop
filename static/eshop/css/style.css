@@ -409,6 +409,28 @@ p i {
     font-style: italic;
 }
 
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0.8em 0;
+    color: var(--text);
+}
+
+/* full width under the floated product image */
+.divider.below-cta {
+    clear: both;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+}
+
 .shipping-description {
     margin-top: 1em;
     color: var(--success);

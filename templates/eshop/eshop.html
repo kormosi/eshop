@@ -39,6 +39,8 @@
                     <span class="cta-label">Pridať do košíka</span>
                 </button>
             </div>
+
+            <div class="divider below-cta" aria-hidden="true">✦</div>
             
             {% for paragraph in product.description.splitlines %}
             {% if paragraph %}<p>{{ paragraph }}</p>{% endif %}
