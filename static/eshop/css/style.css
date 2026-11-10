@@ -506,7 +506,7 @@ textarea.checkout-input {
 footer {
     margin-top: 2em;
     margin-bottom: 0.5em;
-    width: 80%;
+    width: 90%;
 }
 
 .footer-links {
@@ -581,6 +581,32 @@ footer img {
     background: linear-gradient(var(--heading), var(--button));
     border-color: var(--heading);
     border-radius: 99em;
+    position: relative;
+    overflow: hidden;
+}
+
+/* shine: a light band sweeping across every few seconds */
+.call-to-action::after,
+.call-to-action-pay.cta-gold::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--text) 70%, transparent) 50%, transparent 65%);
+    transform: translateX(-100%);
+    animation: cta-shine 3.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes cta-shine {
+    0% { transform: translateX(-100%); }
+    40%, 100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .call-to-action::after,
+    .call-to-action-pay.cta-gold::after {
+        animation: none;
+    }
 }
 
 /* gradient, not a plain color: .call-to-action-pay's background transition would fade from transparent */
