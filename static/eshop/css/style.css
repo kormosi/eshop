@@ -400,7 +400,7 @@ section {
 
 /* product cover: cap growth on wide screens so it stays level with the details beside it */
 img.images {
-    max-width: 13em;
+    max-width: 16em;
 }
 
 .images img {
@@ -532,9 +532,11 @@ footer img {
     height: 2.1em;
 }
 
+/* mobile: centered below the floated cover; desktop: left-aligned beside it (see media query) */
 .btncontainer {
     display: flex;
     justify-content: center;
+    clear: both;
     margin-bottom: 1.5em;
 }
 
@@ -639,6 +641,11 @@ footer img {
 
     .images {
         width: 35%;
+    }
+
+    .btncontainer {
+        justify-content: flex-start;
+        clear: none;
     }
 
     .lang-and-cart {
