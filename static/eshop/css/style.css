@@ -381,15 +381,13 @@ section {
 }
 
 .cart-delivery-address {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
     margin: 2em 0;
 }
 
 #checkout-submit {
-    width: 70%;
+    width: 90%;
     margin-bottom: 0.5em;
+    margin-top: 2em;
 }
 
 .payment-note {
@@ -522,7 +520,7 @@ footer {
 
 .footer-links a b {
     font-weight: bold;
-    color: var(--text);
+    color: var(--heading);
 }
 
 .footer_icons {
