@@ -337,8 +337,8 @@ section {
 
 .vop-consent input {
     flex-shrink: 0;
-    width: 1.9em;
-    height: 1.9em;
+    width: 1.5em;
+    height: 1.5em;
     margin: 0;
     accent-color: var(--button);
     cursor: pointer;
@@ -693,7 +693,7 @@ footer img {
     }
 
     .header-container {
-        width: 52%;
+        width: 42%;
     }
 
     .container {
