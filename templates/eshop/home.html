@@ -3,28 +3,24 @@
 {% block content %}
 
     <div class="articles">
-        <h1>Niektoré tajomstvá majú zostať ukryté</h1>
+        <h1 class="tagline">Dve sestry. Dva pohľady. Jedno dobrodružstvo.</h1>
         <div class="hero">
-            <img src="{% static 'eshop/images/puto_horizontal.jpeg' %}" alt="Krištáľové puto">
+            <img src="{% static 'eshop/images/KRIŠTÁLOVÉ.PNG' %}" alt="Krištáľové puto">
             <a href="{% url 'eshop' %}" class="call-to-action hero-cta">
-                <span id="sk-content" class="lang active">Do obchodu</span>
-                <span id="en-content" class="lang">Visit the store</span>
+                <span id="sk-content" class="lang active">Objav Krištáľové puto</span>
+                <span id="en-content" class="lang">Discover Crystal Bond</span>
             </a>
         </div>
 
-        <article id="sk-content" class="lang active">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </article>
+        <p class="intro"><b>Krištáľové puto</b> je slovenské urban fantasy pre čitateľov od 13 rokov.</p>
+        <p class="intro">Príbeh rozprávaný z pohľadu dvoch sestier ťa vtiahne do dobrodružstva plného tajomstiev, napätia, neobyčajných schopností a štipky romantiky.</p>
 
-        <article id="en-content" class="lang">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </article>
+        <ul class="features">
+            <li><img src="{% static 'eshop/images/crystal.svg' %}" alt=""><span>Superschopnosti</span></li>
+            <li><img src="{% static 'eshop/images/compass.svg' %}" alt=""><span>Dobrodružstvo</span></li>
+            <li><img src="{% static 'eshop/images/heart.svg' %}" alt=""><span>Romantika</span></li>
+            <li><img src="{% static 'eshop/images/book.svg' %}" alt=""><span>Dva pohľady</span></li>
+        </ul>
     </div>
 
 {% endblock %}

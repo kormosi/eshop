@@ -241,9 +241,56 @@ nav ul li a.active,
 
 .hero .hero-cta {
     position: absolute;
-    bottom: 4%;
+    bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+/* Landing page */
+.tagline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1.6em;
+    font-style: italic;
+    text-align: center;
+}
+
+.tagline::before,
+.tagline::after {
+    content: "✦";
+    color: var(--heading);
+    font-style: normal;
+    font-size: 0.8em;
+}
+
+.intro {
+    text-align: center;
+}
+
+.features {
+    display: flex;
+    margin-top: 1.2em;
+}
+
+.features li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.features li + li {
+    border-left: 1px solid color-mix(in srgb, var(--heading) 50%, transparent);
+}
+
+.features img {
+    height: 2.4em;
 }
 
 /* Content */
