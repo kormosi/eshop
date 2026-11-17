@@ -735,6 +735,11 @@ footer img {
 
 @media (min-width: 1200px) {
 
+    .footer-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
     footer {
         width: 40%;
     }
