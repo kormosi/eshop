@@ -272,7 +272,8 @@ nav ul li a.active,
 
 .features {
     display: flex;
-    margin-top: 1.2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .features li {
@@ -316,11 +317,9 @@ nav ul li a.active,
 }
 
 .articles {
-    background-color: var(--section);
     border-radius: 0.4em;
     margin-top: 0.5em;
     padding: 0 0.5em 0.5em;
-    border: 1px solid color-mix(in srgb, var(--heading) 40%, transparent);
     width: 100%;
     min-height: 15em;
 }
@@ -337,7 +336,7 @@ h1 {
 }
 
 h2, h3 {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 h3 {
@@ -368,6 +367,7 @@ p {
     line-height: 1.5; /* 1.5 times the font size */
     text-align: justify;
     margin-top: 0.7em;
+    font-family: sans-serif;
 }
 
 p b {
@@ -580,7 +580,6 @@ textarea.checkout-input {
 
 /*Footer*/
 footer {
-    margin-top: 2em;
     margin-bottom: 0.5em;
     width: 90%;
 }
@@ -747,7 +746,21 @@ footer img {
 }
 
 
+@media (max-width: 1199px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
 @media (min-width: 1200px) {
+
+    .mobile-only {
+        display: none;
+    }
+
+    .intro hr {
+        display: none;
+    }
 
     .footer-links {
         display: grid;
@@ -790,5 +803,10 @@ footer img {
     
     .call-to-action {
         width: 14em;
+    }
+    
+    .articles {
+        background-color: var(--section);
+        border: 1px solid color-mix(in srgb, var(--heading) 40%, transparent);
     }
 }
