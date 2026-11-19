@@ -196,6 +196,7 @@ header {
 nav {
     font-size: 1.4em;
     width: 92%;
+    margin-bottom: 0.7em;
 }
 
 nav ul {
@@ -228,7 +229,7 @@ nav ul li a.active,
 /* Landing hero */
 .hero {
     position: relative;
-    margin-top: 0.5em;
+    margin-top: 1.5em;
     margin-bottom: 2em;
 }
 
@@ -466,7 +467,6 @@ section {
 }
 
 #checkout-submit {
-    width: 90%;
     margin-bottom: 0.5em;
     margin-top: 2em;
 }
@@ -662,28 +662,28 @@ footer img {
 }
 
 /* shine: a light band sweeping across every few seconds */
-/*.call-to-action::after,*/
-/*.call-to-action-pay.cta-gold::after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    inset: 0;*/
-/*    background: linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--text) 70%, transparent) 50%, transparent 65%);*/
-/*    transform: translateX(-100%);*/
-/*    animation: cta-shine 3.5s ease-in-out infinite;*/
-/*    pointer-events: none;*/
-/*}*/
+.call-to-action::after,
+.call-to-action-pay.cta-gold::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--text) 70%, transparent) 50%, transparent 65%);
+    transform: translateX(-100%);
+    animation: cta-shine 5s ease-in-out infinite;
+    pointer-events: none;
+}
 
-/*@keyframes cta-shine {*/
-/*    0% { transform: translateX(-100%); }*/
-/*    40%, 100% { transform: translateX(100%); }*/
-/*}*/
+@keyframes cta-shine {
+    0% { transform: translateX(-100%); }
+    40%, 100% { transform: translateX(100%); }
+}
 
-/*@media (prefers-reduced-motion: reduce) {*/
-/*    .call-to-action::after,*/
-/*    .call-to-action-pay.cta-gold::after {*/
-/*        animation: none;*/
-/*    }*/
-/*}*/
+@media (prefers-reduced-motion: reduce) {
+    .call-to-action::after,
+    .call-to-action-pay.cta-gold::after {
+        animation: none;
+    }
+}
 
 /* gradient, not a plain color: .call-to-action-pay's background transition would fade from transparent */
 .call-to-action:hover,
@@ -794,7 +794,6 @@ footer img {
 
     nav {
         width: 30%;
-        margin-bottom: 0.5em;
     }
 
     #checkout-form {
@@ -813,5 +812,9 @@ footer img {
     
     h1 {
         margin-top: 0.5em;
+    }
+    
+    .hero .hero-cta {
+        width: 15em;
     }
 }
