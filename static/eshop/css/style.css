@@ -196,7 +196,6 @@ header {
 nav {
     font-size: 1.4em;
     width: 92%;
-    margin-bottom: 0.5em;
 }
 
 nav ul {
@@ -230,6 +229,7 @@ nav ul li a.active,
 .hero {
     position: relative;
     margin-top: 0.5em;
+    margin-bottom: 2em;
 }
 
 .hero img {
@@ -331,7 +331,6 @@ h1, h2, h3, h4, h5, h6, #price {
 h1 {
     font-size: 1.7em;
     letter-spacing: 0.02em;
-    margin-top: 0.5em;
     margin-bottom: 0.3em;
 }
 
@@ -509,6 +508,7 @@ p i {
 
 .divider {
     display: flex;
+    width: 100%;
     align-items: center;
     gap: 0.5em;
     margin: 0.8em 0;
@@ -794,6 +794,7 @@ footer img {
 
     nav {
         width: 30%;
+        margin-bottom: 0.5em;
     }
 
     #checkout-form {
@@ -808,5 +809,9 @@ footer img {
     .articles {
         background-color: var(--section);
         border: 1px solid color-mix(in srgb, var(--heading) 40%, transparent);
+    }
+    
+    h1 {
+        margin-top: 0.5em;
     }
 }
