@@ -787,4 +787,8 @@ footer img {
         width: 70%;
         margin-inline: auto;
     }
+    
+    .call-to-action {
+        width: 14em;
+    }
 }
